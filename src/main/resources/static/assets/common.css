@@ -1,0 +1,21 @@
+html{
+    height: 100%;
+}
+body {
+    margin: initial;
+    font-family: 'Noto Sans KR', sans-serif;
+    background: #dfe8e8;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#loginForm{
+    height: 50rem;
+    max-width: 68.75rem;
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 1.25rem;
+    box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.1);
+}
