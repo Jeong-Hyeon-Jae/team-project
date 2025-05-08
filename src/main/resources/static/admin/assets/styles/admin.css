@@ -1,0 +1,69 @@
+body {
+    background-color: #FDF2D4;
+    box-sizing: border-box;
+}
+
+#loginForm > .calendar-wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+#loginForm > .calendar-wrapper > .leftBox {
+    width: 25%;
+    height: 100%;
+    border-top-left-radius: 1.25rem;
+    border-bottom-left-radius: 1.25rem;
+    background-color: blue;
+    padding: 1rem;
+}
+
+#loginForm > .calendar-wrapper > .rightBox {
+    width: 75%;
+    height: 100%;
+    border-top-right-radius: 1.25rem;
+    border-bottom-right-radius: 1.25rem;
+    background-color: red;
+    padding: 1rem;
+}
+
+#loginForm > .calendar-wrapper > .rightBox > .header {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: center;
+}
+
+#loginForm > .calendar-wrapper > .rightBox > .header > .title {
+    font-size: 1.75rem;
+}
+
+#loginForm > .calendar-wrapper > .rightBox > .header > button {
+    cursor: pointer;
+}
+
+#loginForm > .calendar-wrapper > .rightBox > .days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-weight: bold;
+    margin-top: 1rem;
+    color: #444;
+}
+
+#loginForm > .calendar-wrapper > .rightBox > .dates {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: right;
+    margin-top: 0.5rem;
+}
+
+#loginForm > .calendar-wrapper > .rightBox > .dates > .day {
+    border: 1px solid #e0e0e0;
+    height: 5rem;
+    padding: 0.315rem;
+    position: relative;
+    background: #fff;
+}
