@@ -1,4 +1,4 @@
-package com.jhj.teamproject.controllers;
+package com.jhj.teamproject.user.controllers;
 
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
