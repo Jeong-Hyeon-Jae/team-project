@@ -4,15 +4,22 @@ html{
 body {
     margin: initial;
     font-family: 'Noto Sans KR', sans-serif;
-    background: #dfe8e8;
+    background: #f5f6fa;
+    color: #2c3e50;
     min-height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
+ol,ul{
+    list-style-type: none;
+}
+a[href] {
+    text-decoration: none;
+}
 
-#loginForm {
+#defaultContainer {
     height: 40rem;
     max-width: 70rem;
     width: 100%;

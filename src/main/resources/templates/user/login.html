@@ -7,12 +7,40 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>로그인 - SUB</title>
     <link rel="stylesheet" href="/assets/common.css">
+    <link rel="stylesheet" href="/assets/styles/login.css">
+
 </head>
 <body>
-<form id="loginForm">
-    <div class="calendar-wrapper">
+<div id="defaultContainer">
+    <form id="loginForm">
+        <h1 class="title">LOGIN</h1>
+        <label class="--object-label">
+            <span class="---caption">이메일</span>
+            <input required autocomplete="email" autofocus maxlength="20" minlength="5" type="email" name="email" spellcheck="false">
+        </label>
+        <label class="--object-label">
+            <span class="---caption">비밀번호</span>
+            <input required autocomplete="off" autofocus maxlength="50" minlength="5" type="password" name="password" spellcheck="false">
+        </label>
+        <label class="--object-check">
+            <input type="checkbox" name="remember" class="---input">
+            <span class="---box"></span>
+            <span class="---caption">이메일을 기억할까요?</span>
+        </label>
+        <button class="--object-button -color-green" type="submit">
+            <img src="/user/assets/images/login/login-form.submit.png" alt="" class="---icon" draggable="false">
+            <span class="---caption">로그인</span>
+        </button>
+        <ul class="menu">
+            <li class="item">
+                <a class="link" href="/user/register">회원가입</a>
+            </li>
+            <li class="item">
+                <a class="link" href="/user/login">계정 복구</a>
+            </li>
+        </ul>
+    </form>
+</div>
 
-    </div>
-</form>
 </body>
 </html>
