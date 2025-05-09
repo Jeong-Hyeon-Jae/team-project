@@ -8,3 +8,5 @@
 포인트 색상: #6C5CE7 — 퍼플 블루 (현대적이고 세련됨)
 
 폰트: 'Helvetica Neue', sans-serif
+
+- --object-button으로 크기를 2rem으로 맞췄음.
