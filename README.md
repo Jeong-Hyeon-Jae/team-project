@@ -20,4 +20,17 @@ CREATE TABLE `leave`.`users` (
     CONSTRAINT UNIQUE (`email`)                      -- 이메일 중복 방지
 );
 
+## 🗄️ Annual Leaves 테이블 생성 SQL
+```sql
+CREATE TABLE `leave`.`annual_leaves` (
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `user_id` INT UNSIGNED NOT NULL,
+    `total_days` INT UNSIGNED NOT NULL,           -- 총 연차 일 수
+    `used_days` INT UNSIGNED NOT NULL DEFAULT 0,  -- 사용 연차 일 수
+    `remaining_days` INT UNSIGNED NOT NULL DEFAULT 0, -- 남은 연차 일 수
+
+    CONSTRAINT PRIMARY KEY (`id`),
+    CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `leave`.`users`(`id`)
+);
+
 
