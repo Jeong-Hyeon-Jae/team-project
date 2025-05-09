@@ -34,6 +34,6 @@ public class UserService {
         if (!isPasswordValid(user.getPassword())) {
             return LoginResult.FAILURE_INVALID_PASSWORD;
         }
-        
+        return null;
     }
 }
