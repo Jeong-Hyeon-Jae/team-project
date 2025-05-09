@@ -1,34 +1,33 @@
 body {
     background-color: #FDF2D4;
-    box-sizing: border-box;
 }
 
-#loginForm > .calendar-wrapper {
+#defaultContainer > #loginForm > .calendar-wrapper {
     height: 100%;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
 }
 
-#loginForm > .calendar-wrapper > .leftBox {
+#defaultContainer > #loginForm > .calendar-wrapper > .leftBox {
     width: 25%;
     height: 100%;
     border-top-left-radius: 1.25rem;
     border-bottom-left-radius: 1.25rem;
-    background-color: blue;
+    background-color: darkcyan;
     padding: 1rem;
 }
 
-#loginForm > .calendar-wrapper > .rightBox {
+#defaultContainer > #loginForm > .calendar-wrapper > .rightBox {
     width: 75%;
     height: 100%;
     border-top-right-radius: 1.25rem;
     border-bottom-right-radius: 1.25rem;
-    background-color: red;
+    background-color: #e0e0e0;
     padding: 1rem;
 }
 
-#loginForm > .calendar-wrapper > .rightBox > .header {
+#defaultContainer > #loginForm > .calendar-wrapper > .rightBox > .header {
     align-items: center;
     display: flex;
     flex-direction: row;
@@ -36,15 +35,17 @@ body {
     justify-content: center;
 }
 
-#loginForm > .calendar-wrapper > .rightBox > .header > .title {
+#defaultContainer > #loginForm > .calendar-wrapper > .rightBox > .header > .title {
     font-size: 1.75rem;
 }
 
-#loginForm > .calendar-wrapper > .rightBox > .header > button {
+#defaultContainer > #loginForm > .calendar-wrapper > .rightBox > .header > button {
+    background-color: #6C5CE7;
+    color: #ffffff;
     cursor: pointer;
 }
 
-#loginForm > .calendar-wrapper > .rightBox > .days {
+#defaultContainer > #loginForm > .calendar-wrapper > .rightBox > .days {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     text-align: center;
@@ -53,17 +54,17 @@ body {
     color: #444;
 }
 
-#loginForm > .calendar-wrapper > .rightBox > .dates {
+#defaultContainer > #loginForm > .calendar-wrapper > .rightBox > .dates {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     text-align: right;
     margin-top: 0.5rem;
 }
 
-#loginForm > .calendar-wrapper > .rightBox > .dates > .day {
-    border: 1px solid #e0e0e0;
-    height: 5rem;
-    padding: 0.315rem;
+#defaultContainer > #loginForm > .calendar-wrapper > .rightBox > .dates > .day {
+    border: 0.2rem solid #e0e0e0;
+    height: 6rem;
+    padding: 0.35rem;
     position: relative;
     background: #fff;
 }
