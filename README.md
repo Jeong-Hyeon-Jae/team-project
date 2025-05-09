@@ -3,4 +3,15 @@
 ![image](https://github.com/user-attachments/assets/eba48ee9-f06f-4d66-bff0-f42961406497)
 
 
-<pre> ```sql CREATE TABLE `leave`.`users` ( `id` INT UNSIGNED NOT NULL AUTO_INCREMENT, `email` VARCHAR(50) NOT NULL, `password` VARCHAR(50) NOT NULL, `name` VARCHAR(50) NOT NULL, `role` ENUM('USER','ADMIN') DEFAULT 'user', `created_at` DATETIME DEFAULT NOW(), CONSTRAINT PRIMARY KEY (`id`), CONSTRAINT UNIQUE (`email`) ); ``` </pre>
+CREATE TABLE `leave`.`users` (
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,       -- 고유 ID (자동 증가)
+    `email` VARCHAR(50) NOT NULL,                    -- 사용자 이메일 (중복 불가)
+    `password` VARCHAR(50) NOT NULL,                 -- 비밀번호
+    `name` VARCHAR(50) NOT NULL,                     -- 사용자 이름
+    `role` ENUM('USER','ADMIN') DEFAULT 'user',      -- 역할: 일반 사용자 / 관리자
+    `created_at` DATETIME DEFAULT NOW(),             -- 생성 일시 (기본값 현재시간)
+    
+    CONSTRAINT PRIMARY KEY (`id`),                   -- 기본 키
+    CONSTRAINT UNIQUE (`email`)                      -- 이메일 중복 방지
+);
+
