@@ -19,9 +19,9 @@ CREATE TABLE `leave`.`users` (
     CONSTRAINT PRIMARY KEY (`id`),                   -- 기본 키 지정
     CONSTRAINT UNIQUE (`email`)                      -- 이메일 중복 방지
 );
-
+```
 ## 🗄️ Annual Leaves 테이블 생성 SQL
-```sql
+``` sql
 CREATE TABLE `leave`.`annual_leaves` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `user_id` INT UNSIGNED NOT NULL,
@@ -32,5 +32,23 @@ CREATE TABLE `leave`.`annual_leaves` (
     CONSTRAINT PRIMARY KEY (`id`),
     CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `leave`.`users`(`id`)
 );
+```
+## 🗄️ Leave Requests 테이블 생성 SQL
+```sql
+CREATE TABLE `leave`.`leave_requests` (
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `user_id` INT UNSIGNED NOT NULL,
+    `start_date` DATE NOT NULL,                   -- 연차 시작일
+    `end_date` DATE NOT NULL,                     -- 연차 종료일
+    `days` INT UNSIGNED NOT NULL,                 -- 신청한 일 수
+    `content` VARCHAR(255) NOT NULL,              -- 연차 사유
+    `status` ENUM('PENDING', 'APPROVED', 'REJECTED') DEFAULT 'PENDING', -- 상태
+    `reviewed_by` INT UNSIGNED NULL,              -- 검토자 ID (users FK)
+    `reviewed_at` DATETIME NULL DEFAULT NULL,     -- 검토 일시
+    `created_at` DATETIME NOT NULL,               -- 신청 일시
 
-
+    CONSTRAINT PRIMARY KEY (`id`),
+    CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `leave`.`users`(`id`),
+    CONSTRAINT FOREIGN KEY (`reviewed_by`) REFERENCES `leave`.`users`(`id`)
+);
+```
