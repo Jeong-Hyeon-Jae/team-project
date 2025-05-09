@@ -52,9 +52,10 @@ CREATE TABLE `leave`.`leave_requests` (
     CONSTRAINT FOREIGN KEY (`reviewed_by`) REFERENCES `leave`.`users`(`id`)
 );
 ```
-
+## INDEX.html
 ![index](https://github.com/user-attachments/assets/cde311ae-94f0-4c3b-b431-f2db203888ea)
 
+## ADMIN.html
 ![admin html](https://github.com/user-attachments/assets/63af1014-271b-434c-a8f8-f7c99692a2fe)
 
 
