@@ -15,6 +15,7 @@ public class UserService {
     public UserService(UserMapper userMapper) {
         this.userMapper = userMapper;
     }
+
     public static boolean isEmailValid(String input) {
         return input != null && input.matches("^(?=.{8,50}$)([\\da-z\\-_.]{4,})@([\\da-z][\\da-z\\-]*[\\da-z]\\.)?([\\da-z][\\da-z\\-]*[\\da-z])\\.([a-z]{2,15})(\\.[a-z]{2,3})?$");
     }
@@ -27,13 +28,23 @@ public class UserService {
         return input != null && input.matches("^([\\da-zA-Z가-힣]{2,10})$");
     }
 
+
     public LoginResult login(UserEntity user) {
-        if (!isEmailValid(user.getEmail())) {
-            return LoginResult.FAILURE_INVALID_EMAIL;
+        if (user == null
+                || !isPasswordValid(user.getPassword())
+                || !isEmailValid(user.getEmail())) {
+            return LoginResult.FAILURE;
         }
-        if (!isPasswordValid(user.getPassword())) {
-            return LoginResult.FAILURE_INVALID_PASSWORD;
+        UserEntity dbUser = this.userMapper.selectByEmail(user.getEmail());
+        if (dbUser == null) {
+            return LoginResult.FAILURE;
         }
-        return null;
+        user.setEmail(user.getEmail());
+        user.setPassword(user.getPassword());
+        user.setName(user.getName());
+        user.setRole(user.getRole());
+        user.setCreatedAt(user.getCreatedAt());
+
+        return LoginResult.SUCCESS;
     }
 }

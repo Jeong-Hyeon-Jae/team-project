@@ -1,5 +1,5 @@
 🎨 디자인 컨셉: Modern Minimal Urban
-배경색: #F5F6FA — 아주 밝은 회색 (도시적, 정갈함)
+배경색: #dde3f8 — 아주 밝은 파랑 (도시적, 정갈함)
 
 컨테이너 배경: #FFFFFF — 깔끔한 화이트
 
@@ -9,4 +9,4 @@
 
 폰트: 'Helvetica Neue', sans-serif
 
-- --object-button으로 크기를 2rem으로 맞췄음.
+--object-button으로 크기를 2rem으로 맞췄음.

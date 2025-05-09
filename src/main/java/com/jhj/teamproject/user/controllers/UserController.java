@@ -27,7 +27,7 @@ public class UserController {
         if (user == null) {
             return "user/login";
         }else{
-            return null;
+            return "";
         }
     }
 
@@ -35,5 +35,10 @@ public class UserController {
     public String postLogin(HttpSession session, UserEntity user) {
         LoginResult result = this.userService.login(user);
         return null;
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public String getRegister() {
+        return "user/register";
     }
 }
