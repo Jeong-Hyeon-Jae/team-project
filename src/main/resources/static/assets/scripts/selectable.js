@@ -1,3 +1,5 @@
+let yourDate = new Date()
+
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
 
@@ -7,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay'
         },
-        initialDate: '2023-01-12',
+        initialDate: `${yourDate.toISOString().split('T')[0]}`,
         navLinks: true, // can click day/week names to navigate views
         selectable: true,
         selectMirror: true,

@@ -6,20 +6,44 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>메인 - SUB</title>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js'></script>
     <link rel="stylesheet" href="/assets/styles/common.css">
     <script defer src="/assets/scripts/dist/fullcalendar.js"></script>
     <script src="/assets/scripts/selectable.js"></script>
 </head>
 <body>
 <div id="defaultContainer">
-    <div class="menu-bar">
-
-    </div>
     <form id="annualForm">
-
-        <div id="calendar">
-
+        <div class="menu-bar">
+            <br>
+            <h1 class="title">반가워요! 땡땡님</h1>
+            <br><br><br>
+            <div class="today">
+                <h2 class="title">Calenders</h2>
+                <span class="today">2025. 5. 9.</span>
+            </div>
+            <br>
+            <div class="calendar">
+                <label>
+                    <input autofocus required type="checkbox">
+                    <span class="content">전체 일정</span>
+                </label>
+                <br>
+                <label>
+                    <input autofocus required type="checkbox">
+                    <span class="content">내 일정</span>
+                </label>
+            </div>
+            <div class="category">
+                <h2 class="title">Categories</h2>
+                <input autofocus required type="checkbox" name="" id="">
+                <span class="content">연차</span>
+            </div>
+            <br><br>
+            <button autofocus type="button">일정 등록하기</button>
         </div>
+
+        <div id="calendar"></div>
     </form>
 </div>
 </body>
