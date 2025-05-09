@@ -4,27 +4,29 @@
     padding: 0 0.75rem;
 
     align-items: center;
+    background-color: #6C5CE7;
     border: 0.0625rem solid transparent;
     border-radius: 0.25rem;
+    color: #ffffff;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     justify-content: center;
 
 }
-.--object-button:hover{
+.-button-purple{
+    background-color: #6C5CE7;
+    color: #ffffff;
+}
+.-button-purple:hover{
     background-color: #5549b4;
     transition-duration: 175ms;
     transition-property: background-color;
     transition-timing-function: ease;
 }
-.--object-button:active{
+.-button-purple:active{
     background-color: #342D6EFF;
     transition-duration: 175ms;
     transition-property: background-color;
     transition-timing-function: ease;
-}
-.-button-purple{
-    background-color: #6C5CE7;
-    color: #ffffff;
 }

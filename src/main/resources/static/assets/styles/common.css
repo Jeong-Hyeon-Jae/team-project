@@ -2,6 +2,7 @@
 
 @import "../../annual/assets/styles/index.css";
 @import "objects/object-button.css";
+@import "objects/object-label.css";
 
 html{
     height: 100%;
@@ -14,7 +15,7 @@ html{
 body {
     margin: initial;
     font-family: 'Noto Sans KR', sans-serif;
-    background: #f5f6fa;
+    background: #dde3f8;
     color: #2c3e50;
     min-height: 100%;
     display: flex;

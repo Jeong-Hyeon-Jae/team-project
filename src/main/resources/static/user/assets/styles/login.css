@@ -45,22 +45,6 @@
 #loginForm>.menu>.item{
     font-size: 0.8rem;
 }
-.--object-label{
-    width: 100%;
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    gap: 0.5rem;
-    justify-content: center;
-    text-align: left;
-}
-.--object-label>input{
-    width: 70%;
-    background-color: #ffffff;
-    border-radius: 0.25rem;
-    border: 0.0625rem solid #e0e0e0;
-    padding: 0.5rem 0.5rem;
-}
 .--object-label>.---caption{
     font-weight: 800;
     width: 3.5rem;

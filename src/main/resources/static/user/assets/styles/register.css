@@ -1,0 +1,43 @@
+#defaultContainer{
+    width: 37.5rem;
+    height: 37.5rem;
+}
+#defaultContainer.--object-layout{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#registerForm{
+    width: 32.5rem;
+    height: 29rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.9rem;
+}
+#registerForm>.button-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+.table{
+    width: 100%;
+    height: 100%;
+}
+
+a[href]{
+    color: #ffffff;
+}
+
+.--object-label>.--caption{
+    width: 100%;
+    font-weight: 800;
+    font-size: 0.8rem;
+    text-align: left;
+    margin-left: 9.85rem;;
+}
