@@ -1,3 +1,7 @@
+@charset "UTF-8";
+
+@import "../../annual/assets/styles/index.css";
+
 html{
     height: 100%;
 }
@@ -49,10 +53,34 @@ button, input, select, textarea {
 }
 
 #defaultContainer {
-    height: 40rem;
-    max-width: 70rem;
+    height: 70vh;
+    max-width: 70vw;
     width: 100%;
     background-color: #ffffff;
     border-radius: 1.25rem;
     box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.1);
+}
+
+.fc-dayGridMonth-view.fc-view.fc-daygrid {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.fc-header-toolbar.fc-toolbar.fc-toolbar-ltr {
+    padding: 1rem 0 0 0;
+    font-size: 0.75rem;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+.fc-scrollgrid.fc-scrollgrid-liquid {
+    text-align: center;
+    width: 90%;
+    min-width: 10rem;
+    height: 60vh;
+
 }
