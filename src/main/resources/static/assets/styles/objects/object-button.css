@@ -34,9 +34,11 @@
     background-color: #e74c3c;
     color: #f2f4f8;
 }
+
 .-button-red:hover{
     background-color: #d84333;
 }
+
 .-button-red:active{
     background-color: #c53b2c;
 }
