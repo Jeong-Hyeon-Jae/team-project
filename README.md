@@ -27,7 +27,7 @@ CREATE TABLE `leave`.`annual_leaves` (
     `user_id` INT UNSIGNED NOT NULL,
     `total_days` INT UNSIGNED NOT NULL,           -- 총 연차 일 수
     `used_days` INT UNSIGNED NOT NULL DEFAULT 0,  -- 사용 연차 일 수
-    `remaining_days` INT UNSIGNED NOT NULL DEFAULT 0, -- 남은 연차 일 수
+    -- `remaining_days` INT UNSIGNED NOT NULL DEFAULT 0, 이새퀴 방생해야함
 
     CONSTRAINT PRIMARY KEY (`id`),
     CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `leave`.`users`(`id`)
