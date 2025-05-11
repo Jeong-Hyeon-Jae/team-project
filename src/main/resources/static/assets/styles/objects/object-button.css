@@ -4,7 +4,6 @@
     padding: 0 0.75rem;
 
     align-items: center;
-    background-color: #6C5CE7;
     border: 0.0625rem solid transparent;
     border-radius: 0.25rem;
     color: #ffffff;
@@ -29,4 +28,15 @@
     transition-duration: 175ms;
     transition-property: background-color;
     transition-timing-function: ease;
+}
+
+.-button-red {
+    background-color: #e74c3c;
+    color: #f2f4f8;
+}
+.-button-red:hover{
+    background-color: #d84333;
+}
+.-button-red:active{
+    background-color: #c53b2c;
 }

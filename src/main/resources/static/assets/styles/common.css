@@ -2,6 +2,7 @@
 
 @import "../../annual/assets/styles/index.css";
 @import "objects/object-button.css";
+@import "objects/object-check.css";
 @import "objects/object-label.css";
 
 html{

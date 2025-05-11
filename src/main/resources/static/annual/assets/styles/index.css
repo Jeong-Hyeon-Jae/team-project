@@ -1,23 +1,22 @@
 @charset "UTF-8";
 
-#defaultContainer {
-}
-
 #defaultContainer > #annualForm {
     width: 100%;
     min-width: 55rem;
     align-items: flex-start;
+    height: 100%;
+
     display: flex;
     flex-direction: row;
     gap: 1rem;
-    height: 100%;
 }
 
 #defaultContainer > #annualForm > .menu-bar {
+    border-radius: 1.25rem 0 0 1.25rem;
     min-width: 15rem;
     height: 70vh;
-    /*background-color: red;*/
-    padding-left: 1rem;
+    background-color: #edf0fe;
+    padding-left: 2rem;
 
     display: flex;
     flex-direction: column;
@@ -28,6 +27,35 @@
     margin-left: 1rem;
     font-weight: 300;
     font-size: 1rem;
+}
+
+#defaultContainer > #annualForm > .menu-bar > .button-container {
+    padding-right: 2rem;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#defaultContainer > #annualForm > .menu-bar > .button-container > .--object-button.-button-red {
+    width: 10rem;
+    height: 2.5rem;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#defaultContainer > #annualForm > .menu-bar > .button-container > .--object-button.-button-red > .---caption {
+    margin: 0 auto;
+}
+
+#defaultContainer > #annualForm > .menu-bar > .button-container > .--object-button.-button-red > .---icon {
+    z-index: 9;
+}
+
+#defaultContainer > #annualForm > .calendar > .--object-check > .---box {
+
 }
 
 h2 {

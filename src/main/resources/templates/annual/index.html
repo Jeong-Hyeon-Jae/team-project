@@ -19,30 +19,40 @@
             <h1 class="title">반가워요! 땡땡님</h1>
             <br><br><br>
             <div class="today">
-                <h2 class="title">Calenders</h2>
+                <h2 class="title">Today</h2>
                 <span class="today">2025. 5. 9.</span>
             </div>
-            <br>
+
             <div class="calendar">
-                <label>
-                    <input autofocus required type="checkbox">
-                    <span class="content">전체 일정</span>
+                <h2 class="title">Calendar</h2>
+                <label class="--object-check">
+                    <input class="---input" type="checkbox" name="option" value="all">
+                    <span class="---box"></span>
+                    <span class="---caption">전체 일정</span>
                 </label>
                 <br>
-                <label>
-                    <input autofocus required type="checkbox">
-                    <span class="content">내 일정</span>
+                <label class="--object-check">
+                    <input class="---input" type="checkbox" name="option" value="any">
+                    <span class="---box"></span>
+                    <span class="---caption">내 일정</span>
                 </label>
             </div>
             <div class="category">
                 <h2 class="title">Categories</h2>
-                <input autofocus required type="checkbox" name="" id="">
-                <span class="content">연차</span>
+                <label class="--object-check">
+                    <input class="---input" type="checkbox" name="option" value="any">
+                    <span class="---box"></span>
+                    <span class="---caption">연차</span>
+                </label>
             </div>
             <br><br>
-            <button autofocus type="button">일정 등록하기</button>
+            <div class="button-container">
+                <button autofocus type="button" class="--object-button -button-red">
+                    <span class="---caption">일정 등록하기</span>
+                    <img alt="" class="---icon" draggable="false" src="/annual/assets/images/icons8-plus-24.png">
+                </button>
+            </div>
         </div>
-
         <div id="calendar"></div>
     </form>
 </div>

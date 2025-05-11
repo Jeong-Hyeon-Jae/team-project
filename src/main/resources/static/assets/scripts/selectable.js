@@ -7,10 +7,15 @@ document.addEventListener('DOMContentLoaded', function() {
         headerToolbar: {
             left: 'prev,next today',
             center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            right: 'dayGridMonth,timeGridWeek'
         },
         initialDate: `${yourDate.toISOString().split('T')[0]}`,
         navLinks: true, // can click day/week names to navigate views
+        navLinkDayClick: function(date, jsEvent) {
+            var calendarApi = calendar.view.calendar;
+            calendarApi.gotoDate(date);
+            calendarApi.changeView('timeGridWeek'); // day로 이동하는 것을 week로 변경
+        },
         selectable: true,
         selectMirror: true,
         select: function(arg) {
@@ -92,3 +97,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
     calendar.render();
 });
+
+const $annualForm = document.getElementById('annualForm');
