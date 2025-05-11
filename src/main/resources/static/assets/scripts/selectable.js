@@ -1,4 +1,5 @@
 let yourDate = new Date()
+const $fcHeaderToolbar = document.querySelector('#calendar .fc-header-toolbar');
 
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
@@ -92,10 +93,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 url: 'http://google.com/',
                 start: '2023-01-28'
             }
-        ]
+        ],
     });
+
+
 
     calendar.render();
 });
 
-const $annualForm = document.getElementById('annualForm');
+

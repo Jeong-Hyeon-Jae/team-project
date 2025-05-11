@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/assets/styles/common.css">
     <script defer src="/assets/scripts/dist/fullcalendar.js"></script>
     <script src="/assets/scripts/selectable.js"></script>
+    <script defer src="/annual/assets/scripts/index.js"></script>
 </head>
 <body>
 <div id="defaultContainer">
@@ -20,7 +21,7 @@
             <br><br><br>
             <div class="today">
                 <h2 class="title">Today</h2>
-                <span class="today">2025. 5. 9.</span>
+                <span class="today"></span>
             </div>
 
             <div class="calendar">
@@ -48,12 +49,52 @@
             <br><br>
             <div class="button-container">
                 <button autofocus type="button" class="--object-button -button-red">
-                    <span class="---caption">일정 등록하기</span>
+                    <span class="---caption">연차 등록하기</span>
                     <img alt="" class="---icon" draggable="false" src="/annual/assets/images/icons8-plus-24.png">
                 </button>
             </div>
         </div>
-        <div id="calendar"></div>
+        <div class="calendar-header">
+            <div id="calendar"></div>
+            <div class="calendar-legend">
+                <span><span class="dot dot-green"></span> 연차 승인</span>
+                <span><span class="dot dot-blue"></span> 승인 대기</span>
+            </div>
+        </div>
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <h2>등록</h2>
+                <label>
+                    <span class="title">제목</span>
+                    <input type="text" placeholder="제목을 입력하세요" />
+                </label>
+                <label>
+                    <span class="title">시작일</span>
+                    <input autofocus type="date" />
+                </label>
+                <label>
+                    <span class="title">종료일</span>
+                    <input autofocus type="date" />
+                </label>
+                <span class="title">분류</span>
+                <div class="category-select">
+                    <label><input type="radio" name="type" checked /> 연차</label>
+                    <label><input type="radio" name="type" /> 기타</label>
+                </div>
+                <label>
+                    <span class="title">사유</span>
+                    <select>
+                        <option value="">선택하세요</option>
+                        <option>휴가</option>
+                        <option>개인일정</option>
+                    </select>
+                </label>
+                <div class="modal-buttons">
+                    <button id="closeModal" class="btn-outline">닫기</button>
+                    <button id="saveEvent" class="btn-filled">등록</button>
+                </div>
+            </div>
+        </div>
     </form>
 </div>
 </body>
