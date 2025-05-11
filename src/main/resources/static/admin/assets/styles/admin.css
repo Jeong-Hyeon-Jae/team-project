@@ -1,7 +1,7 @@
 #defaultContainer > #annualForm > .menu-bar > .text > .title {
     font-size: 1.25rem;
     font-weight: 400;
-    text-align: center;
+    text-align: left;
 }
 
 #defaultContainer > #annualForm > .menu-bar > .href-container {
@@ -10,7 +10,6 @@
     flex-direction: column;
     gap: 2rem;
     justify-content: flex-start;
-    padding: 0 2rem;
 }
 
 #defaultContainer > #annualForm > .menu-bar > .href-container > .href-box {
