@@ -29,8 +29,6 @@
     transition-property: background-color;
     transition-timing-function: ease;
 }
-<<<<<<< Updated upstream
-
 .-button-red {
     background-color: #e74c3c;
     color: #f2f4f8;
@@ -43,7 +41,6 @@
 .-button-red:active{
     background-color: #c53b2c;
 }
-=======
 .--color-gray{
     background-color: #636569;
     color: #ffffff;
@@ -61,4 +58,3 @@
     transition-property: background-color;
     transition-timing-function: ease;
 }
->>>>>>> Stashed changes
