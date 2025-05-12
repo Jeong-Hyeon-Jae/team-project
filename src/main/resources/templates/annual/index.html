@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>메인 - SUB</title>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js'></script>
+    <link rel="stylesheet" href="/assets/styles/common.css">
+    <script defer src="/assets/scripts/dist/fullcalendar.js"></script>
+    <script src="/assets/scripts/selectable.js"></script>
+    <script defer src="/annual/assets/scripts/index.js"></script>
+</head>
+<body>
+<div id="defaultContainer">
+    <form id="annualForm">
+        <div class="menu-bar">
+            <br>
+            <h1 class="title">반가워요! 땡땡님</h1>
+            <br><br><br>
+            <div class="today">
+                <h2 class="title">Today</h2>
+                <span class="today"></span>
+            </div>
+
+            <div class="calendar">
+                <h2 class="title">Calendar</h2>
+                <label class="--object-check">
+                    <input checked class="---input" type="radio" name="option" value="all">
+                    <span class="---box"></span>
+                    <span class="---caption">전체 일정</span>
+                </label>
+                <br>
+                <label class="--object-check">
+                    <input class="---input" type="radio" name="option" value="my">
+                    <span class="---box"></span>
+                    <span class="---caption">내 일정</span>
+                </label>
+            </div>
+            <div class="category">
+                <h2 class="title">Categories</h2>
+                <label class="--object-check">
+                    <input checked onclick="return false;" class="---input" type="checkbox" name="option" value="leave">
+                    <span class="---box"></span>
+                    <span class="---caption">연차</span>g
+                </label>
+            </div>
+            <br><br>
+            <div class="button-container">
+                <button autofocus type="button" class="--object-button -button-red">
+                    <span class="---caption">연차 등록하기</span>
+                    <img alt="" class="---icon" draggable="false" src="/annual/assets/images/icons8-plus-24.png">
+                </button>
+            </div>
+        </div>
+        <div class="calendar-header">
+            <div id="calendar"></div>
+            <div class="calendar-legend">
+                <span><span class="dot dot-green"></span> 연차 승인</span>
+                <span><span class="dot dot-blue"></span> 승인 대기</span>
+            </div>
+        </div>
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <h2>등록</h2>
+                <label>
+                    <span class="title">제목</span>
+                    <input type="text" placeholder="제목을 입력하세요" />
+                </label>
+                <label>
+                    <span class="title">시작일</span>
+                    <input type="date" />
+                </label>
+                <label>
+                    <span class="title">종료일</span>
+                    <input type="date" />
+                </label>
+                <span class="title">분류</span>
+                <div class="category-select">
+                    <label><input type="radio" name="type" checked /> 연차</label>
+                    <label><input type="radio" name="type" /> 기타</label>
+                </div>
+                <label>
+                    <span class="title">사유</span>
+                    <select>
+                        <option value="">선택하세요</option>
+                        <option>휴가</option>
+                        <option>개인일정</option>
+                    </select>
+                </label>
+                <div class="modal-buttons">
+                    <button id="closeModal" class="btn-outline">닫기</button>
+                    <button id="saveEvent" class="btn-filled">등록</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>신청리스트 - SUB</title>
+    <link rel="stylesheet" href="/assets/styles/common.css">
+    <link rel="stylesheet" href="/admin/assets/styles/admin.css">
+    <link rel="stylesheet" href="/admin/assets/styles/list.css">
+    <script defer src="/assets/scripts/dist/fullcalendar.js"></script>
+    <script src="/assets/scripts/selectable.js"></script>
+</head>
+<body>
+
+<div id="defaultContainer">
+    <form id="annualForm">
+        <div class="menu-bar">
+            <div class="text">
+                <h2 class="title">
+                    관리자 ? ?님.
+                    <br>
+                    오늘도 화이팅입니다!
+                </h2>
+            </div>
+            <div class="href-container">
+                <div class="category">
+                    <h2 class="title">Today</h2>
+                    <span>오늘의 할일 자리</span>
+                </div>
+                <div class="href-box">
+                    <a href="/admin">인덱스 이동</a>
+                </div>
+                <div class="href-box">
+                    <a href="/admin/list">신청 리스트 이동</a>
+                </div>
+                <div class="href-box">
+                    <a href="#">로그아웃</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="list-table">
+            <table class="table">
+                <caption>신청 내역</caption>
+                <tbody>
+                <tr>
+                    <th>No</th>
+                    <th>신청자</th>
+                    <th>내용</th>
+                    <th>신청 날짜</th>
+                    <th>희망 날짜</th>
+                    <th>상태</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>현재석</td>
+                    <td class="content">잠못자서 잠 자야함 잠못자서 잠 자야함 잠못자서 잠 자야함 잠못자서 잠 자야함</td>
+                    <td>5월 16일</td>
+                    <td>5월 16일</td>
+                    <td>
+                        <button class="-button-purple button" type="button">승인</button>
+                        <button class="-button-red button" type="button">취소</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

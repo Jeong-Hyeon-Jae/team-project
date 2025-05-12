@@ -1,0 +1,14 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jhj.teamproject.annual.entities.AnnualEntity">
+    <select id="selectByIndex" resultType="com.jhj.teamproject.annual.mappers.AnnualMapper">
+        SELECT u.id AS user_id,
+               u.name,
+               u.email,
+               a.total_days,
+               a.used_days,
+        FROM annual_leaves a
+                 JOIN
+            users u ON a.user_id = u.id
+        WHERE u.email = 'example@example.com';
+    </select>
+</mapper>

@@ -1,0 +1,178 @@
+@charset "UTF-8";
+
+#defaultContainer > #annualForm {
+    width: 100%;
+    min-width: 55rem;
+    align-items: flex-start;
+    height: 100%;
+
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+#defaultContainer > #annualForm > .menu-bar {
+    border-radius: 1.25rem 0 0 1.25rem;
+    min-width: 15rem;
+    height: 70vh;
+    background-color: #edf0fe;
+    padding-left: 2rem;
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+#defaultContainer > #annualForm > .menu-bar > .title {
+    margin-left: 1rem;
+    font-weight: 300;
+    font-size: 1rem;
+}
+
+#defaultContainer > #annualForm > .menu-bar > .button-container {
+    padding-right: 2rem;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#defaultContainer > #annualForm > .menu-bar > .button-container > .--object-button.-button-red {
+    width: 10rem;
+    height: 2.5rem;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#defaultContainer > #annualForm > .menu-bar > .button-container > .--object-button.-button-red > .---caption {
+    margin: 0 auto;
+}
+
+#defaultContainer > #annualForm > .menu-bar > .button-container > .--object-button.-button-red > .---icon {
+    z-index: 9;
+}
+
+
+#defaultContainer > #annualForm > .calendar-header {
+    position: relative;
+    width: 100%;
+}
+
+#defaultContainer > #annualForm > .calendar-header > .calendar-legend {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: bold;
+    background-color: transparent;
+
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#defaultContainer > #annualForm > .calendar-header > .calendar-legend > span > .dot {
+    width: 0.675rem;
+    height: 0.675rem;
+    border-radius: 50%;
+    margin-right: 0.25rem;
+
+    display: inline-block;
+}
+
+#defaultContainer > #annualForm > .calendar-header > .calendar-legend > span > .dot-green {
+    background-color: #1abc9c;
+}
+
+#defaultContainer > #annualForm > .calendar-header > .calendar-legend > span > .dot-blue {
+    background-color: #3498db;
+}
+
+#defaultContainer > #annualForm > .modal {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+
+    align-items: center;
+    display: none;
+    justify-content: center;
+    z-index: 999;
+}
+
+#defaultContainer > #annualForm > .modal.visible {
+    display: flex;
+}
+
+#defaultContainer > #annualForm > .modal > .modal-content {
+    background: white;
+    padding: 2rem 1.5rem;
+    border-radius: 1rem;
+    width: 25rem;
+    box-shadow: 0 0.75rem 1.875rem rgba(0, 0, 0, 0.2);
+    font-family: 'Pretendard', sans-serif;
+}
+
+#defaultContainer > #annualForm > .modal > .modal-content h2 {
+    text-align: center;
+    margin-bottom: 1.125rem;
+    font-size: 1.0625rem;
+}
+
+#defaultContainer > #annualForm > .modal > .modal-content label {
+    display: block;
+    font-weight: bold;
+    margin-top: 0.875rem;
+    margin-bottom: 0.25rem;
+}
+
+#defaultContainer > #annualForm > .modal > .modal-content input[type="text"],
+#defaultContainer > #annualForm > .modal > .modal-content input[type="date"],
+#defaultContainer > #annualForm > .modal > .modal-content select {
+    width: 100%;
+    padding: 0.675rem;
+    border-radius: 0.5rem;
+    border: 0.0625rem solid #ccc;
+    margin-bottom: 0.5rem;
+}
+
+#defaultContainer > #annualForm > .modal > .modal-content > .category-select {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+#defaultContainer > #annualForm > .modal > .modal-content > .category-select label {
+    font-weight: normal;
+}
+
+#defaultContainer > #annualForm > .modal > .modal-content > .modal-buttons {
+    margin-top: 1.5rem;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+#defaultContainer > #annualForm > .modal > .modal-content > .modal-buttons > .btn-outline {
+    background: white;
+    border: 0.0625rem solid #444;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#defaultContainer > #annualForm > .modal > .modal-content > .modal-buttons > .btn-filled {
+    background: #2c3e50;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+}

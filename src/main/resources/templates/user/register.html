@@ -5,6 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<<<<<<< HEAD
     <title>회원가입</title>
     <script defer src="/user/assets/register.js"></script>
 </head>
@@ -58,3 +59,73 @@
 </form>
 </body>
 </html>
+=======
+    <title>회원가입 - SUB</title>
+    <link rel="stylesheet" href="/assets/styles/common.css">
+    <link rel="stylesheet" href="/user/assets/styles/register.css">
+</head>
+<body>
+<div id="defaultContainer" class="--object-layout">
+    <form novalidate id="registerForm">
+        <h2 class="title">회원가입</h2>
+        <table class="table">
+            <tbody>
+            <tr>
+                <th scope="col">
+                    <label for="registerName">이름</label>
+                </th>
+                <td>
+                    <div class="row">
+                        <input id="registerName" required autocomplete="false" class="--object-label input" maxlength="50" minlength="8" name="email" spellcheck="false" type="text">
+                        <span class="warning -visible">이름을 올바르게 입력해주세요.</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="col">
+                    <label for="registerEmail">이메일</label>
+                </th>
+                <td>
+                    <div class="row">
+                        <input id="registerEmail" required autocomplete="false" class="--object-label input" maxlength="50" minlength="8" name="email" spellcheck="false" type="text">
+                        <span class="warning -visible">이미 사용중인 이메일입니다.</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="col">
+                    <label for="registerPassword">비밀번호</label>
+                </th>
+                <td>
+                    <div class="row">
+                        <input id="registerPassword" required autocomplete="false" class="--object-label input" maxlength="100" minlength="8" name="password" spellcheck="false" type="password">
+                        <span class="warning -visible">비밀번호를 입력해주세요.</span>
+                    </div>
+                    <div class="row">
+                        <input required autocomplete="false" class="--object-label input" maxlength="100" minlength="8" name="password" spellcheck="false" type="password">
+                        <span class="warning -visible">비밀번호가 일치하지 않습니다.</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="col">
+                    <label for="registerJoin">입사일</label>
+                </th>
+                <td>
+                    <div class="row">
+                        <input id="registerJoin" required autocomplete="false" class="--object-label input" maxlength="50" minlength="8" name="email" type="date">
+                    </div>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="button-container">
+            <a href="/user/login" class="--object-button --color-gray">취소</a>
+            <button class="--object-button -button-purple" type="submit">회원가입</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
+>>>>>>> 87ef6b82d8b0ac9a20a67f04189e242221f39745

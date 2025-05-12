@@ -1,0 +1,72 @@
+#defaultContainer{
+    width: 37.5rem;
+    height: 37.5rem;
+}
+#defaultContainer.--object-layout{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#registerForm{
+    width: 32.5rem;
+    height: 29rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.9rem;
+}
+#registerForm>.title{
+    font-weight: 800;
+    color: #6C5CE7;
+}
+#registerForm>.button-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+.table{
+    width: 100%;
+    height: 100%;
+    border-spacing: 0;
+}
+.table>tbody>tr>td>.row{
+    position: relative;
+}
+.table>tbody>tr:nth-child(3)>td>.row:nth-child(2){
+    margin-top: 1.5rem;
+}
+.table>tbody>tr>td>.row>.warning{
+    position: absolute;
+
+    color: red;
+    opacity: 0;
+    pointer-events: none;
+    padding:0.062rem 0.062rem;
+    border-radius: 0.25rem;
+    font-size: 0.8rem;
+    z-index: 2;
+    margin-top: 0.25rem;
+}
+.table>tbody>tr>td>.row>.warning.-visible{
+    opacity: 1;
+    transition-property: opacity;
+    transition-duration: 175ms;
+    transition-timing-function: ease;
+    z-index: 1;
+}
+
+a[href]{
+    color: #ffffff;
+}
+.--object-label>.--caption{
+    width: 100%;
+    font-weight: 800;
+    font-size: 0.8rem;
+    text-align: left;
+    margin-left: 9.85rem;;
+}
