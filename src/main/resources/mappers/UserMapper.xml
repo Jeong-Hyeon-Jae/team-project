@@ -4,6 +4,7 @@
     <insert id="insertUser">
         INSERT INTO `leave`.`users`(`email`, `password`, `name`, `role`, `created_at`)
         VALUES (#{email}, #{password}, #{name}, #{role}, #{createdAt})
+        WHERE `leave`.`users` u
     </insert>
 <!--    <select id="selectCountByEmail" resultType="java.lang.Integer">
         SELECT COUNT(0)

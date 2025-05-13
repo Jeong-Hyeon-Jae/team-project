@@ -1,12 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jhj.teamproject.user.mappers.UserMapper">
-    <insert id="insertUser"></insert>
-    <update id="update"></update>
-    <select id="selectByEmail" resultType="com.jhj.teamproject.user.entities.UserEntity"></select>
-    <select id="selectByNickname" resultType="com.jhj.teamproject.user.entities.UserEntity"></select>
-    <select id="selectCountByEmail" resultType="java.lang.Integer">
-        select `email`,`password`,``
+    <insert id="insertUser">
+        insert into `leave`.`users` (email, password, name, role, joined_at)
+        values(#{user.email},#{user.password},#{user.name},#{user.role},#{user.joinedAt});
+    </insert>
+    <update id="update">
+        update `leave`.`users`
+        set `email`=#{user.email},
+            `password`= #{user.password},
+            `name`=#{user.name},
+            `role`=#{user.name},
+            `modified_at`=#{user.modifiedAt}
+        where `id` = ${user.id}
+        limit 1;
+    </update>
+    <select id="selectByEmail" resultType="com.jhj.teamproject.user.entities.UserEntity">
+        select `id`        as `id`,
+               `email`     as `email`,
+               `password`  as `password`,
+               `name`      as `name`,
+               `role`      as `role`,
+               `joined_at` as `joinedAt`,
+               `modified_at` as `modifiedAt`
+        from `leave`.`users`
+        where `email` = #{email}
+        limit 1;
     </select>
-    <select id="selectCountByNickname" resultType="java.lang.Integer"></select>
+    <select id="selectCountByEmail" resultType="java.lang.Integer">
+        select count(0)
+        from `leave`.`users`
+        where `email` = #{user.email};
+    </select>
 </mapper>
