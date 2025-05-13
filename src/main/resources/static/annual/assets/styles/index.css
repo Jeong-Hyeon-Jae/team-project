@@ -74,7 +74,7 @@
     gap: 1rem;
 }
 
-#defaultContainer > #annualForm > .calendar-header > .calendar-legend > span > .dot {
+#defaultContainer > #annualForm > .menu-bar > .calendar-legend > span > .dot {
     width: 0.675rem;
     height: 0.675rem;
     border-radius: 50%;
@@ -83,11 +83,11 @@
     display: inline-block;
 }
 
-#defaultContainer > #annualForm > .calendar-header > .calendar-legend > span > .dot-green {
+#defaultContainer > #annualForm > .menu-bar > .calendar-legend > span > .dot-green {
     background-color: #1abc9c;
 }
 
-#defaultContainer > #annualForm > .calendar-header > .calendar-legend > span > .dot-blue {
+#defaultContainer > #annualForm > .menu-bar > .calendar-legend > span > .dot-blue {
     background-color: #3498db;
 }
 

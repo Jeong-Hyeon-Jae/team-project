@@ -28,10 +28,11 @@ public class UserController {
         if (user != null) {
             System.out.println("로그인 성공");
             return "/";
-        }else{
+        }/*else{
             System.out.println("로그인 실패");
             return "redirect:/user/login";
-        }
+        }*/
+        return "/user/login";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
