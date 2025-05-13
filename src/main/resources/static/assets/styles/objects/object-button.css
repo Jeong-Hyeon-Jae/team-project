@@ -41,18 +41,18 @@
 .-button-red:active{
     background-color: #c53b2c;
 }
-.--color-gray{
+.--button-gray{
     background-color: #636569;
     color: #ffffff;
 
 }
-.--color-gray:hover{
+.--button-gray:hover{
     background-color: #3f454d;
     transition-duration: 175ms;
     transition-property: background-color;
     transition-timing-function: ease;
 }
-.--color-gray:active{
+.--button-gray:active{
     background-color: #2a2d34;
     transition-duration: 175ms;
     transition-property: background-color;

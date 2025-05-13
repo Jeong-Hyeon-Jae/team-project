@@ -2,6 +2,7 @@ package com.jhj.teamproject.user.entities;
 
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
@@ -15,5 +16,6 @@ public class UserEntity {
     private String password;
     private String name;
     private String role;
-    private LocalDateTime createdAt;
+    private LocalDate joinedAt;
+    private LocalDate modifiedAt;
 }

@@ -1,5 +1,7 @@
 #defaultContainer{
     position: relative;
+    width: 25rem;
+    height: 20rem;
 }
 #loginForm{
     width: 20rem;

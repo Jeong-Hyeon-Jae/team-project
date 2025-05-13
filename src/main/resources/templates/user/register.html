@@ -8,6 +8,7 @@
     <title>회원가입 - SUB</title>
     <link rel="stylesheet" href="/assets/styles/common.css">
     <link rel="stylesheet" href="/user/assets/styles/register.css">
+    <script defer src="/user/assets/scripts/register.js"></script>
 </head>
 <body>
 <div id="defaultContainer" class="--object-layout">
@@ -21,7 +22,7 @@
                 </th>
                 <td>
                     <div class="row">
-                        <input id="registerName" required autocomplete="false" class="--object-label input" maxlength="50" minlength="8" name="email" spellcheck="false" type="text">
+                        <input id="registerName" required autocomplete="false" class="--object-label input" maxlength="50" minlength="8" name="name" spellcheck="false" type="text">
                         <span class="warning -visible">이름을 올바르게 입력해주세요.</span>
                     </div>
                 </td>
@@ -47,8 +48,21 @@
                         <span class="warning -visible">비밀번호를 입력해주세요.</span>
                     </div>
                     <div class="row">
-                        <input required autocomplete="false" class="--object-label input" maxlength="100" minlength="8" name="password" spellcheck="false" type="password">
+                        <input required autocomplete="false" class="--object-label input" maxlength="100" minlength="8" name="passwordCheck" spellcheck="false" type="password">
                         <span class="warning -visible">비밀번호가 일치하지 않습니다.</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <label for="registerRole">직급</label>
+                </th>
+                <td>
+                    <div class="row">
+                        <select required name="role" id="registerRole">
+                            <option selected value="ADMIN">Admin</option>
+                            <option  value="USER">User</option>
+                        </select>
                     </div>
                 </td>
             </tr>
@@ -58,7 +72,7 @@
                 </th>
                 <td>
                     <div class="row">
-                        <input id="registerJoin" required autocomplete="false" class="--object-label input" maxlength="50" minlength="8" name="email" type="date">
+                        <input id="registerJoin" required autocomplete="false" class="--object-label input" maxlength="50" minlength="8" name="joinedAt" type="date">
                     </div>
 
                 </td>
@@ -67,7 +81,7 @@
         </table>
         <div class="button-container">
             <a href="/user/login" class="--object-button --color-gray">취소</a>
-            <button class="--object-button -button-purple" type="submit">회원가입</button>
+            <button name="registerBtn" class="--object-button -button-purple" type="submit">회원가입</button>
         </div>
     </form>
 </div>
