@@ -21,6 +21,7 @@ $closeBtn.addEventListener('click', () => {
 // 저장 버튼 (예시로 제목만 콘솔에 찍기)
 document.getElementById('saveEvent').addEventListener('click', () => {
     const startDateString = $annualForm[name='start-date'].value.split('-');
+
     const endDateString = $annualForm[name='end-date'].value.split('-');
     const betweenDay = (new Date(startDateString[0], Number(startDateString[1])-1, startDateString[2]).getTime() - new Date(endDateString[0], Number(endDateString[1])-1, endDateString[2]).getTime())/1000/60/60/24;
     const annualRadio = $annualForm[name='annual'];
@@ -29,7 +30,14 @@ document.getElementById('saveEvent').addEventListener('click', () => {
     formData.append('startDate', $annualForm[name='start-date'].value);
     formData.append('endDate', $annualForm[name='end-date'].value);
     formData.append('days', Math.abs(betweenDay).toString());
-    formData.append('content', $annualForm[name='content']);
+    formData.append('content', $annualForm[name='content'].value);
+    annualRadio.forEach((node) => {
+        if (node.checked) {
+            formData.append('category', annualRadio.value);
+        }
+    });
+
+    formData.append('category', $annualForm[name='half']);
 
     xhr.onreadystatechange = () => {
         if (xhr.readyState !== XMLHttpRequest.DONE) {
@@ -47,7 +55,7 @@ document.getElementById('saveEvent').addEventListener('click', () => {
             alert('일정 제목을 입력하세요.');
         }
     };
-    xhr.open('POST', '/user/register');
+    xhr.open('POST', '/request');
     xhr.send(formData);
 
 
