@@ -33,25 +33,17 @@ public class UserService {
     }
 
     //로그인
-    public LoginResult login(UserEntity user) {
-        if (user == null
-                || !UserService.isEmailValid(user.getEmail())
-                || !UserService.isPasswordValid(user.getPassword())) {
+    public LoginResult login(String email, String password) {
+        if (email == null || password == null || !UserService.isEmailValid(email)) {
             return LoginResult.FAILURE;
         }
-        UserEntity dbUser = this.userMapper.selectByEmail(user.getEmail());
-        if (dbUser == null) {
+        UserEntity dbUserEntity = this.userMapper.selectByEmail(email);
+        if (dbUserEntity == null || dbUserEntity.getIsDeleted()=="y") {
             return LoginResult.FAILURE;
         }
-        if (!Bcrypt.isMatch(user.getPassword(), dbUser.getPassword())) {
+        if (!Bcrypt.isMatch(password,dbUserEntity.getPassword())) {
             return LoginResult.FAILURE;
         }
-        user.setPassword(dbUser.getPassword());
-        user.setEmail(dbUser.getEmail());
-        user.setRole(dbUser.getRole());
-        user.setName(dbUser.getName());
-        user.setJoinedAt(dbUser.getJoinedAt());
-        user.setModifiedAt(dbUser.getModifiedAt());
         return LoginResult.SUCCESS;
     }
 
@@ -65,10 +57,7 @@ public class UserService {
             System.out.println("올바르지 않은 이메일");
             return RegisterResult.FAILURE_INVALID_EMAIL;
         }
-//        if (this.userMapper.selectCountByEmail(user.getEmail())>0) {
-//            System.out.println("이메일 중복");
-//            return RegisterResult.FAILURE_DUPLICATE_EMAIL;
-//        }
+
         if (!isPasswordValid(user.getPassword())) {
             System.out.println("올바르지 않은 비밀번호");
             return RegisterResult.FAILURE_INVALID_PASSWORD;
@@ -80,10 +69,21 @@ public class UserService {
         user.setEmail(user.getEmail());
         user.setName(user.getName());
         user.setPassword(Bcrypt.encrypt(user.getPassword()));
-        user.setRole(user.getRole());
-        user.setJoinedAt(user.getJoinedAt());
+        user.setCreatedAt(user.getCreatedAt());
+        user.setIsDeleted("n");
+        if (user.isAdmin() == true) {
+            user.setAdmin(true);
+        }
+        user.setAdmin(false);
+        user.setContactMvno(user.getContactMvno());
+        user.setContactFirst(user.getContactFirst());
+        user.setContactSecond(user.getContactSecond());
+        user.setContactThird(user.getContactThird());
+        user.setAddressPostal(user.getAddressPostal());
+        user.setAddressPrimary(user.getAddressPrimary());
+        user.setAddressSecondary(user.getAddressSecondary());
 
-        if(this.userMapper.insertUser(user)==0 ){
+        if (this.userMapper.insertUser(user) == 0) {
             return RegisterResult.FAILURE;
         }
         AnnualEntity annual = new AnnualEntity();
@@ -91,7 +91,7 @@ public class UserService {
         annual.setTotalDays(totalDays);
         annual.setUsedDays(0);
 
-        if(this.userMapper.insertAnnual(annual)==0){
+        if (this.userMapper.insertAnnual(annual) == 0) {
             return RegisterResult.FAILURE;
         }
         System.out.println("success");

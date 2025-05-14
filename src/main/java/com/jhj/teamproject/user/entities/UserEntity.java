@@ -15,7 +15,15 @@ public class UserEntity {
     private String email;
     private String password;
     private String name;
-    private String role;
-    private LocalDate joinedAt;
+    private LocalDate createdAt;
     private LocalDate modifiedAt;
+    private String isDeleted;
+    private boolean isAdmin;
+    private String contactMvno;
+    private String contactFirst;
+    private String contactSecond;
+    private String contactThird;
+    private String addressPostal;
+    private String addressPrimary;
+    private String addressSecondary;
 }
