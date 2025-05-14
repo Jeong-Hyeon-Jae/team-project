@@ -51,6 +51,13 @@
     <select id="selectCountByEmail" resultType="java.lang.Integer">
         select count(0)
         from `leave`.`users`
-        where `email` = #{user.email};
+        where `email` = #{user.email}
+    </select>
+
+    <select id="selectIdByEmail" resultType="java.lang.Integer">
+        select `id`
+        from `leave`.`users`
+        where `email` = #{email}
+        limit 1;
     </select>
 </mapper>

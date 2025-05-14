@@ -26,9 +26,12 @@ public class LeaveRequestController {
     @RequestMapping(value="/request", method = RequestMethod.POST, produces =  MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String postRequest(LeaveRequestEntity leaveRequest,
-                              @SessionAttribute(value = "signedUser")UserEntity userEntity) {
-        leaveRequest.setUserId(userEntity.getId());
-        LeaveResult result = this.leaveRequestService.insert(leaveRequest);
+                              @SessionAttribute(value = "email")String email) {
+
+        UserEntity user = new UserEntity();
+        user.setEmail(email);
+
+        LeaveResult result = this.leaveRequestService.insert(leaveRequest, user.getEmail());
         JSONObject res = new JSONObject();
         res.put("result", result.toString().toLowerCase());
 

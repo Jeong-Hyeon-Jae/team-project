@@ -1,12 +1,11 @@
 const $annualForm = document.getElementById('annualForm');
 const $today = $annualForm.querySelector(':scope > .menu-bar > .today > .today');
-const date = new Date();
-console.log($annualForm);
 
 const addBtn = $annualForm.querySelector(':scope > .menu-bar > .button-container > button');
 const $modal = document.getElementById('modal');
 const $closeBtn = document.getElementById('closeModal');
 const $eventTitle = document.getElementById('eventTitle');
+const date = new Date();
 
 $today.textContent = "";
 $today.textContent = new Date().toLocaleDateString('ko-KR');
@@ -26,7 +25,10 @@ document.getElementById('saveEvent').addEventListener('click', (e) => {
     const startDateString = $annualForm[name='start-date'].value.split('-');
 
     const endDateString = $annualForm[name='end-date'].value.split('-');
-    const betweenDay = (new Date(startDateString[0], Number(startDateString[1])-1, startDateString[2]).getTime() - new Date(endDateString[0], Number(endDateString[1])-1, endDateString[2]).getTime())/1000/60/60/24;
+    const betweenDay = (new Date(startDateString[0],
+        Number(startDateString[1])-1,
+        startDateString[2]).getTime() - new Date(endDateString[0],
+        Number(endDateString[1])-1, endDateString[2]).getTime())/1000/60/60/24;
     const annualRadio = $annualForm[name='annual'];
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
@@ -35,6 +37,17 @@ document.getElementById('saveEvent').addEventListener('click', (e) => {
         alert('시작 날짜를 입력해 주세요.');
         $annualForm[name='start-date'].select();
         $annualForm[name='start-date'].focus();
+        return;
+    }
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const selectedDate = new Date($annualForm[name='start-date'].value);
+    selectedDate.setHours(0, 0, 0, 0);
+
+    if (selectedDate < today) {
+        alert('시작 날짜는 오늘보다 이전일 수 없습니다.');
+        $annualForm.querySelector("[name='start-date']").focus();
         return;
     }
     if ($annualForm[name='end-date'].value === '') {
@@ -54,9 +67,10 @@ document.getElementById('saveEvent').addEventListener('click', (e) => {
     formData.append('endDate', $annualForm[name='end-date'].value);
     formData.append('days', Math.abs(betweenDay).toString());
     formData.append('content', $annualForm[name='content'].value);
+    formData.append('status', 'PENDING');
     annualRadio.forEach((node) => {
         if (node.checked) {
-            formData.append('category', annualRadio.value);
+            formData.append('category', annualRadio.value.toUpperCase());
         }
     });
 
@@ -69,7 +83,17 @@ document.getElementById('saveEvent').addEventListener('click', (e) => {
             return;
         }
         const response = JSON.parse(xhr.responseText);
-
+        switch (response) {
+            case 'failure':
+                alert(`알수 없는 오류로 에러가 발생했습니다. ${xhr.status}`);
+                break;
+            case 'success':
+                alert(`입력된 연차가 제출되었습니다.`);
+                break;
+            default:
+                location.href='/user/login';
+                return;
+        }
     };
     xhr.open('POST', '/request');
     xhr.send(formData);
