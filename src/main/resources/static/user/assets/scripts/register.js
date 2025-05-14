@@ -2,10 +2,7 @@ const $registerForm = document.getElementById('registerForm');
 
 $registerForm.onsubmit = (e) => {
     e.preventDefault();
-    const $emailLabel = $registerForm.querySelector('.row:has(input[name="email"])');
-    if ($registerForm['email'].value ==='') {
 
-    }
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
     formData.append('email', $registerForm['email'].value);
@@ -24,21 +21,10 @@ $registerForm.onsubmit = (e) => {
         const response = JSON.parse(xhr.responseText);
         switch (response.result) {
             case 'success':
-                dialog.showSimpleOk('회원가입', '회원가입에 성공하셨습니다. 로그인 하세요.', () => {
-                    location.href = '/';
-                })
+                location.href = "/user/login";
                 break;
             case'failure':
-                alert('실패');
-                break;
-            case 'failure_invalid_email':
-                alert('이메일 오류');
-                break;
-            case 'failure_invalid_password':
-                alert('password 오류');
-                break;
-            case 'failure_invalid_name':
-                alert('name 오류');
+                dialog.showSimpleOk('회원가입', '회원가입에 실패하였습니다. 잠시 후 다시 시도해 주세요');
                 break;
             default:
                 alert('요청 중 오류');

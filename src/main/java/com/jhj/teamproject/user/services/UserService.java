@@ -21,7 +21,7 @@ public class UserService {
     }
 
     public static boolean isEmailValid(String input) {
-        return input != null && input.matches("^(?=.{8,50}$)([\\da-z\\-_.]{4,})@([\\da-z][\\da-z\\-]*[\\da-z]\\.)?([\\da-z][\\da-z\\-]*[\\da-z])\\.([a-z]{2,15})(\\.[a-z]{2,3})?$");
+        return input != null && input.matches("^(?=.{2,50}$)([\\da-z\\-_.]{2,})@([\\da-z][\\da-z\\-]*[\\da-z]\\.)?([\\da-z][\\da-z\\-]*[\\da-z])\\.([a-z]{2,15})(\\.[a-z]{2,3})?$");
     }
 
     public static boolean isPasswordValid(String input) {
@@ -32,38 +32,51 @@ public class UserService {
         return input != null && input.matches("^([a-zA-Z가-힣]{2,50})$");
     }
 
+    //로그인
     public LoginResult login(UserEntity user) {
         if (user == null
-                || !isEmailValid(user.getEmail())
-                || !isPasswordValid(user.getPassword())) {
+                || !UserService.isEmailValid(user.getEmail())
+                || !UserService.isPasswordValid(user.getPassword())) {
             return LoginResult.FAILURE;
         }
         UserEntity dbUser = this.userMapper.selectByEmail(user.getEmail());
-        if (dbUser == null || !Bcrypt.isMatch(user.getPassword(), dbUser.getPassword())) {
+        if (dbUser == null) {
             return LoginResult.FAILURE;
         }
+        if (!Bcrypt.isMatch(user.getPassword(), dbUser.getPassword())) {
+            return LoginResult.FAILURE;
+        }
+        user.setPassword(dbUser.getPassword());
+        user.setEmail(dbUser.getEmail());
+        user.setRole(dbUser.getRole());
+        user.setName(dbUser.getName());
+        user.setJoinedAt(dbUser.getJoinedAt());
+        user.setModifiedAt(dbUser.getModifiedAt());
         return LoginResult.SUCCESS;
     }
 
+    //회원가입
     public RegisterResult register(UserEntity user) {
 
-        System.out.println("registerService");
         if (user == null) {
             return RegisterResult.FAILURE;
         }
         if (!isEmailValid(user.getEmail())) {
-            System.out.println("이메일 오류");
+            System.out.println("올바르지 않은 이메일");
             return RegisterResult.FAILURE_INVALID_EMAIL;
         }
+//        if (this.userMapper.selectCountByEmail(user.getEmail())>0) {
+//            System.out.println("이메일 중복");
+//            return RegisterResult.FAILURE_DUPLICATE_EMAIL;
+//        }
         if (!isPasswordValid(user.getPassword())) {
-            System.out.println("비밀번호 오류");
+            System.out.println("올바르지 않은 비밀번호");
             return RegisterResult.FAILURE_INVALID_PASSWORD;
         }
         if (!isNameValid(user.getName())) {
-            System.out.println("이름 오류");
+            System.out.println("올바르지 않은 이름");
             return RegisterResult.FAILURE_INVALID_NAME;
         }
-
         user.setEmail(user.getEmail());
         user.setName(user.getName());
         user.setPassword(Bcrypt.encrypt(user.getPassword()));
@@ -81,6 +94,7 @@ public class UserService {
         if(this.userMapper.insertAnnual(annual)==0){
             return RegisterResult.FAILURE;
         }
+        System.out.println("success");
         return RegisterResult.SUCCESS;
     }
 }

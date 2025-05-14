@@ -26,18 +26,18 @@ public class UserController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public String getLogin(@SessionAttribute(value = "signedUser", required = false) UserEntity user) {
-        if (user != null) {
-            System.out.println("로그인 성공");
-            return "/";
-        }else{
+        if (user == null) {
             System.out.println("로그인 실패");
             return "/user/login";
         }
+        System.out.println("로그인 성공");
+        return "/annual/index";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String postLogin(HttpSession session, UserEntity user) {
+    public String postLogin(UserEntity user
+            , HttpSession session) {
         LoginResult result = this.userService.login(user);
         if (result == LoginResult.SUCCESS) {
             session.setAttribute("signedUser", user);
@@ -47,6 +47,7 @@ public class UserController {
         return response.toString();
     }
 
+
     @RequestMapping(value = "/register", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public String getRegister() {
         return "user/register";
@@ -54,7 +55,7 @@ public class UserController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String postRegister(UserEntity user,AnnualEntity annual) {
+    public String postRegister(UserEntity user, AnnualEntity annual) {
         System.out.println("postRegister");
         RegisterResult result = this.userService.register(user);
         JSONObject response = new JSONObject();
