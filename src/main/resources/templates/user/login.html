@@ -8,6 +8,8 @@
     <title>로그인 - SUB</title>
     <link rel="stylesheet" href="/assets/styles/common.css">
     <link rel="stylesheet" href="/user/assets/styles/login.css">
+    <script defer src="/user/assets/scripts/login.js"></script>
+
 </head>
 <body>
 <div id="defaultContainer">
@@ -20,11 +22,13 @@
             <span class="---caption">이메일</span>
             <input required autocomplete="email" autofocus maxlength="50" minlength="5" type="email" name="email"
                    spellcheck="false">
+            <span class="--warning">이메일을 입력해주세요.</span>
         </label>
         <label class="--object-label">
             <span class="---caption">비밀번호</span>
             <input required autocomplete="off" autofocus maxlength="100" minlength="5" type="password" name="password"
                    spellcheck="false">
+            <span class="--warning">비밀번호를 입력해주세요.</span>
         </label>
         <button class="--object-button -button-purple" type="submit">
             <span class="---caption">로그인</span>

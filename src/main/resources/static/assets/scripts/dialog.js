@@ -97,3 +97,5 @@ class Dialog {
         )
     }
 }
+
+const dialog= new Dialog();

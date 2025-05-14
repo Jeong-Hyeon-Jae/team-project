@@ -1,7 +1,11 @@
 const $registerForm = document.getElementById('registerForm');
 
-$registerForm.onsubmit= (e) => {
+$registerForm.onsubmit = (e) => {
     e.preventDefault();
+    const $emailLabel = $registerForm.querySelector('.row:has(input[name="email"])');
+    if ($registerForm['email'].value ==='') {
+
+    }
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
     formData.append('email', $registerForm['email'].value);
@@ -20,8 +24,9 @@ $registerForm.onsubmit= (e) => {
         const response = JSON.parse(xhr.responseText);
         switch (response.result) {
             case 'success':
-                alert('등록 완료');
-                location.href = '/';
+                dialog.showSimpleOk('회원가입', '회원가입에 성공하셨습니다. 로그인 하세요.', () => {
+                    location.href = '/';
+                })
                 break;
             case'failure':
                 alert('실패');

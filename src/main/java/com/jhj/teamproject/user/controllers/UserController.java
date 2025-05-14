@@ -1,5 +1,6 @@
 package com.jhj.teamproject.user.controllers;
 
+import com.jhj.teamproject.annual.entities.AnnualEntity;
 import com.jhj.teamproject.user.entities.UserEntity;
 import com.jhj.teamproject.user.results.LoginResult;
 import com.jhj.teamproject.user.results.RegisterResult;
@@ -28,11 +29,10 @@ public class UserController {
         if (user != null) {
             System.out.println("로그인 성공");
             return "/";
-        }/*else{
+        }else{
             System.out.println("로그인 실패");
-            return "redirect:/user/login";
-        }*/
-        return "/user/login";
+            return "/user/login";
+        }
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -54,7 +54,7 @@ public class UserController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String postRegister(UserEntity user) {
+    public String postRegister(UserEntity user,AnnualEntity annual) {
         System.out.println("postRegister");
         RegisterResult result = this.userService.register(user);
         JSONObject response = new JSONObject();
