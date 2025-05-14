@@ -33,33 +33,17 @@ public class UserService {
     }
 
     //로그인
-    public LoginResult login(UserEntity user) {
-        if (user == null
-                || !UserService.isEmailValid(user.getEmail())
-                || !UserService.isPasswordValid(user.getPassword())) {
+    public LoginResult login(String email, String password) {
+        if (email == null || password == null || !UserService.isEmailValid(email)) {
             return LoginResult.FAILURE;
         }
-        UserEntity dbUser = this.userMapper.selectById(user.getId());
-        if (dbUser == null) {
+        UserEntity dbUserEntity = this.userMapper.selectByEmail(email);
+        if (dbUserEntity == null || dbUserEntity.getIsDeleted()=="y") {
             return LoginResult.FAILURE;
         }
-        if (!Bcrypt.isMatch(user.getPassword(), dbUser.getPassword())) {
+        if (!Bcrypt.isMatch(password,dbUserEntity.getPassword())) {
             return LoginResult.FAILURE;
         }
-        user.setPassword(dbUser.getPassword());
-        user.setEmail(dbUser.getEmail());
-        user.setAdmin(dbUser.isAdmin());
-        user.setName(dbUser.getName());
-        user.setIsDelete(dbUser.getIsDelete());
-        user.setCreatedAt(dbUser.getCreatedAt());
-        user.setModifiedAt(dbUser.getModifiedAt());
-        user.setContactMvno(dbUser.getContactMvno());
-        user.setContactFirst(dbUser.getContactFirst());
-        user.setContactSecond(dbUser.getContactSecond());
-        user.setContactThird(dbUser.getContactThird());
-        user.setAddressPostal(dbUser.getAddressPostal());
-        user.setAddressPrimary(dbUser.getAddressPrimary());
-        user.setAddressSecondary(dbUser.getAddressSecondary());
         return LoginResult.SUCCESS;
     }
 
@@ -73,10 +57,7 @@ public class UserService {
             System.out.println("올바르지 않은 이메일");
             return RegisterResult.FAILURE_INVALID_EMAIL;
         }
-//        if (this.userMapper.selectCountByEmail(user.getEmail())>0) {
-//            System.out.println("이메일 중복");
-//            return RegisterResult.FAILURE_DUPLICATE_EMAIL;
-//        }
+
         if (!isPasswordValid(user.getPassword())) {
             System.out.println("올바르지 않은 비밀번호");
             return RegisterResult.FAILURE_INVALID_PASSWORD;
@@ -89,6 +70,7 @@ public class UserService {
         user.setName(user.getName());
         user.setPassword(Bcrypt.encrypt(user.getPassword()));
         user.setCreatedAt(user.getCreatedAt());
+        user.setIsDeleted("n");
         if (user.isAdmin() == true) {
             user.setAdmin(true);
         }

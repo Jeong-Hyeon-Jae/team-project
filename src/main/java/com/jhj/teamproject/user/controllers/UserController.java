@@ -36,11 +36,12 @@ public class UserController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String postLogin(UserEntity user
+    public String postLogin(@RequestParam(value = "email") String email, @RequestParam(value="password") String password
             , HttpSession session) {
-        LoginResult result = this.userService.login(user);
+        LoginResult result = this.userService.login(email,password);
         if (result == LoginResult.SUCCESS) {
-            session.setAttribute("signedUser", user);
+            session.setAttribute("email", email);
+            session.setAttribute("password", password);
         }
         JSONObject response = new JSONObject();
         response.put("result", result.toString().toLowerCase());

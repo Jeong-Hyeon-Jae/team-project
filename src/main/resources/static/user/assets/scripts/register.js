@@ -8,7 +8,6 @@ $registerForm.onsubmit = (e) => {
     formData.append('email', $registerForm['email'].value);
     formData.append('name', $registerForm['name'].value);
     formData.append('password', $registerForm['password'].value);
-    formData.append('role', $registerForm['role'].value);
     formData.append('createdAt', $registerForm['createdAt'].value);
     formData.append('contactMvno', $registerForm['contactMvno'].value);
     formData.append('contactFirst', $registerForm['contactFirst'].value);

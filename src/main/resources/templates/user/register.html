@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="/user/assets/styles/register.css">
     <script src="/assets/scripts/common.js"></script>
     <script defer src="/user/assets/scripts/register.js"></script>
-
 </head>
 <body>
 <div class="--dialog ">
@@ -98,7 +97,15 @@
                                 <option value="LGU">LGU+</option>
                                 <option value="ETC">알뜰폰</option>
                             </select>
+                            <select required class="--object-field ---field" name="contactFirst">
+                                <option selected value="010">010</option>
+                            </select>
+                            <input required class="--object-field ---field -flex-stretch" maxlength="4" minlength="3"
+                                   name="contactSecond" placeholder="0000" type="text">
+                            <input required class="--object-field ---field -flex-stretch" maxlength="4" minlength="4"
+                                   name="contactThird" placeholder="0000" type="text">
                         </label>
+
                     </div>
                 </td>
             </tr>

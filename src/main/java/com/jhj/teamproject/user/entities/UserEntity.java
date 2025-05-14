@@ -15,10 +15,10 @@ public class UserEntity {
     private String email;
     private String password;
     private String name;
-    private String isDelete;
-    private boolean isAdmin;
     private LocalDate createdAt;
     private LocalDate modifiedAt;
+    private String isDeleted;
+    private boolean isAdmin;
     private String contactMvno;
     private String contactFirst;
     private String contactSecond;

@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface UserMapper {
-    UserEntity selectById(@Param(value = "id") int id);
+    UserEntity selectByEmail(@Param(value = "email") String email);
 
     int insertUser(@Param(value = "user") UserEntity user);
 
@@ -15,5 +15,5 @@ public interface UserMapper {
 
     int selectCountByEmail(@Param(value = "email") String email);
 
-    int update(@Param(value = "user") UserEntity user);
+//    int update(@Param(value = "user") UserEntity user);
 }
