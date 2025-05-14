@@ -39,7 +39,7 @@ public class UserService {
                 || !UserService.isPasswordValid(user.getPassword())) {
             return LoginResult.FAILURE;
         }
-        UserEntity dbUser = this.userMapper.selectByEmail(user.getEmail());
+        UserEntity dbUser = this.userMapper.selectById(user.getId());
         if (dbUser == null) {
             return LoginResult.FAILURE;
         }
@@ -48,10 +48,18 @@ public class UserService {
         }
         user.setPassword(dbUser.getPassword());
         user.setEmail(dbUser.getEmail());
-        user.setRole(dbUser.getRole());
+        user.setAdmin(dbUser.isAdmin());
         user.setName(dbUser.getName());
-        user.setJoinedAt(dbUser.getJoinedAt());
+        user.setIsDelete(dbUser.getIsDelete());
+        user.setCreatedAt(dbUser.getCreatedAt());
         user.setModifiedAt(dbUser.getModifiedAt());
+        user.setContactMvno(dbUser.getContactMvno());
+        user.setContactFirst(dbUser.getContactFirst());
+        user.setContactSecond(dbUser.getContactSecond());
+        user.setContactThird(dbUser.getContactThird());
+        user.setAddressPostal(dbUser.getAddressPostal());
+        user.setAddressPrimary(dbUser.getAddressPrimary());
+        user.setAddressSecondary(dbUser.getAddressSecondary());
         return LoginResult.SUCCESS;
     }
 
@@ -80,10 +88,20 @@ public class UserService {
         user.setEmail(user.getEmail());
         user.setName(user.getName());
         user.setPassword(Bcrypt.encrypt(user.getPassword()));
-        user.setRole(user.getRole());
-        user.setJoinedAt(user.getJoinedAt());
+        user.setCreatedAt(user.getCreatedAt());
+        if (user.isAdmin() == true) {
+            user.setAdmin(true);
+        }
+        user.setAdmin(false);
+        user.setContactMvno(user.getContactMvno());
+        user.setContactFirst(user.getContactFirst());
+        user.setContactSecond(user.getContactSecond());
+        user.setContactThird(user.getContactThird());
+        user.setAddressPostal(user.getAddressPostal());
+        user.setAddressPrimary(user.getAddressPrimary());
+        user.setAddressSecondary(user.getAddressSecondary());
 
-        if(this.userMapper.insertUser(user)==0 ){
+        if (this.userMapper.insertUser(user) == 0) {
             return RegisterResult.FAILURE;
         }
         AnnualEntity annual = new AnnualEntity();
@@ -91,7 +109,7 @@ public class UserService {
         annual.setTotalDays(totalDays);
         annual.setUsedDays(0);
 
-        if(this.userMapper.insertAnnual(annual)==0){
+        if (this.userMapper.insertAnnual(annual) == 0) {
             return RegisterResult.FAILURE;
         }
         System.out.println("success");

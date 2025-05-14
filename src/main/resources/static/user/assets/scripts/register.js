@@ -9,7 +9,14 @@ $registerForm.onsubmit = (e) => {
     formData.append('name', $registerForm['name'].value);
     formData.append('password', $registerForm['password'].value);
     formData.append('role', $registerForm['role'].value);
-    formData.append('joinedAt', $registerForm['joinedAt'].value);
+    formData.append('createdAt', $registerForm['createdAt'].value);
+    formData.append('contactMvno', $registerForm['contactMvno'].value);
+    formData.append('contactFirst', $registerForm['contactFirst'].value);
+    formData.append('contactSecond', $registerForm['contactSecond'].value);
+    formData.append('contactThird', $registerForm['contactThird'].value);
+    formData.append('addressPostal', $registerForm['addressPostal'].value);
+    formData.append('addressPrimary', $registerForm['addressPrimary'].value);
+    formData.append('addressSecondary', $registerForm['addressSecondary'].value);
     xhr.onreadystatechange = () => {
         if (xhr.readyState !== XMLHttpRequest.DONE) {
             return;
