@@ -1,5 +1,6 @@
 package com.jhj.teamproject.annual.entities;
 
+import com.jhj.teamproject.annual.results.LeaveCategory;
 import com.jhj.teamproject.annual.results.LeaveStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,6 +20,7 @@ public class LeaveRequestEntity {
     private int days;
     private String content;
     private LeaveStatus status;
+    private LeaveCategory category;
     private int reviewedBy;
     private LocalDateTime reviewedAt;
     private LocalDateTime createdAt;

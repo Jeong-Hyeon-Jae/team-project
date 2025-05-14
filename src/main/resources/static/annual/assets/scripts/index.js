@@ -37,8 +37,6 @@ document.getElementById('saveEvent').addEventListener('click', () => {
         }
     });
 
-    formData.append('category', $annualForm[name='half']);
-
     xhr.onreadystatechange = () => {
         if (xhr.readyState !== XMLHttpRequest.DONE) {
             return;
@@ -48,12 +46,7 @@ document.getElementById('saveEvent').addEventListener('click', () => {
             return;
         }
         const response = JSON.parse(xhr.responseText);
-        if (title) {
-            console.log('저장할 일정 제목:', title);
-            $modal.classList.remove('visible');
-        } else {
-            alert('일정 제목을 입력하세요.');
-        }
+
     };
     xhr.open('POST', '/request');
     xhr.send(formData);

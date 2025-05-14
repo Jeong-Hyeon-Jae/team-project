@@ -17,12 +17,4 @@ public class AnnualController {
 
         return "/annual/index";
     }
-
-    @RequestMapping(value="/request", method = RequestMethod.POST, produces =  MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public String postRequest(LeaveRequestEntity leaveRequest) {
-
-
-        return null;
-    }
 }

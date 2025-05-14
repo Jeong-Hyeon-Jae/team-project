@@ -1,4 +1,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jhj.teamproject.annual.entities.LeaveRequestEntity">
-
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id" >
+        INSERT INTO `leave`.`leave_requests` (user_id, start_date, end_date, days, content, status, category, created_at)
+        VALUES (#{leaveRequest.userId}, #{leaveRequest.startDate}, #{leaveRequest.endDate}, #{leaveRequest.days}, #{leaveRequest.content}, #{leaveRequest. status}, #{leaveRequest.category}, #{leaveRequest.createdAt})
+    </insert>
 </mapper>
