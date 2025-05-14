@@ -7,17 +7,25 @@
 ## 🗄️ Users 테이블 생성 SQL
 
 ```sql
-CREATE TABLE `leave`.`users` (
-    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,       -- 고유 ID (자동 증가)
-    `email` VARCHAR(50) NOT NULL,                    -- 사용자 이메일 (중복 불가)
-    `password` VARCHAR(100) NOT NULL,                 -- 비밀번호
-    `name` VARCHAR(50) NOT NULL,                     -- 사용자 이름
-    `role` ENUM('USER','ADMIN') DEFAULT 'user',      -- 역할: 일반 사용자 / 관리자
-    `created_at` DATE DEFAULT NOW(),                 -- 생성 일시 (기본값 현재시간)
-    `modified_at` DATE NULL,                         -- 수정 일시
-
-    CONSTRAINT PRIMARY KEY (`id`),                   -- 기본 키 지정
-    CONSTRAINT UNIQUE (`email`)                      -- 이메일 중복 방지
+create table `leave`.`users`
+(
+    `id`          int unsigned not null auto_increment,
+    `email`       varchar(50)  not null,
+    `password`    varchar(100) not null,
+    `name`        varchar(50)  not null,
+    `created_at`  date default now() comment '입사일',
+    `modified_at` date         null comment '수정일',
+    `is_delete`    varchar(1)   not null comment '탈퇴여부 (y,n)',
+    `is_admin`     boolean      not null comment '관리자여부 (true,false)',
+    `contact_mvno_code` varchar(3)     not null comment '연락처 통신사 코드 FK',
+    `contact_first`     varchar(4)     not null comment '연락처 앞',
+    `contact_second`    varchar(4)     not null comment '연락처 중간',
+    `contact_third`     varchar(4)     not null comment '연락처 끝',
+    `address_postal`    varchar(10)     not null comment '주소 우편번호',
+    `address_primary`   varchar(100)   not null comment '주소 기본',
+    `address_secondary` varchar(100)   not null comment '주소 상세',
+    constraint primary key (`id`),
+    constraint unique (`email`)
 );
 ```
 ## 🗄️ Annual Leaves 테이블 생성 SQL

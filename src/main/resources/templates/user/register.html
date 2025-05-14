@@ -34,7 +34,8 @@
                 </th>
                 <td>
                     <div class="row">
-                        <input id="registerName" required autocomplete="false" class="--object-label input" maxlength="50" minlength="8" name="name" spellcheck="false" type="text">
+                        <input id="registerName" required autocomplete="false" class="--object-label input"
+                               maxlength="50" minlength="8" name="name" spellcheck="false" type="text">
                         <span class="warning">이름을 올바르게 입력해주세요.</span>
                     </div>
                 </td>
@@ -45,7 +46,8 @@
                 </th>
                 <td>
                     <div class="row">
-                        <input id="registerEmail" required autocomplete="false" class="--object-label input" maxlength="50" minlength="8" name="email" spellcheck="false" type="text">
+                        <input id="registerEmail" required autocomplete="false" class="--object-label input"
+                               maxlength="50" minlength="8" name="email" spellcheck="false" type="text">
                         <span class="warning -visible">이미 사용중인 이메일입니다.</span>
                     </div>
                 </td>
@@ -56,11 +58,13 @@
                 </th>
                 <td>
                     <div class="row">
-                        <input id="registerPassword" required autocomplete="false" class="--object-label input" maxlength="100" minlength="8" name="password" spellcheck="false" type="password">
+                        <input id="registerPassword" required autocomplete="false" class="--object-label input"
+                               maxlength="100" minlength="8" name="password" spellcheck="false" type="password">
                         <span class="warning -visible">비밀번호를 입력해주세요.</span>
                     </div>
                     <div class="row">
-                        <input required autocomplete="false" class="--object-label input" maxlength="100" minlength="8" name="passwordCheck" spellcheck="false" type="password">
+                        <input required autocomplete="false" class="--object-label input" maxlength="100" minlength="8"
+                               name="passwordCheck" spellcheck="false" type="password">
                         <span class="warning -visible">비밀번호가 일치하지 않습니다.</span>
                     </div>
                 </td>
@@ -73,20 +77,54 @@
                     <div class="row">
                         <select required name="role" id="registerRole">
                             <option selected value="ADMIN">Admin</option>
-                            <option  value="USER">User</option>
+                            <option value="USER">User</option>
                         </select>
                     </div>
                 </td>
             </tr>
             <tr>
                 <th scope="col">
-                    <label for="registerJoin">입사일</label>
+                    <label for="registercreated">입사일</label>
                 </th>
                 <td>
                     <div class="row">
-                        <input id="registerJoin" required autocomplete="false" class="--object-label input" maxlength="50" minlength="8" name="joinedAt" type="date">
+                        <input id="registercreated" required autocomplete="false" class="--object-label input"
+                               maxlength="50" minlength="8" name="createdAt" type="date">
                     </div>
 
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <label for="registerContact">
+                        연락처
+                    </label>
+                </th>
+                <td>
+                    <div id="registerContact" class="row">
+                        <select required name="contactMvno">
+                            <option disabled hidden selected value="-1">통신사</option>
+                            <option value="SKT">SKT</option>
+                            <option value="KT">KT</option>
+                            <option value="LGU">LGU+</option>
+                            <option value="ETC">알뜰폰</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <label>주소</label>
+                </th>
+                <td>
+                    <div id="registerPost">
+                        <input required class="--object-field"maxlength="5" minlength="5"
+                               name="addressPostal" placeholder="우편번호(주소 찾기 버튼을 클릭해 주세요.)">
+                        <input readonly required class="--object-field" maxlength="100" minlength="10"
+                               name="addressPrimary" placeholder="기본 주소 (주소 찾기 버튼을 클릭해 주세요.)" type="text">
+                        <input class="--object-field" maxlength="100" minlength="0" name="addressSecondary"
+                               placeholder="상세 주소 (건물 이름, 동, 호)" type="text">
+                    </div>
                 </td>
             </tr>
             </tbody>

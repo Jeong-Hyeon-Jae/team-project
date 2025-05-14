@@ -42,7 +42,6 @@
 }
 .table>tbody>tr>td>.row>.warning{
     position: absolute;
-
     color: red;
     opacity: 0;
     pointer-events: none;
@@ -51,12 +50,12 @@
     font-size: 0.8rem;
     z-index: 2;
     margin-top: 0.25rem;
-}
-.table>tbody>tr>td>.row>.warning.-visible{
-    opacity: 1;
     transition-property: opacity;
     transition-duration: 175ms;
     transition-timing-function: ease;
+}
+.table>tbody>tr>td>.row>.warning.-visible{
+    opacity: 1;
     z-index: 1;
 }
 
@@ -69,4 +68,13 @@ a[href]{
     font-size: 0.8rem;
     text-align: left;
     margin-left: 9.85rem;;
+}
+.--object-field{
+    border: 0.0625rem solid #3f454d;
+}
+#registerPost{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
 }
