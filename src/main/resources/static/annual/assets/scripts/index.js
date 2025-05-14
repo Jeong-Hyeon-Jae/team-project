@@ -1,15 +1,16 @@
 const $annualForm = document.getElementById('annualForm');
 const $today = $annualForm.querySelector(':scope > .menu-bar > .today > .today');
 const date = new Date();
-
+console.log($annualForm);
 
 const addBtn = $annualForm.querySelector(':scope > .menu-bar > .button-container > button');
 const $modal = document.getElementById('modal');
 const $closeBtn = document.getElementById('closeModal');
-const $eventTitle = document.getElementById('eventTitle')
+const $eventTitle = document.getElementById('eventTitle');
 
 $today.textContent = "";
 $today.textContent = new Date().toLocaleDateString('ko-KR');
+
 addBtn.addEventListener('click', () => {
     $modal.classList.add('visible');
 });
@@ -18,8 +19,10 @@ $closeBtn.addEventListener('click', () => {
     $modal.classList.remove('visible');
 });
 
-// 저장 버튼 (예시로 제목만 콘솔에 찍기)
-document.getElementById('saveEvent').addEventListener('click', () => {
+
+
+document.getElementById('saveEvent').addEventListener('click', (e) => {
+    e.preventDefault();
     const startDateString = $annualForm[name='start-date'].value.split('-');
 
     const endDateString = $annualForm[name='end-date'].value.split('-');
@@ -27,6 +30,26 @@ document.getElementById('saveEvent').addEventListener('click', () => {
     const annualRadio = $annualForm[name='annual'];
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
+
+    if ($annualForm[name='start-date'].value === '') {
+        alert('시작 날짜를 입력해 주세요.');
+        $annualForm[name='start-date'].select();
+        $annualForm[name='start-date'].focus();
+        return;
+    }
+    if ($annualForm[name='end-date'].value === '') {
+        alert('종료 날짜를 입력해 주세요.');
+        $annualForm[name='end-date'].select();
+        $annualForm[name='start-date'].focus();
+        return;
+    }
+    if ($annualForm[name='content'].value === '') {
+        alert('사유를 입력해 주세요.')
+        $annualForm[name='content'].select();
+        $annualForm[name='content'].focus();
+        return;
+    }
+
     formData.append('startDate', $annualForm[name='start-date'].value);
     formData.append('endDate', $annualForm[name='end-date'].value);
     formData.append('days', Math.abs(betweenDay).toString());
@@ -50,6 +73,6 @@ document.getElementById('saveEvent').addEventListener('click', () => {
     };
     xhr.open('POST', '/request');
     xhr.send(formData);
-
-
 });
+
+

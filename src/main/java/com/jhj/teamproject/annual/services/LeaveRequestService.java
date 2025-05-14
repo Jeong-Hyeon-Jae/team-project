@@ -22,10 +22,15 @@ public class LeaveRequestService {
     }
 
     public LeaveResult insert(LeaveRequestEntity leaveRequest) {
+        if (leaveRequest.getStartDate() == null ||
+            leaveRequest.getEndDate() == null ||
+            leaveRequest.getContent() == null ||
+            leaveRequest.getStatus() == null) {
+            return LeaveResult.FAILURE;
+        }
 
         LeaveRequestEntity leave = new LeaveRequestEntity();
-        /*UserEntity user = this.userMapper.selectBy;
-        leave.setUserId();*/
+
         leave.setStartDate(leaveRequest.getStartDate());
         leave.setEndDate(leaveRequest.getEndDate());
         leave.setDays(leaveRequest.getDays());
