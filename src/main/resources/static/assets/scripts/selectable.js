@@ -1,4 +1,4 @@
-let yourDate = new Date()
+const yourDate = new Date()
 const $fcHeaderToolbar = document.querySelector('#calendar .fc-header-toolbar');
 
 document.addEventListener('DOMContentLoaded', function() {

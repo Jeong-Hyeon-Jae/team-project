@@ -54,6 +54,21 @@
     z-index: 9;
 }
 
+#defaultContainer > #annualForm > .menu-bar > .logout-container {
+    width: 100%;
+
+    align-items: flex-end;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    text-align: right;
+}
+
+#defaultContainer > #annualForm > .menu-bar > .logout-container > .logout {
+    color: #3498db;
+    margin-right: 1rem;
+    font-size: 0.875rem;
+}
 
 #defaultContainer > #annualForm > .calendar-header {
     position: relative;
@@ -65,7 +80,7 @@
     top: 0;
     right: 0;
     padding: 0.5rem 0.75rem;
-    font-size: 0.875rem;
+    font-size: 0.725rem;
     font-weight: bold;
     background-color: transparent;
 
@@ -74,7 +89,7 @@
     gap: 1rem;
 }
 
-#defaultContainer > #annualForm > .menu-bar > .calendar-legend > span > .dot {
+#defaultContainer > #annualForm > .calendar-header > .calendar-legend > span > .dot {
     width: 0.675rem;
     height: 0.675rem;
     border-radius: 50%;
@@ -83,11 +98,11 @@
     display: inline-block;
 }
 
-#defaultContainer > #annualForm > .menu-bar > .calendar-legend > span > .dot-green {
+#defaultContainer > #annualForm > .calendar-header > .calendar-legend > span > .dot-green {
     background-color: #1abc9c;
 }
 
-#defaultContainer > #annualForm > .menu-bar > .calendar-legend > span > .dot-blue {
+#defaultContainer > #annualForm > .calendar-header > .calendar-legend > span > .dot-blue {
     background-color: #3498db;
 }
 
@@ -130,12 +145,22 @@
 
 #defaultContainer > #annualForm > .modal > .modal-content input[type="text"],
 #defaultContainer > #annualForm > .modal > .modal-content input[type="date"],
-#defaultContainer > #annualForm > .modal > .modal-content select {
+#defaultContainer > #annualForm > .modal > .modal-content textarea {
     width: 100%;
     padding: 0.675rem;
     border-radius: 0.5rem;
     border: 0.0625rem solid #ccc;
     margin-bottom: 0.5rem;
+    resize: none;
+
+}
+
+#defaultContainer > #annualForm > .modal > .modal-content textarea {
+    font-weight: 400;
+}
+
+#defaultContainer > #annualForm > .modal > .modal-content > .title {
+    font-weight: 600
 }
 
 #defaultContainer > #annualForm > .modal > .modal-content > .category-select {
