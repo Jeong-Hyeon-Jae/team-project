@@ -25,8 +25,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public String getLogin(@SessionAttribute(value = "signedUser", required = false) UserEntity user) {
-        if (user == null) {
+    public String getLogin(@SessionAttribute(value = "email", required = false) String email) {
+        if (email == null) {
             System.out.println("로그인 실패");
             return "/user/login";
         }
