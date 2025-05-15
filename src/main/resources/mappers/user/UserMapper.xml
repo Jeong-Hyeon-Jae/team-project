@@ -51,7 +51,7 @@
     <select id="selectCountByEmail" resultType="java.lang.Integer">
         select count(0)
         from `leave`.`users`
-        where `email` = #{user.email}
+        where `email` = #{email}
     </select>
 
     <select id="selectIdByEmail" resultType="java.lang.Integer">

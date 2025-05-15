@@ -9,131 +9,95 @@
     <link rel="stylesheet" href="/assets/styles/common.css">
     <link rel="stylesheet" href="/user/assets/styles/register.css">
     <script src="/assets/scripts/common.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script defer src="/user/assets/scripts/register.js"></script>
 </head>
 <body>
-<div class="--dialog ">
-    <div class="--modal -visible">
-        <h3 class="--title">제목</h3>
-        <div class="--content">내용</div>
-        <div class="--button-container">
-            <button class=" --object-button --button-gray">취소</button>
-            <button class=" --object-button --button-purple">성공</button>
-        </div>
+<div class="--dialog"></div>
+<div id="addressFindDialog">
+    <div class="modal">
     </div>
 </div>
-<div id="defaultContainer" class="--object-layout">
+<div id="defaultContainer">
     <form novalidate id="registerForm">
-        <h2 class="title">회원가입</h2>
-        <table class="table">
-            <tbody>
-            <tr>
-                <th scope="col">
-                    <label for="registerName">이름</label>
-                </th>
-                <td>
-                    <div class="row">
-                        <input id="registerName" required autocomplete="false" class="--object-label input"
-                               maxlength="50" minlength="8" name="name" spellcheck="false" type="text">
-                        <span class="warning -visible">이름을 올바르게 입력해주세요.</span>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th scope="col">
-                    <label for="registerEmail">이메일</label>
-                </th>
-                <td>
-                    <div class="row">
-                        <input id="registerEmail" required autocomplete="false" class="--object-label input"
-                               maxlength="50" minlength="8" name="email" spellcheck="false" type="text">
-                        <span class="warning -visible">이미 사용중인 이메일입니다.</span>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th scope="col">
-                    <label for="registerPassword">비밀번호</label>
-                </th>
-                <td>
-                    <div class="row">
-                        <input id="registerPassword" required autocomplete="false" class="--object-label input"
-                               maxlength="100" minlength="8" name="password" spellcheck="false" type="password">
-                        <span class="warning -visible">비밀번호를 입력해주세요.</span>
-                    </div>
-                    <div class="row">
-                        <input required autocomplete="false" class="--object-label input" maxlength="100" minlength="8"
-                               name="passwordCheck" spellcheck="false" type="password">
-                        <span class="warning -visible">비밀번호가 일치하지 않습니다.</span>
-                    </div>
-                </td>
-            </tr>
+        <h1 class="title">회원가입</h1>
+        <input type="hidden" name="admin" value="false">
+        <div class="container info -visible">
+            <label class="--object-label">
+                <span class="---caption">이름</span>
+                <input id="registerName" required autocomplete="off" class="--object-field ---field"
+                       maxlength="50" minlength="8" name="name" spellcheck="false" type="text" placeholder="이름">
+                <span class="--warning"></span>
+            </label>
 
-            <tr>
-                <th scope="col">
-                    <label for="registercreated">입사일</label>
-                </th>
-                <td>
-                    <div class="row">
-                        <input id="registercreated" required autocomplete="false" class="--object-label input"
-                               maxlength="50" minlength="8" name="createdAt" type="date">
-                    </div>
+            <label class="--object-label">
+                <span class="---caption">이메일</span>
+                <input id="registerEmail" required autocomplete="off" class="--object-field ---field"
+                       maxlength="50" minlength="8" name="email" spellcheck="false" type="text" placeholder="use@sample.com">
+                <span class="--warning"></span>
+            </label>
+            <label class="--object-label">
+                <span class="---caption">비밀번호</span>
+                <input id="registerPassword" required autocomplete="off" class="--object-field ---field"
+                       maxlength="100" minlength="8" name="password" spellcheck="false" type="password" placeholder="문자,숫자,특수문자를 포함 8자리 이상이 필요합니다.">
+                <input required autocomplete="off" class="--object-field ---field"
+                       maxlength="100" minlength="8" name="passwordCheck" spellcheck="false" type="password"
+                       placeholder="비밀번호 재입력">
+                <span class="--warning"></span>
+            </label>
 
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">
-                    <label for="registerContact">
-                        연락처
-                    </label>
-                </th>
-                <td>
-                    <div id="registerContact" class="row">
-                        <label>
-                            <select required name="contactMvno">
-                                <option disabled hidden selected value="-1">통신사</option>
-                                <option value="SKT">SKT</option>
-                                <option value="KT">KT</option>
-                                <option value="LGU">LGU+</option>
-                                <option value="ETC">알뜰폰</option>
-                            </select>
-                            <select required class="--object-field ---field" name="contactFirst">
-                                <option selected value="010">010</option>
-                            </select>
-                            <input required class="--object-field ---field -flex-stretch" maxlength="4" minlength="3"
-                                   name="contactSecond" placeholder="0000" type="text">
-                            <input required class="--object-field ---field -flex-stretch" maxlength="4" minlength="4"
-                                   name="contactThird" placeholder="0000" type="text">
-                        </label>
+            <label class="--object-label">
+                <span class="---caption">입사일</span>
+                <input id="registerCreated" required autocomplete="off" class="--object-field ---field"
+                       maxlength="50" minlength="8" name="createdAt" type="date">
+                <span class="--warning"></span>
+            </label>
 
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">
-                    <span>주소</span>
-                </th>
-                <td>
-                    <div id="registerPost">
-                        <label>
-                            <input required class="--object-label" maxlength="5" minlength="5"
-                                   name="addressPostal" placeholder="우편번호(주소 찾기 버튼을 클릭해 주세요.)">
-                            <button name="addressFindButton" type="button">주소찾기</button>
-                            <input readonly required class="--object-label" maxlength="100" minlength="10"
-                                   name="addressPrimary" placeholder="기본 주소 (주소 찾기 버튼을 클릭해 주세요.)" type="text">
-                            <input class="--object-label" maxlength="100" minlength="0" name="addressSecondary"
-                                   placeholder="상세 주소 (건물 이름, 동, 호)" type="text">
-                        </label>
-
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <div class="button-container">
-            <a href="/user/login" class="--object-button --button-gray">취소</a>
-            <button name="registerBtn" class="--object-button --button-purple" type="submit">회원가입</button>
+            <label class="--object-label">
+                <span class="---caption">연락처</span>
+                <span class="---row">
+                    <select required class="--object-field ---field" name="contactMvno">
+                      <option disabled hidden selected value="-1">통신사</option>
+                      <option value="SKT">SKT</option>
+                      <option value="KT">KT</option>
+                      <option value="LGU">LGU+</option>
+                      <option value="ETC">알뜰폰</option>
+                    </select>
+                    <select required class="--object-field ---field" name="contactFirst">
+                      <option selected value="010">010</option>
+                    </select>-
+                    <input required class="--object-field ---field" maxlength="4" minlength="3"
+                           name="contactSecond" placeholder="0000" type="text">-
+                    <input required class="--object-field ---field" maxlength="4" minlength="4"
+                           name="contactThird" placeholder="0000" type="text">
+                </span>
+                <span class="--warning"></span>
+            </label>
+            <label class="--object-label">
+                <span class="---caption">주소</span>
+                <span class="---row">
+                    <input required class="--object-field ---field -flex-stretch" maxlength="5" minlength="5"
+                           name="addressPostal" placeholder="우편번호">
+                    <button class="--object-button --button-purple" name="addressFindButton"
+                            type="button">주소 찾기</button>
+                </span>
+                <input readonly required class="--object-field ---field" maxlength="100" minlength="10"
+                       name="addressPrimary" placeholder="기본 주소" type="text">
+                <input class="--object-field ---field" maxlength="100" minlength="0"
+                       name="addressSecondary" placeholder="상세 주소" type="text">
+                <span class="--warning"></span>
+            </label>
         </div>
+        <div class="button-container">
+            <a href="/user/login" class="--object-button --button-gray">
+                <span class="---caption">취소</span>
+            </a>
+            <div class="-flex-stretch" role="none"></div>
+            <button class="--object-button --button-purple" name="submit" type="submit">
+                <span class="---caption">회원가입</span>
+            </button>
+        </div>
+
     </form>
 </div>
 </body>

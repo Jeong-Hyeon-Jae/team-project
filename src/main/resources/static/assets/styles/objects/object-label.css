@@ -1,31 +1,22 @@
 .--object-label{
-    width: 100%;
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    gap: 0.5rem;
-    justify-content: center;
-    text-align: left;
-}
-.--object-label>input{
-    width: 70%;
-    background-color: #ffffff;
-    border-radius: 0.25rem;
-    border: 0.0625rem solid #e0e0e0;
-    padding: 0.5rem 0.5rem;
-}
-.--object-label.input{
-    width: 70%;
-    background-color: #ffffff;
-    border-radius: 0.25rem;
-    border: 0.0625rem solid #e0e0e0;
-    padding: 0.5rem 0.5rem;
-}
-.--object-label.--position-col{
     display: flex;
     flex-direction: column;
+
+    gap: 0.25rem;
+    width: 100%;
+    text-align: left;
 }
-.--object-label.--position-row{
-    display: flex;
-    flex-direction: row;
+.--object-label > .---caption {
+    font-weight: 600;
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+    text-align: left;
+}
+
+.--object-label>input{
+    flex-grow: 1;
+    background-color: #ffffff;
+    border-radius: 0.25rem;
+    border: 0.0625rem solid #e0e0e0;
+    padding: 0.5rem 0.5rem;
 }

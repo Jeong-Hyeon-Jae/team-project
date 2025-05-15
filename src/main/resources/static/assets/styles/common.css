@@ -4,7 +4,8 @@
 @import "objects/object-button.css";
 @import "objects/object-check.css";
 @import "objects/object-label.css";
-@import "objects/object-modal.css";
+@import "objects/object-dialog.css";
+@import "objects/object-field.css";
 
 html{
     height: 100%;

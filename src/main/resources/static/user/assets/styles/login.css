@@ -1,14 +1,15 @@
-#defaultContainer{
+#defaultContainer {
     position: relative;
     width: 25rem;
     height: 20rem;
 }
-#loginForm{
+
+#loginForm {
     width: 20rem;
     height: 50%;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     position: absolute;
 
     align-items: center;
@@ -18,24 +19,28 @@
     gap: 0.5rem;
     justify-content: center;
 }
-#loginForm>.title-container{
+
+#loginForm > .title-container {
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
-#loginForm>.title-container>.image{
+
+#loginForm > .title-container > .image {
     width: 2rem;
     height: 2rem;
 }
-#loginForm>.title-container>.title{
+
+#loginForm > .title-container > .title {
     font-weight: 500;
     color: #6C5CE7;
     font-size: 1.8rem;
     margin-bottom: 1rem;
 }
-#loginForm>.menu{
+
+#loginForm > .menu {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -44,10 +49,21 @@
     gap: 0.25rem;
     margin-top: 0.5rem;
 }
-#loginForm>.menu>.item{
-    font-size: 0.8rem;
+
+#loginForm > .menu > .item {
+    font-size: 0.9rem;
+    color:#636569;
 }
-.--object-label>.---caption{
+
+.--warning {
+    color: red;
+    height: 0.8rem;
+}
+.-visible{
+    display: block;
+}
+
+.--object-label > .---caption {
     font-weight: 800;
     width: 3.5rem;
     white-space: nowrap;

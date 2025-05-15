@@ -2,6 +2,7 @@ package com.jhj.teamproject.user.controllers;
 
 import com.jhj.teamproject.annual.entities.AnnualEntity;
 import com.jhj.teamproject.user.entities.UserEntity;
+import com.jhj.teamproject.user.results.FindResult;
 import com.jhj.teamproject.user.results.LoginResult;
 import com.jhj.teamproject.user.results.RegisterResult;
 import com.jhj.teamproject.user.services.UserService;
@@ -24,6 +25,8 @@ public class UserController {
         this.userService = userService;
     }
 
+
+    //로그인
     @RequestMapping(value = "/login", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public String getLogin(@SessionAttribute(value = "email", required = false) String email) {
         if (email == null) {
@@ -31,24 +34,23 @@ public class UserController {
             return "/user/login";
         }
         System.out.println("로그인 성공");
-        return "/annual/index";
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String postLogin(@RequestParam(value = "email") String email, @RequestParam(value="password") String password
+    public String postLogin(@RequestParam(value = "email") String email, @RequestParam(value = "password") String password
             , HttpSession session) {
-        LoginResult result = this.userService.login(email,password);
+        LoginResult result = this.userService.login(email, password);
         if (result == LoginResult.SUCCESS) {
             session.setAttribute("email", email);
-            session.setAttribute("password", password);
         }
         JSONObject response = new JSONObject();
         response.put("result", result.toString().toLowerCase());
         return response.toString();
     }
 
-
+    //회원가입
     @RequestMapping(value = "/register", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public String getRegister() {
         return "user/register";
@@ -56,11 +58,28 @@ public class UserController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String postRegister(UserEntity user, AnnualEntity annual) {
-        System.out.println("postRegister");
+    public String postRegister(UserEntity user) {
         RegisterResult result = this.userService.register(user);
         JSONObject response = new JSONObject();
         response.put("result", result.toString().toLowerCase());
         return response.toString();
+    }
+
+    //계정찾기
+    @RequestMapping(value = "/findInfo", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public String getFindInfo(){
+        return "user/findInfo";
+    }
+
+    @RequestMapping(value = "/findInfo/findId", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String postFindId(UserEntity user){
+        return null;
+    }
+    @RequestMapping(value = "/findInfo/findPassword", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String postFindPassword(@RequestParam(value = "email")String email, @RequestParam(value = "name") String name){
+
+        return null;
     }
 }
