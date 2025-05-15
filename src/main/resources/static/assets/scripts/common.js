@@ -1,18 +1,39 @@
+HTMLElement.VISIBLE_CLASS = '-visible';
+
 /**
  *
  * @return {HTMLElement}
  */
-HTMLElement.prototype.show=function(){
+HTMLElement.prototype.show = function () {
     this.classList.add('-visible');
     return this;
 }
 /**
  * @return {HTMLElement}
  */
-HTMLElement.prototype.hide=function(){
+HTMLElement.prototype.hide = function () {
     this.classList.remove('-visible');
     return this;
 }
+
+/**
+ *
+ * @param {boolean}b
+ * @param {string|undefined} warningText
+ * @return {HTMLLabelElement}
+ */
+HTMLElement.prototype.setVisible = function (b, warningText = undefined) {
+    const $warning = this.querySelector(':scope > .--warning');
+        if (b === true) {
+                $warning.innerText = warningText ?? '';
+                $warning.classList.add(HTMLElement.VISIBLE_CLASS); // 예: '-visible'
+        } else if (b === false) {
+
+                $warning.innerText = '';
+                $warning.classList.remove(HTMLElement.VISIBLE_CLASS);
+        }
+        return this;
+};
 
 
 class Dialog {
@@ -71,10 +92,6 @@ class Dialog {
      * @return {HTMLElement}
      */
     show(args) {
-        args.isContentHtml ??= false;
-        const $modal = document.createElement('div');
-        $modal.classList.add('--modal');
-
         const $title = document.createElement('div');
         $title.classList.add('--title');
         $title.innerText = args.title;
@@ -85,25 +102,33 @@ class Dialog {
         } else {
             $content.innerText = args.content;
         }
+        const $modal = document.createElement('div');
+        $modal.classList.add('--modal');
         $modal.append($title, $content);
-        if (args.button != null && args.button.length > 0) {
+        if (args.buttons != null && args.buttons.length > 0) {
             const $buttonContainer = document.createElement('div');
-            $buttonContainer.classList.add('--button-conatiner');
-            for (const button of $buttonContainer) {
+            $buttonContainer.classList.add('--button-container');
+            for (const button of args.buttons) {
                 const $button = document.createElement('button');
-                $button.classList.add('--button','-object-button',`--button-${button.color ??'gray'}`)
+                $button.classList.add('--object-button', `--button-${button.color ?? 'gray'}`)
                 $button.setAttribute('type', 'button');
                 $button.innerText = button.caption;
                 $button.addEventListener('click', () => button.onclick($modal));
                 $buttonContainer.append($button);
             }
             $modal.append($buttonContainer);
-            this.#$element.append($modal);
-            this.#$element.show();
-            this.#$modal.push($modal);
-            setTimeout(() => $modal.show(), 50);
+
         }
+        this.#$element.append($modal);
+        this.#$element.classList.add(HTMLElement.VISIBLE_CLASS);
+        this.#$modal.push($modal);
+        setTimeout(() => {
+            this.#$element.classList.add(HTMLElement.VISIBLE_CLASS);
+            $modal.classList.add(HTMLElement.VISIBLE_CLASS);
+        }, args.delay ?? 50);
+        return $modal;
     }
+
     /**
      *
      * @param {string}title
@@ -120,14 +145,14 @@ class Dialog {
     showSimpleOk(title, content, args) {
         args ??= {};
         return this.show({
-                title:title,
-                content:content,
-                buttons:[
+                title: title,
+                content: content,
+                buttons: [
                     {
-                        caption:args.buttonCaption??'확인',
+                        caption: args.buttonCaption ?? '확인',
                         color: args.buttonColor ?? 'purple',
-                        onclick:($modal)=>{
-                            if(typeof args.onOkCallback==='function'){
+                        onclick: ($modal) => {
+                            if (typeof args.onOkCallback === 'function') {
                                 args.onOkCallback($modal);
                             }
                             this.hide($modal);
@@ -135,8 +160,8 @@ class Dialog {
                     },
 
                 ],
-            isContentHtml: args.isContentHtml,
-            delay: args.delay
+                isContentHtml: args.isContentHtml,
+                delay: args.delay
             }
         )
     }

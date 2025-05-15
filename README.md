@@ -15,7 +15,7 @@ create table `leave`.`users`
     `name`        varchar(50)  not null,
     `created_at`  date default now() comment '입사일',
     `modified_at` date         null comment '수정일',
-    `is_deleted`    varchar(1)   not null comment '탈퇴여부 (y,n)',
+    `is_deleted`    varchar(1)   not null comment '탈퇴여부 (Y,N)',
     `is_admin`     boolean      not null comment '관리자여부 (true,false)',
     `contact_mvno_code` varchar(3)     not null comment '연락처 통신사 코드 FK',
     `contact_first`     varchar(4)     not null comment '연락처 앞',
