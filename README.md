@@ -55,7 +55,7 @@ CREATE TABLE `leave`.`leave_requests`
     `reviewed_by` INT UNSIGNED NULL,              -- 검토자 ID (users FK)
     `reviewed_at` DATETIME NULL DEFAULT NULL,     -- 검토 일시
     `created_at` DATETIME NOT NULL,               -- 신청 일시
-
+    `category` ENUM('LEAVE','HALF') NOT NULL comment '연차 구분',
     CONSTRAINT PRIMARY KEY (`id`),
     CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `leave`.`users`(`id`),
     CONSTRAINT FOREIGN KEY (`reviewed_by`) REFERENCES `leave`.`users`(`id`)
