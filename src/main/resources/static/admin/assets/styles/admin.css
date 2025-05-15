@@ -10,6 +10,7 @@
     flex-direction: column;
     gap: 2rem;
     justify-content: flex-start;
+    margin-bottom: 2rem;
 }
 
 #defaultContainer > #annualForm > .menu-bar > .href-container > .href-box {

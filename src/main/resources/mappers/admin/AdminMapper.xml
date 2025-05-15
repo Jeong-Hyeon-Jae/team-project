@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhj.teamproject.admin.mappers.AdminMapper">
+    <update id="updateRequests">
+        update `leave`.`leave_requests`
+        set status = #{status}
+        where user_id = #{user.id}
+    </update>
+
+    <select id="AllRequests" resultType="com.jhj.teamproject.admin.entities.RequestsEntity">
+        select lr.id          as `id`,
+               lr.user_id     as `userId`,
+               lr.start_date  as `startDate`,
+               lr.end_date    as `endDate`,
+               lr.days        as `days`,
+               lr.content     as `content`,
+               lr.status      as `status`,
+               lr.reviewed_by as `reviewedBy`,
+               lr.reviewed_at as `reviewedAt`,
+               lr.created_at  as `createdAt`,
+               u.name         as `name`,
+               u2.name        as `reviewedByName`
+        from `leave`.`leave_requests` lr
+                 join `leave`.`users` u on u.id = lr.`user_id`
+                 LEFT JOIN `leave`.`users` u2 ON lr.`reviewed_by` = u2.`id`
+    </select>
+</mapper>
