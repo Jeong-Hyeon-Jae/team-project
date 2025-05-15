@@ -30,7 +30,8 @@ create table `leave`.`users`
 ```
 ## 🗄️ Annual Leaves 테이블 생성 SQL
 ``` sql
-CREATE TABLE `leave`.`annual_leaves` (
+CREATE TABLE `leave`.`annual_leaves` 
+(
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `user_id` INT UNSIGNED NOT NULL,
     `total_days` INT UNSIGNED NOT NULL,           -- 총 연차 일 수
@@ -42,7 +43,8 @@ CREATE TABLE `leave`.`annual_leaves` (
 ```
 ## 🗄️ Leave Requests 테이블 생성 SQL
 ```sql
-CREATE TABLE `leave`.`leave_requests` (
+CREATE TABLE `leave`.`leave_requests` 
+(
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `user_id` INT UNSIGNED NOT NULL,
     `start_date` DATE NOT NULL,                   -- 연차 시작일
