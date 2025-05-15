@@ -83,20 +83,16 @@ document.getElementById('saveEvent').addEventListener('click', (e) => {
             return;
         }
         const response = JSON.parse(xhr.responseText);
-        switch (response) {
+        console.log(response);
+        switch (response.result) {
             case 'failure':
                 alert(`알수 없는 오류로 에러가 발생했습니다. ${xhr.status}`);
                 break;
             case 'success':
-                alert(`입력된 연차가 제출되었습니다.`);
+
                 break;
-            default:
-                location.href='/user/login';
-                return;
         }
     };
     xhr.open('POST', '/request');
     xhr.send(formData);
 });
-
-

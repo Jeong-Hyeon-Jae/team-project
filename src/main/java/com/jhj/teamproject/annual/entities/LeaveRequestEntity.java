@@ -24,4 +24,5 @@ public class LeaveRequestEntity {
     private int reviewedBy;
     private LocalDateTime reviewedAt;
     private LocalDateTime createdAt;
+    private String name;
 }

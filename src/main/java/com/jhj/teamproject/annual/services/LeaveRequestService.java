@@ -3,14 +3,14 @@ package com.jhj.teamproject.annual.services;
 import com.jhj.teamproject.annual.entities.LeaveRequestEntity;
 import com.jhj.teamproject.annual.mappers.LeaveRequestMapper;
 import com.jhj.teamproject.annual.results.LeaveCategory;
-import com.jhj.teamproject.annual.results.LeaveResult;
 import com.jhj.teamproject.annual.results.LeaveStatus;
-import com.jhj.teamproject.user.entities.UserEntity;
+import com.jhj.teamproject.annual.results.Result;
 import com.jhj.teamproject.user.mappers.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class LeaveRequestService {
@@ -23,14 +23,18 @@ public class LeaveRequestService {
         this.userMapper = userMapper;
     }
 
-    public LeaveResult insert(LeaveRequestEntity leaveRequest,
-                              String email) {
+    public Result insert(LeaveRequestEntity leaveRequest,
+                         String email) {
         if (leaveRequest.getStartDate() == null ||
             leaveRequest.getEndDate() == null ||
             leaveRequest.getContent() == null ||
             leaveRequest.getStatus() == null) {
 
-            return LeaveResult.FAILURE;
+            return Result.FAILURE;
+        }
+        boolean exists = leaveRequestMapper.selectCountByEmailAndDate(email, leaveRequest);
+        if (exists) {
+            return Result.FAILURE_DUPLICATE_DATE;
         }
 
         LeaveRequestEntity leave = new LeaveRequestEntity();
@@ -40,12 +44,12 @@ public class LeaveRequestService {
         } else if (leaveRequest.getCategory().equals(LeaveCategory.HALF)) {
             leave.setCategory(LeaveCategory.HALF);
         } else {
-            return LeaveResult.FAILURE;
+            return Result.FAILURE;
         }
         if (leaveRequest.getStatus().equals(LeaveStatus.PENDING)) {
             leave.setStatus(LeaveStatus.PENDING);
         } else {
-            return LeaveResult.FAILURE;
+            return Result.FAILURE;
         }
         leave.setUserId(this.userMapper.selectIdByEmail(email));
         leave.setStartDate(leaveRequest.getStartDate());
@@ -57,6 +61,10 @@ public class LeaveRequestService {
         leave.setStatus(leaveRequest.getStatus());*/
 
 
-        return this.leaveRequestMapper.insert(leave) > 0 ? LeaveResult.SUCCESS : LeaveResult.FAILURE;
+        return this.leaveRequestMapper.insert(leave) > 0 ? Result.SUCCESS : Result.FAILURE;
+    }
+
+    public List<LeaveRequestEntity> selectByEmail(String email) {
+        return this.leaveRequestMapper.select(email);
     }
 }
