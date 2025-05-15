@@ -32,6 +32,7 @@ public class AdminService {
                 break;
             case "취소":
                 status = "REJECTED";
+                break;
             default:
                 return UpdateResult.FAILURE;
         }
