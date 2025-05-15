@@ -1,6 +1,6 @@
 package com.jhj.teamproject.annual.results;
 
-public enum LeaveResult {
+public enum Result {
     SUCCESS,
     FAILURE,
 }
