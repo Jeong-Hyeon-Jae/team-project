@@ -5,7 +5,30 @@ const addBtn = $annualForm.querySelector(':scope > .menu-bar > .button-container
 const $modal = document.getElementById('modal');
 const $closeBtn = document.getElementById('closeModal');
 const $eventTitle = document.getElementById('eventTitle');
+const $title = $annualForm.querySelector(':scope > .menu-bar > .title')
 const date = new Date();
+
+$annualForm.onsubmit = (e) => {
+    e.preventDefault();
+
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState !== XMLHttpRequest.DONE) {
+            return;
+        }
+        if (xhr.status < 200 || xhr.status >= 300) {
+            alert(xhr.status);
+            return;
+        }
+        const response = JSON.parse(xhr.responseText);
+        console.log(response);
+        $title.innerHTML = ''
+        $title.innerHTML = `
+            반가워요! 땡땡님ㅇㅇ
+        `
+    };
+    xhr.open('GET', '/request/info');
+    xhr.send();
+}
 
 $today.textContent = "";
 $today.textContent = new Date().toLocaleDateString('ko-KR');
@@ -17,8 +40,6 @@ addBtn.addEventListener('click', () => {
 $closeBtn.addEventListener('click', () => {
     $modal.classList.remove('visible');
 });
-
-
 
 document.getElementById('saveEvent').addEventListener('click', (e) => {
     e.preventDefault();
@@ -87,12 +108,31 @@ document.getElementById('saveEvent').addEventListener('click', (e) => {
         switch (response.result) {
             case 'failure':
                 alert(`알수 없는 오류로 에러가 발생했습니다. ${xhr.status}`);
-                break;
+                return;
+            case 'failure_duplicate_date':
+                alert(`이미 접수되었습니다.`)
+                return;
             case 'success':
+                alert(`연차접수가 완료되었습니다.`);
+                location.href = "/";
 
-                break;
         }
     };
     xhr.open('POST', '/request');
     xhr.send(formData);
+});
+
+const radios = document.querySelectorAll('input[name="option"]');
+
+radios.forEach(radio => {
+    radio.addEventListener('change', () => {
+    const checkedButton = document.querySelector('input[type="radio"]:checked');
+        if (checkedButton) {
+            if (checkedButton.value === 'my') {
+                showCalendar(checkedButton.value)
+            } else if (checkedButton.value === 'all') {
+                showCalendar(checkedButton.value)
+            }
+        }
+    });
 });

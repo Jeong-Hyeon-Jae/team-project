@@ -21,8 +21,11 @@
             leave.leave_requests lr
                 JOIN
             leave.users u ON lr.user_id = u.id
-        WHERE
-            u.email = #{email}
+        <where>
+            <if test="email != null and email != ''">
+                u.email = #{email}
+            </if>
+        </where>
     </select>
     <select id="selectCountByEmailAndDate" resultType="boolean">
         SELECT COUNT(*) > 0

@@ -10,6 +10,8 @@ import java.util.List;
 public interface LeaveRequestMapper {
     int insert (@Param(value = "leaveRequest") LeaveRequestEntity leaveRequest);
     List<LeaveRequestEntity> select(@Param(value = "email") String email);
+    List<LeaveRequestEntity> selectAll();
     boolean selectCountByEmailAndDate(@Param(value = "email") String email,
-                                   @Param(value = "leaveRequest") LeaveRequestEntity reaveRequest);
+                                   @Param(value = "leaveRequest") LeaveRequestEntity leaveRequest);
+
 }

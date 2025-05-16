@@ -63,4 +63,26 @@ public class LeaveRequestController {
 
         return events.toString();
     }
+
+    @RequestMapping(value = "/request/list", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String getRequestListAll() {
+        JSONArray events = new JSONArray();
+        JSONObject res = new JSONObject();
+        System.out.println("요청 들어옴 post");
+
+        List<LeaveRequestEntity> leaveList = this.leaveRequestService.selectByEmail(null);
+
+        for (LeaveRequestEntity i : leaveList) {
+            res.put("result", Result.SUCCESS.toString().toLowerCase());
+            res.put("title", i.getName()); // js의 기본 달력 출력값이 title로 되어있음 -> 이름으로 변경
+            res.put("start", i.getStartDate().toString());
+            res.put("end", i.getEndDate().toString());
+            res.put("allDay", true);
+            res.put("content", i.getContent());
+            events.put(res);
+        }
+
+        return events.toString();
+    }
 }

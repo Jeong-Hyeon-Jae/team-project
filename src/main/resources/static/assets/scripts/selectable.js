@@ -2,7 +2,10 @@ const yourDate = new Date()
 const $fcHeaderToolbar = document.querySelector('#calendar .fc-header-toolbar');
 let calendar;
 
-document.addEventListener('DOMContentLoaded', function() {
+const showCalendar = (val) =>{
+    if (calendar) {
+        calendar.destroy();
+    }
     const calendarEl = document.getElementById('calendar');
     calendar = new FullCalendar.Calendar(calendarEl, {
         headerToolbar: {
@@ -19,18 +22,18 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         selectable: true,
         selectMirror: true,
-/*        select: function(arg) {
-            const title = prompt('Event Title:');
-            if (title) {
-                calendar.addEvent({
-                    title: title,
-                    start: arg.start,
-                    end: arg.end,
-                    allDay: arg.allDay,
-                })
-            }
-            calendar.unselect()
-        }*/
+        /*        select: function(arg) {
+                    const title = prompt('Event Title:');
+                    if (title) {
+                        calendar.addEvent({
+                            title: title,
+                            start: arg.start,
+                            end: arg.end,
+                            allDay: arg.allDay,
+                        })
+                    }
+                    calendar.unselect()
+                }*/
         eventClick: function(arg) {
             if (confirm('Are you sure you want to delete this event?')) {
                 arg.event.remove()
@@ -39,6 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
         editable: true,
         dayMaxEvents: true, // allow "more" link when too many events
         events: function(fetchInfo, successCallback, failureCallback) {
+
             const xhr = new XMLHttpRequest();
             xhr.onreadystatechange = () => {
                 if (xhr.readyState !== XMLHttpRequest.DONE) {
@@ -48,23 +52,33 @@ document.addEventListener('DOMContentLoaded', function() {
                     alert(xhr.status);
                     return;
                 }
+
                 const res = JSON.parse(xhr.responseText);
-                console.log(res);
+
+
                 if (Array.isArray(res)) {
                     successCallback(res);
                 } else {
-                    alert('type error!!!');
                     failureCallback('response data type error');
                 }
+
             };
-            xhr.open('GET', '/request/list');
-            xhr.send();
+
+
+            if (val === 'my') {
+                xhr.open('GET', '/request/list');
+                xhr.send();
+            } else {
+                xhr.open('POST', '/request/list');
+                xhr.send();
+            }
         },
     });
-
-
-
     calendar.render();
+
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    showCalendar();
 });
-
-
