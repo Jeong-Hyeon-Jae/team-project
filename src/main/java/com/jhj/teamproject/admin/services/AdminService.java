@@ -1,7 +1,6 @@
 package com.jhj.teamproject.admin.services;
 
 import com.jhj.teamproject.admin.entities.RequestsEntity;
-import com.jhj.teamproject.admin.entities.UsersEntity;
 import com.jhj.teamproject.admin.mappers.AdminMapper;
 import com.jhj.teamproject.admin.results.UpdateResult;
 import com.jhj.teamproject.user.entities.UserEntity;
@@ -21,21 +20,22 @@ public class AdminService {
         return this.adminMapper.AllRequests();
     }
 
-    public UpdateResult updateRequests(UserEntity user, String action) {
-        if (action == null || user.getId() <= 0) {
+    public UpdateResult updateRequests(String signedUser, String status, int id) {
+        if (signedUser == null || status == null || id <= 0) {
+            return UpdateResult.FAILURE;
+        };
+        if (!status.equals("APPROVED") && !status.equals("REJECTED")) {
             return UpdateResult.FAILURE;
         }
-        String status;
-        switch (action) {
-            case "승인":
-                status = "APPROVED";
-                break;
-            case "취소":
-                status = "REJECTED";
-                break;
-            default:
-                return UpdateResult.FAILURE;
+        UserEntity user = this.adminMapper.selectByEmail(signedUser);
+        if (user == null) {
+            return UpdateResult.FAILURE;
         }
-        return this.adminMapper.updateRequests(user ,status) > 0 ? UpdateResult.SUCCESS : UpdateResult.FAILURE;
+
+        return this.adminMapper.updateRequests(user, status, id) > 0 ? UpdateResult.SUCCESS : UpdateResult.FAILURE;
+    }
+
+    public UserEntity getRequestByEmail(String email) {
+        return this.adminMapper.selectByEmail(email);
     }
 }

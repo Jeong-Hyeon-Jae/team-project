@@ -18,10 +18,11 @@ public class RequestsEntity {
     private LocalDate endDate;
     private int days;
     private String content;
-    private String name;
-    private String reviewedByName;
     private String status;
     private int reviewedBy;
     private LocalDateTime reviewedAt;
     private LocalDateTime createdAt;
+    private String category;
+    private String name;
+    private String reviewedByName;
 }

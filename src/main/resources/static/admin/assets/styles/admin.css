@@ -29,3 +29,20 @@
 #defaultContainer > #annualForm > .menu-bar > .href-container > .category > .title {
     font-size: 1.25rem;
 }
+
+#defaultContainer > #annualForm > .menu-bar > .calendar-legend > span > .dot {
+    width: 0.675rem;
+    height: 0.675rem;
+    border-radius: 50%;
+    margin-right: 0.25rem;
+
+    display: inline-block;
+}
+
+#defaultContainer > #annualForm > .menu-bar > .calendar-legend > span > .dot-green {
+    background-color: #1abc9c;
+}
+
+#defaultContainer > #annualForm > .menu-bar > .calendar-legend > span > .dot-blue {
+    background-color: #3498db;
+}

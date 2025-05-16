@@ -17,6 +17,18 @@ const loadLists = () => {
         let tbodyHtml = '';
         for (const list of lists) {
             const createdAtArray = list['createdAt'].split('T');
+            let actionHtml = '';
+            if (list['status'] === 'APPROVED') {
+                actionHtml = '승인 완료';
+            } else if (list['status'] === 'REJECTED') {
+                actionHtml = '승인 거부';
+            } else {
+                actionHtml =
+                        `
+                        <button name="approval" class="-button-purple button" type="button">승인</button>
+                        <button name="cancel" class="-button-red button" type="button">취소</button>
+                        `;
+            }
             tbodyHtml += `
             <tr data-id="${list['id']}">
                     <td>${list['id']}</td>
@@ -26,10 +38,7 @@ const loadLists = () => {
                     <td>${list['days']}일</td>
                     <td>${list['reviewedByName']}</td>
                     <td class="status">${list['status']}</td>
-                    <td class="action">
-                        <button name="approval" class="-button-purple button" type="button">승인</button>
-                        <button name="cancel" class="-button-red button" type="button">취소</button>
-                    </td>
+                    <td class="action">${actionHtml}</td>
                 </tr>
                 `
         }
@@ -51,28 +60,26 @@ const tableAction = ($btn, actionType) => {
     const id = $tr.dataset.id;
     const $actionTd = $tr.querySelector('.action');
     const $statusTd = $tr.querySelector('.status');
-    
+
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
+    const actionStatus = actionType === '승인' ? 'APPROVED' : 'REJECTED';
     formData.append('id', id);
-    formData.append('action', actionType);
+    formData.append('action', actionStatus);
+
     xhr.onreadystatechange = () => {
-        if (xhr.readyState !== XMLHttpRequest.DONE) {
-            return;
-        }
+        if (xhr.readyState !== XMLHttpRequest.DONE) return;
+
         if (xhr.status < 200 || xhr.status >= 300) {
             alert(`[${xhr.status}] 변경 실패`);
             return;
         }
 
-        if (actionType == '승인') {
-            $actionTd.textContent = '승인 완료';
-            $statusTd.textContent = 'APPROVED';
-        } else {
-            $actionTd.textContent = '승인 거부';
-            $statusTd.textContent = 'REJECTED';
-        }
+        $actionTd.textContent = actionType === '승인' ? '승인 완료' : '승인 거부';
+        $statusTd.textContent = actionStatus;
+        loadLists();
     };
+
     xhr.open('PATCH', '/admin/list');
     xhr.send(formData);
 }

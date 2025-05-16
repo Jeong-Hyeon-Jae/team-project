@@ -5,8 +5,10 @@
 <mapper namespace="com.jhj.teamproject.admin.mappers.AdminMapper">
     <update id="updateRequests">
         update `leave`.`leave_requests`
-        set status = #{status}
-        where user_id = #{user.id}
+        set status = #{status},
+            reviewed_by = #{user.id},
+            reviewed_at = now()
+        where `id` = #{id}
     </update>
 
     <select id="AllRequests" resultType="com.jhj.teamproject.admin.entities.RequestsEntity">
@@ -20,10 +22,32 @@
                lr.reviewed_by as `reviewedBy`,
                lr.reviewed_at as `reviewedAt`,
                lr.created_at  as `createdAt`,
+               lr.category as `category`,
                u.name         as `name`,
                u2.name        as `reviewedByName`
         from `leave`.`leave_requests` lr
                  join `leave`.`users` u on u.id = lr.`user_id`
-                 LEFT JOIN `leave`.`users` u2 ON lr.`reviewed_by` = u2.`id`
+                 left join `leave`.`users` u2 on lr.`reviewed_by` = u2.`id`
+    </select>
+
+    <select id="selectByEmail" resultType="com.jhj.teamproject.user.entities.UserEntity">
+        select `id`                as `id`,
+               `email`             as `email`,
+               `password`          as `password`,
+               `name`              as `name`,
+               `is_admin`          as `isAdmin`,
+               `is_deleted`        as `isDeleted`,
+               `created_at`        as `createdAt`,
+               `modified_at`       as `modifiedAt`,
+               `contact_mvno_code` as `contactMvno`,
+               `contact_first`     as `contactFirst`,
+               `contact_second`    as `contactSecond`,
+               `contact_third`     as `contactThird`,
+               `address_postal`    as `addressPostal`,
+               `address_primary`   as `addressPrimary`,
+               `address_secondary` as `addressSecondary`
+        from `leave`.`users`
+        where `email` = #{email}
+        limit 1;
     </select>
 </mapper>
