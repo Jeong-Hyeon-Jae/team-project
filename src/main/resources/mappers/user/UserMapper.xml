@@ -17,17 +17,33 @@
         values (#{annual.userId},#{annual.totalDays},#{annual.usedDays});
     </insert>
 
+    <update id="update">
+        update `leave`.`users`
+        set `email`=#{user.email},
+            `password`=#{user.password},
+            `name`=#{user.name},
+            `is_deleted`=#{user.deleted},
+            `created_at`=#{user.createdAt},
+            `modified_at`=#{user.modifiedAt},
+            `contact_mvno_code` =#{user.contactMvno},
+            `contact_first`=#{user.contactFirst},
+            `contact_second`=#{user.contactSecond},
+            `contact_third`=#{user.contactThird},
+            `address_postal` =#{user.addressPostal},
+            `address_primary`=#{user.addressPrimary},
+            `address_secondary`=#{user.addressSecondary}
+        where `email` = ${user.email}
+          and `name` = #{user.name}
+        limit 1;
+    </update>
+    <update id="updatePassword">
+        update `leave`.`users`
+        set `password`=#{user.password},
+            `modified_at`=#{user.modifiedAt}
+        where `email` = #{user.email}
+        limit 1;
+    </update>
 
-<!--    <update id="update">-->
-<!--        update `leave`.`users`-->
-<!--        set `email`=#{user.email},-->
-<!--            `password`= #{user.password},-->
-<!--            `name`=#{user.name},-->
-<!--            `role`=#{user.name},-->
-<!--            `modified_at`=#{user.modifiedAt}-->
-<!--        where `id` = ${user.id}-->
-<!--        limit 1;-->
-<!--    </update>-->
     <select id="selectByEmail" resultType="com.jhj.teamproject.user.entities.UserEntity">
         select `id`                as `id`,
                `email`             as `email`,

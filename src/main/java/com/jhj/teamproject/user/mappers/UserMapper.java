@@ -16,7 +16,10 @@ public interface UserMapper {
     int selectCountByEmail(@Param(value = "email") String email);
 
     int selectIdByEmail(@Param(value = "email") String email);
-//    int update(@Param(value = "user") UserEntity user);
+
+    int update(@Param(value = "user") UserEntity user);
+
+    int updatePassword(@Param(value="user") UserEntity user);
 
     UserEntity selectInfoByName(@Param(value = "name") String name);
 }

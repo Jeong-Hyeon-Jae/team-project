@@ -47,7 +47,7 @@
 
 .--button-gray {
     background-color: #636569;
-    color: #ffffff;
+    color: #ffffff !important;
 
 }
 

@@ -1,6 +1,5 @@
 package com.jhj.teamproject.user.controllers;
 
-import com.jhj.teamproject.admin.mappers.AdminMapper;
 import com.jhj.teamproject.user.entities.UserEntity;
 import com.jhj.teamproject.user.results.CommonResult;
 import com.jhj.teamproject.user.results.RegisterResult;
@@ -17,12 +16,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/user")
 public class UserController {
     private final UserService userService;
-    private final AdminMapper adminMapper;
 
     @Autowired
-    public UserController(UserService userService, AdminMapper adminMapper) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.adminMapper = adminMapper;
     }
 
 
@@ -67,17 +64,17 @@ public class UserController {
     }
 
     //계정찾기
-    @RequestMapping(value = "/findInfo", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    @RequestMapping(value = "/find/find-info", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public String getFindInfo(){
-        return "user/find/findInfo";
+        return "user/find/find-info";
     }
 
     //아이디 찾기
-    @RequestMapping(value = "/findInfo/findId",method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    @RequestMapping(value = "/find/find-id",method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public String getFindId() {
-        return "user/find/findId";
+        return "user/find/find-id";
     }
-    @RequestMapping(value = "/findInfo/findId", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/find/find-id", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String postFindId(@RequestParam(value = "name") String name,
                              @RequestParam(value = "contactMvno") String contactMvno,
@@ -91,14 +88,31 @@ public class UserController {
         return response.toString();
     }
 
-    //비밀번호 찾기
-    @RequestMapping(value = "/findInfo/findPassowrd", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    //비밀번호 변경
+    @RequestMapping(value = "/find/change-password", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public String getFindPassword(){
-        return "user/find/findPassword";
+        return "user/find/change-password";
     }
-    @RequestMapping(value = "/findInfo/findPassword", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+
+    @RequestMapping(value = "/find/change-password", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String postFindPassword(@RequestParam(value = "email") String email, @RequestParam(value = "name") String name) {
-        return null;
+    public String patchChangePassword(UserEntity user ) {
+        ResultTuple<UserEntity> resultTuple = this.userService.changePassword(user);
+        JSONObject response = new JSONObject();
+        response.put("result", resultTuple.getResult().toStringLower());
+        return response.toString();
     }
+
+    @RequestMapping(value = "/find/change-password", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String postChangePassword(UserEntity user) {
+        ResultTuple<UserEntity> resultTuple = this.userService.confirmInfo(user);
+        JSONObject response = new JSONObject();
+        response.put("result", resultTuple.getResult().toStringLower());
+        System.out.println(resultTuple.getResult().toStringLower());
+        return response.toString();
+    }
+
+
+
 }

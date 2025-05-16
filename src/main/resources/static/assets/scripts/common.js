@@ -28,12 +28,28 @@ HTMLElement.prototype.setVisible = function (b, warningText = undefined) {
                 $warning.innerText = warningText ?? '';
                 $warning.classList.add(HTMLElement.VISIBLE_CLASS); // 예: '-visible'
         } else if (b === false) {
-
                 $warning.innerText = '';
                 $warning.classList.remove(HTMLElement.VISIBLE_CLASS);
         }
         return this;
 };
+
+/**
+ *
+ * @param {boolean}b
+ * @return {HTMLInputElement}
+ */
+HTMLInputElement.prototype.setValid = function (b) {
+    if (b === true) {
+        this.classList.remove('-disabled');
+        this.removeAttribute('disabled');
+    } else {
+        this.classList.add('-disabled');
+        this.setAttribute('disabled', '');
+    }
+    return this;
+};
+
 
 
 class Dialog {

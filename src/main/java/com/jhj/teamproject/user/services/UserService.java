@@ -7,8 +7,11 @@ import com.jhj.teamproject.user.results.CommonResult;
 import com.jhj.teamproject.user.results.RegisterResult;
 import com.jhj.teamproject.user.results.ResultTuple;
 import com.jhj.teamproject.user.utils.Bcrypt;
+import jakarta.jws.soap.SOAPBinding;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 
 @Service
 public class UserService {
@@ -113,6 +116,19 @@ public class UserService {
 
     //아이디 찾기.
     public ResultTuple<UserEntity> findId(String name, String contactMvno, String contactFirst, String contactSecond, String contactThird) {
+        if (name == null ||
+                contactMvno == null ||
+                contactFirst == null ||
+                contactSecond == null ||
+                contactThird == null ||
+                !UserService.isNameValid(name) ||
+                !UserService.isContactSecondValid(contactSecond) ||
+                !UserService.isContactThirdValid(contactThird)
+        ) {
+            return ResultTuple.<UserEntity>builder()
+                    .result(CommonResult.FAILURE)
+                    .build();
+        }
         UserEntity dbUser = this.userMapper.selectInfoByName(name);
         System.out.println(dbUser.getEmail());
         return ResultTuple.<UserEntity>builder()
@@ -121,8 +137,76 @@ public class UserService {
                 .build();
     }
 
-    //비밀번호 찾기.
-    public String findPassword(UserEntity user) {
-        return null;
+    //비밀번호 바꾸기 위한 인증.
+    public ResultTuple<UserEntity> confirmInfo(UserEntity user) {
+        // 1. 기본 유효성 검사
+        if (user == null ||
+                !UserService.isEmailValid(user.getEmail()) ||
+                !UserService.isNameValid(user.getName()) ||
+                !UserService.isContactSecondValid(user.getContactSecond()) ||
+                !UserService.isContactThirdValid(user.getContactThird())) {
+            System.out.println(1);
+            return ResultTuple.<UserEntity>builder()
+                    .result(CommonResult.FAILURE)
+                    .build();
+        }
+
+        // 2. 사용자 조회
+        System.out.println(user.getEmail());
+        UserEntity dbUser = this.userMapper.selectByEmail(user.getEmail());
+        if (dbUser == null || dbUser.getIsDeleted().equals("Y")) {
+            System.out.println(2);
+            return ResultTuple.<UserEntity>builder()
+                    .result(CommonResult.FAILURE)
+                    .build();
+        }
+
+        // 3. 연락처 이름 검증 (이메일 외 추가 검증)
+        boolean isSameIdentity =
+                dbUser.getName().equals(user.getName()) &&
+                        dbUser.getContactSecond().equals(user.getContactSecond()) &&
+                        dbUser.getContactThird().equals(user.getContactThird());
+
+        if (!isSameIdentity) {
+            System.out.println(3);
+            return ResultTuple.<UserEntity>builder()
+                    .result(CommonResult.FAILURE)
+                    .build();
+        }
+
+        return ResultTuple.<UserEntity>builder()
+                .result(CommonResult.SUCCESS)
+                .payload(dbUser)
+                .build();
     }
+
+    //비밀번호 바꾸기.
+    public ResultTuple<UserEntity> changePassword(UserEntity user) {
+
+        UserEntity dbUser = this.userMapper.selectByEmail(user.getEmail());
+        // 4. 기존 비밀번호 재사용 방지
+        if (Bcrypt.isMatch(user.getPassword(), dbUser.getPassword())) {
+            System.out.println("기존과 동일");
+            return ResultTuple.<UserEntity>builder()
+                    .result(RegisterResult.FAILURE_DUPLICATE)
+                    .build();
+        }
+        // 5. 비밀번호 변경
+        dbUser.setPassword(Bcrypt.encrypt(user.getPassword()));
+        dbUser.setModifiedAt(LocalDate.now());
+
+        int updatedRows = this.userMapper.updatePassword(dbUser);
+        if (updatedRows < 1) {
+            System.out.println(5);
+            return ResultTuple.<UserEntity>builder()
+                    .result(CommonResult.FAILURE)
+                    .build();
+        }
+        return ResultTuple.<UserEntity>builder()
+                .result(CommonResult.SUCCESS)
+                .build();
+    }
+
+
+
 }
