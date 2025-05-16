@@ -16,8 +16,8 @@ public class AdminService {
         this.adminMapper = adminMapper;
     }
 
-    public RequestsEntity[] getAllRequests() {
-        return this.adminMapper.AllRequests();
+    public RequestsEntity[] getAllRequests(String sort) {
+        return this.adminMapper.AllRequests(sort);
     }
 
     public UpdateResult updateRequests(String signedUser, String status, int id) {

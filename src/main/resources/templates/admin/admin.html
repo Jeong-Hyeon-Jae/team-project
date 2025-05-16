@@ -8,16 +8,25 @@
     <title>관리자 - SUB</title>
     <link rel="stylesheet" href="/assets/styles/common.css">
     <link rel="stylesheet" href="/admin/assets/styles/admin.css">
+    <script th:if="${!user.isAdmin()}">
+        alert("관리자가 아닙니다.")
+        if (history.length > 1) {
+            history.back();
+        }else {
+            window.close();
+        }
+    </script>
+    <script defer src="/admin/assets/scripts/admin.js"></script>
     <script defer src="/assets/scripts/dist/fullcalendar.js"></script>
     <script src="/assets/scripts/selectable.js"></script>
 </head>
-<body>
+<body th:if="${user.isAdmin() == true}">
 <div id="defaultContainer">
     <form id="annualForm">
         <div class="menu-bar">
             <div class="text">
                 <h2 class="title">
-                    관리자 <span th:text="${user.getName()}"></span>님.
+                    관리자 <span th:text="${user.name}"></span>님.
                     <br>
                     오늘도 화이팅입니다!
                 </h2>
@@ -25,7 +34,7 @@
             <div class="href-container">
                 <div class="category">
                     <h2 class="title">Today</h2>
-                    <span>오늘의 할일 자리</span>
+                    <span th:text="${#dates.format(#calendars.createNow(), 'yyyy-MM-dd')}"></span>
                 </div>
                 <div class="href-box">
                     <a href="/admin">인덱스 이동</a>
@@ -37,14 +46,14 @@
                     <a href="/admin/logout">로그아웃</a>
                 </div>
             </div>
+        </div>
+
+        <div class="calendar-header">
+            <div id="calendar"></div>
             <div class="calendar-legend">
                 <span><span class="dot dot-green"></span> 연차 승인</span>
                 <span><span class="dot dot-blue"></span> 승인 대기</span>
             </div>
-        </div>
-
-        <div id="calendar">
-
         </div>
     </form>
 </div>

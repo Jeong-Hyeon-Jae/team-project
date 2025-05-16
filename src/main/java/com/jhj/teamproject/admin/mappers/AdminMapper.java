@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface AdminMapper {
- RequestsEntity[] AllRequests();
+ RequestsEntity[] AllRequests(@Param(value = "sort")String sort);
 
  int updateRequests(@Param(value = "user") UserEntity user,
                     @Param(value = "status")String status,

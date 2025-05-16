@@ -20,12 +20,16 @@
         <div class="menu-bar">
             <div class="text">
                 <h2 class="title">
-                    관리자 <span th:text="${user.getName()}"></span>님.
+                    관리자 <span th:text="${user.name}"></span>님.
                     <br>
                     오늘도 화이팅입니다!
                 </h2>
             </div>
             <div class="href-container">
+                <div class="category">
+                    <h2 class="title">Today</h2>
+                    <span th:text="${#dates.format(#calendars.createNow(), 'yyyy-MM-dd')}"></span>
+                </div>
                 <div class="href-box">
                     <a href="/admin">인덱스 이동</a>
                 </div>
@@ -39,8 +43,17 @@
         </div>
 
         <div class="list-table">
+            <div class="table-header">
+                <div class="title">신청 내역</div>
+                <div class="sort-box">
+                    <label for="sortSelect">정렬:</label>
+                    <select id="sortSelect">
+                        <option value="desc" selected>최신순</option>
+                        <option value="asc">오래된순</option>
+                    </select>
+                </div>
+            </div>
             <table id="listTable" class="table">
-                <caption>신청 내역</caption>
                 <thead>
                 <tr>
                     <th>ID</th>

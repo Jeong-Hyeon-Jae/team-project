@@ -28,6 +28,7 @@
         from `leave`.`leave_requests` lr
                  join `leave`.`users` u on u.id = lr.`user_id`
                  left join `leave`.`users` u2 on lr.`reviewed_by` = u2.`id`
+        order by lr.created_at ${sort}
     </select>
 
     <select id="selectByEmail" resultType="com.jhj.teamproject.user.entities.UserEntity">

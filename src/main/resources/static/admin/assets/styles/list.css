@@ -37,3 +37,41 @@
     border-radius: 0.25rem;
     cursor: pointer;
 }
+
+#defaultContainer > #annualForm > .list-table > .table-header {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+#defaultContainer > #annualForm > .list-table > .table-header > .title {
+    justify-self: center;
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+#defaultContainer > #annualForm > .list-table > .table-header > .stretch {
+    flex-grow: 1;
+}
+
+#defaultContainer > #annualForm > .list-table > .table-header > .sort-box {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    right: 0;
+    position: absolute;
+}
+
+#defaultContainer > #annualForm > .list-table > .table-header > .sort-box > select {
+    padding: 0.4rem 0.6rem;
+    border: 1px solid #63656990;
+    border-radius: 0.25rem;
+    font-size: 0.85rem;
+}
+

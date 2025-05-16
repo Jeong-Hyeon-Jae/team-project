@@ -1,59 +1,60 @@
 const $listTable = document.getElementById('listTable');
+const $select = document.getElementById('sortSelect');
 
-const loadLists = () => {
-    const $tbody = $listTable.querySelector(':scope > tbody');
-    $tbody.innerHTML = '';
+$select.addEventListener('change' ,() => {
+
+})
+
+document.getElementById('sortSelect').addEventListener('change', () => {
+    loadLists();
+});
+
+function loadLists() {
+    const sort = document.getElementById('sortSelect').value; // 내부에서 정렬 값 읽기
+
     const xhr = new XMLHttpRequest();
     xhr.onreadystatechange = () => {
-        if (xhr.readyState !== XMLHttpRequest.DONE){
-            return;
-        }
+        if (xhr.readyState !== XMLHttpRequest.DONE) return;
         if (xhr.status < 200 || xhr.status >= 300) {
-            alert(`[${xhr.status}] 메모를 불러오지 못하였습니다. 잠시 후 다시 시도해 주세요`)
+            alert(`[${xhr.status}] 데이터 요청 실패`);
             return;
         }
-        const lists = JSON.parse(xhr.responseText)
-        console.log(lists);
-        let tbodyHtml = '';
+        const lists = JSON.parse(xhr.responseText);
+        const $tbody = document.querySelector('#listTable > tbody');
+        $tbody.innerHTML = '';
         for (const list of lists) {
-            const createdAtArray = list['createdAt'].split('T');
-            let actionHtml = '';
-            if (list['status'] === 'APPROVED') {
-                actionHtml = '승인 완료';
-            } else if (list['status'] === 'REJECTED') {
-                actionHtml = '승인 거부';
-            } else {
-                actionHtml =
-                        `
-                        <button name="approval" class="-button-purple button" type="button">승인</button>
-                        <button name="cancel" class="-button-red button" type="button">취소</button>
-                        `;
-            }
-            tbodyHtml += `
-            <tr data-id="${list['id']}">
-                    <td>${list['id']}</td>
-                    <td>${list['name']}</td>
-                    <td class="content">${list['content']}</td>
+            const createdAtArray = list.createdAt.split('T');
+            const actionHtml = list.status === 'APPROVED' ? '승인 완료'
+                : list.status === 'REJECTED' ? '승인 거부'
+                    : `
+                <button name="approval" class="-button-purple button" type="button">승인</button>
+                <button name="cancel" class="-button-red button" type="button">취소</button>
+            `;
+            $tbody.innerHTML += `
+                <tr data-id="${list.id}">
+                    <td>${list.id}</td>
+                    <td>${list.name}</td>
+                    <td class="content">${list.content}</td>
                     <td>${createdAtArray[0]}</td>
-                    <td>${list['days']}일</td>
-                    <td>${list['reviewedByName']}</td>
-                    <td class="status">${list['status']}</td>
+                    <td>${list.days}일</td>
+                    <td>${list.reviewedByName || '확인 전'}</td>
+                    <td class="status">${list.status}</td>
                     <td class="action">${actionHtml}</td>
                 </tr>
-                `
+            `;
         }
-        console.log($tbody);
-        $tbody.innerHTML = tbodyHtml;
-        $tbody.querySelectorAll('button[name="approval"]').forEach(($btn) => {
-            $btn.addEventListener('click', () => tableAction($btn, '승인'));
-        });
-        $tbody.querySelectorAll('button[name="cancel"]').forEach(($btn) => {
-            $btn.addEventListener('click', () => tableAction($btn, '취소'));
-        })
+
+        $tbody.querySelectorAll('button[name="approval"]').forEach($btn =>
+            $btn.addEventListener('click', () => tableAction($btn, '승인'))
+        );
+        $tbody.querySelectorAll('button[name="cancel"]').forEach($btn =>
+            $btn.addEventListener('click', () => tableAction($btn, '취소'))
+        );
     };
-    xhr.open('GET', '/admin/lists');
+
+    xhr.open('GET', `/admin/lists?sort=${sort}`);
     xhr.send();
-};
+}
 
 const tableAction = ($btn, actionType) => {
     const $tr = $btn.closest('tr');

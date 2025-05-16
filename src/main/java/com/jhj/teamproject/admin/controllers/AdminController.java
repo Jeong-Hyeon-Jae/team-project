@@ -24,7 +24,7 @@ public class AdminController {
 
     @RequestMapping(value = "/list", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String patchList(@RequestParam(value = "id")int id,
+    public String patchList(@RequestParam(value = "id") int id,
                             @RequestParam(value = "action") String status,
                             @SessionAttribute(value = "email", required = false) String signedUser) {
         UpdateResult result = this.adminService.updateRequests(signedUser, status, id);
@@ -42,10 +42,10 @@ public class AdminController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public String getCalendar(@SessionAttribute(value = "email", required = false) String email,
-                              Model model) {
+    public String getAdmin(@SessionAttribute(value = "email", required = false) String email,
+                           Model model) {
         if (email != null) {
-            UserEntity user = this.adminService.getRequestByEmail(email); //
+            UserEntity user = this.adminService.getRequestByEmail(email);
             if (user != null) {
                 model.addAttribute("user", user);
             }
@@ -57,7 +57,7 @@ public class AdminController {
     public String getList(@SessionAttribute(value = "email", required = false) String email,
                           Model model) {
         if (email != null) {
-            UserEntity user = this.adminService.getRequestByEmail(email); //
+            UserEntity user = this.adminService.getRequestByEmail(email);
             if (user != null) {
                 model.addAttribute("user", user);
             }
@@ -67,7 +67,20 @@ public class AdminController {
 
     @RequestMapping(value = "/lists", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public RequestsEntity[] getLists() {
-        return this.adminService.getAllRequests();
+    public RequestsEntity[] getLists(@RequestParam(value = "sort", defaultValue = "desc") String sort) {
+        if (sort != null) {
+            switch (sort) {
+                case "desc":
+                    sort = "desc";
+                    break;
+                case "asc":
+                    sort = "asc";
+                    break;
+                default:
+                    sort = "desc";
+                    break;
+            }
+        }
+        return this.adminService.getAllRequests(sort);
     }
 }
