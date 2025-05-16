@@ -1,6 +1,6 @@
 package com.jhj.teamproject.user.results;
 
-public enum LoginResult {
-    SUCCESS,
+public enum CommonResult implements Result{
     FAILURE,
+    SUCCESS
 }

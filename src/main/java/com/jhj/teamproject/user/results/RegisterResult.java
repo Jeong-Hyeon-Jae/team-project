@@ -1,6 +1,6 @@
 package com.jhj.teamproject.user.results;
 
-public enum RegisterResult {
+public enum RegisterResult implements Result {
     SUCCESS,
     FAILURE,
     FAILURE_INVALID_EMAIL,

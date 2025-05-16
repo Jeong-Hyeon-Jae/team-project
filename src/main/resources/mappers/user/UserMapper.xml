@@ -60,4 +60,24 @@
         where `email` = #{email}
         limit 1;
     </select>
+    <select id="selectInfoByName" resultType="com.jhj.teamproject.user.entities.UserEntity">
+        select `id`                as `id`,
+               `email`             as `email`,
+               `password`          as `password`,
+               `name`              as `name`,
+               `is_admin`          as `isAdmin`,
+               `is_deleted`        as `isDeleted`,
+               `created_at`        as `createdAt`,
+               `modified_at`       as `modifiedAt`,
+               `contact_mvno_code` as `contactMvno`,
+               `contact_first`     as `contactFirst`,
+               `contact_second`    as `contactSecond`,
+               `contact_third`     as `contactThird`,
+               `address_postal`    as `addressPostal`,
+               `address_primary`   as `addressPrimary`,
+               `address_secondary` as `addressSecondary`
+        from `leave`.`users`
+        where `name` = #{name}
+        limit 1;
+    </select>
 </mapper>

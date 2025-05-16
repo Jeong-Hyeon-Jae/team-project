@@ -1,8 +1,10 @@
 package com.jhj.teamproject.user.controllers;
 
+import com.jhj.teamproject.admin.mappers.AdminMapper;
 import com.jhj.teamproject.user.entities.UserEntity;
-import com.jhj.teamproject.user.results.LoginResult;
+import com.jhj.teamproject.user.results.CommonResult;
 import com.jhj.teamproject.user.results.RegisterResult;
+import com.jhj.teamproject.user.results.ResultTuple;
 import com.jhj.teamproject.user.services.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.json.JSONObject;
@@ -15,10 +17,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/user")
 public class UserController {
     private final UserService userService;
+    private final AdminMapper adminMapper;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, AdminMapper adminMapper) {
         this.userService = userService;
+        this.adminMapper = adminMapper;
     }
 
 
@@ -37,12 +41,13 @@ public class UserController {
     @ResponseBody
     public String postLogin(@RequestParam(value = "email") String email, @RequestParam(value = "password") String password
             , HttpSession session) {
-        LoginResult result = this.userService.login(email, password);
-        if (result == LoginResult.SUCCESS) {
+        ResultTuple<UserEntity> result = this.userService.login(email, password);
+        if (result.getResult() == CommonResult.SUCCESS) {
             session.setAttribute("email", email);
         }
         JSONObject response = new JSONObject();
-        response.put("result", result.toString().toLowerCase());
+        response.put("result", result.getResult().toStringLower());
+        response.put("admin", result.getPayload().isAdmin());
         return response.toString();
     }
 
@@ -74,8 +79,16 @@ public class UserController {
     }
     @RequestMapping(value = "/findInfo/findId", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String postFindId(UserEntity user){
-        return null;
+    public String postFindId(@RequestParam(value = "name") String name,
+                             @RequestParam(value = "contactMvno") String contactMvno,
+                             @RequestParam(value = "contactFirst") String contactFirst,
+                             @RequestParam(value = "contactSecond") String contactSecond,
+                             @RequestParam(value = "contactThird") String contactThird){
+        ResultTuple<UserEntity> resultTuple = this.userService.findId(name, contactMvno, contactFirst, contactSecond, contactThird);
+        JSONObject response = new JSONObject();
+        response.put("result", resultTuple.getResult().toStringLower());
+        response.put("findEmail", resultTuple.getPayload().getEmail());
+        return response.toString();
     }
 
     //비밀번호 찾기

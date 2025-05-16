@@ -3,8 +3,9 @@ package com.jhj.teamproject.user.services;
 import com.jhj.teamproject.annual.entities.AnnualEntity;
 import com.jhj.teamproject.user.entities.UserEntity;
 import com.jhj.teamproject.user.mappers.UserMapper;
-import com.jhj.teamproject.user.results.LoginResult;
+import com.jhj.teamproject.user.results.CommonResult;
 import com.jhj.teamproject.user.results.RegisterResult;
+import com.jhj.teamproject.user.results.ResultTuple;
 import com.jhj.teamproject.user.utils.Bcrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,18 +42,30 @@ public class UserService {
     }
 
     //로그인
-    public LoginResult login(String email, String password) {
-        if (email == null || password == null || !UserService.isEmailValid(email)) {
-            return LoginResult.FAILURE;
+    public ResultTuple<UserEntity> login(String email, String password) {
+        if (email == null ||
+                password == null ||
+                !UserService.isEmailValid(email) ||
+                !UserService.isPasswordValid(password)) {
+            return ResultTuple.<UserEntity>builder()
+                    .result(CommonResult.FAILURE)
+                    .build();
         }
         UserEntity dbUserEntity = this.userMapper.selectByEmail(email);
         if (dbUserEntity == null || dbUserEntity.getIsDeleted() == "y") {
-            return LoginResult.FAILURE;
+            return ResultTuple.<UserEntity>builder()
+                    .result(CommonResult.FAILURE)
+                    .build();
         }
         if (!Bcrypt.isMatch(password, dbUserEntity.getPassword())) {
-            return LoginResult.FAILURE;
+            return ResultTuple.<UserEntity>builder()
+                    .result(CommonResult.FAILURE)
+                    .build();
         }
-        return LoginResult.SUCCESS;
+        return ResultTuple.<UserEntity>builder()
+                .result(CommonResult.SUCCESS)
+                .payload(dbUserEntity)
+                .build();
     }
 
     //회원가입
@@ -99,8 +112,13 @@ public class UserService {
     }
 
     //아이디 찾기.
-    public String findId(UserEntity user) {
-        return null;
+    public ResultTuple<UserEntity> findId(String name, String contactMvno, String contactFirst, String contactSecond, String contactThird) {
+        UserEntity dbUser = this.userMapper.selectInfoByName(name);
+        System.out.println(dbUser.getEmail());
+        return ResultTuple.<UserEntity>builder()
+                .result(CommonResult.SUCCESS)
+                .payload(dbUser)
+                .build();
     }
 
     //비밀번호 찾기.
