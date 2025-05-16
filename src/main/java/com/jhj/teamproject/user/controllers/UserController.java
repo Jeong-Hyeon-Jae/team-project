@@ -1,16 +1,12 @@
 package com.jhj.teamproject.user.controllers;
 
-import com.jhj.teamproject.annual.entities.AnnualEntity;
 import com.jhj.teamproject.user.entities.UserEntity;
-import com.jhj.teamproject.user.results.FindResult;
 import com.jhj.teamproject.user.results.LoginResult;
 import com.jhj.teamproject.user.results.RegisterResult;
 import com.jhj.teamproject.user.services.UserService;
 import jakarta.servlet.http.HttpSession;
-import netscape.javascript.JSObject;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -68,18 +64,28 @@ public class UserController {
     //계정찾기
     @RequestMapping(value = "/findInfo", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public String getFindInfo(){
-        return "user/findInfo";
+        return "user/find/findInfo";
     }
 
+    //아이디 찾기
+    @RequestMapping(value = "/findInfo/findId",method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public String getFindId() {
+        return "user/find/findId";
+    }
     @RequestMapping(value = "/findInfo/findId", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String postFindId(UserEntity user){
         return null;
     }
+
+    //비밀번호 찾기
+    @RequestMapping(value = "/findInfo/findPassowrd", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public String getFindPassword(){
+        return "user/find/findPassword";
+    }
     @RequestMapping(value = "/findInfo/findPassword", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String postFindPassword(@RequestParam(value = "email")String email, @RequestParam(value = "name") String name){
-
+    public String postFindPassword(@RequestParam(value = "email") String email, @RequestParam(value = "name") String name) {
         return null;
     }
 }

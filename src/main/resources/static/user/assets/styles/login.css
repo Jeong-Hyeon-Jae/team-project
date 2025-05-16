@@ -58,6 +58,7 @@
 .--warning {
     color: red;
     height: 0.8rem;
+    font-size: 0.8rem;
 }
 .-visible{
     display: block;

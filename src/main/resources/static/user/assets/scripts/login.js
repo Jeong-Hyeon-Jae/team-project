@@ -2,8 +2,8 @@ const $loginForm = document.getElementById('loginForm');
 
 $loginForm.onsubmit=(e)=>{
     e.preventDefault();
-    const $loginLabel =$loginForm.querySelector(':scope>.--object-label>input[name="email"] + .--warning');
-    const $passwordLabel = $loginForm.querySelector(':scope>.--object-label>input[name="password"] + .--warning');
+    const $loginLabel =$loginForm.querySelector(':scope>.--object-label:has(input[name="email"])');
+    const $passwordLabel = $loginForm.querySelector(':scope>.--object-label:has(input[name="password"])');
         [$loginLabel, $passwordLabel].forEach($label => $label.setVisible(false));
     if ($loginForm['email'].value === '') {
         $loginLabel.setVisible(true, '이메일을 입력해주세요.');
