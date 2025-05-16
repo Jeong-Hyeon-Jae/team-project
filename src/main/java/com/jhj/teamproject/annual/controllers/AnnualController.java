@@ -1,13 +1,7 @@
 package com.jhj.teamproject.annual.controllers;
 
-import com.jhj.teamproject.annual.entities.AnnualEntity;
-import com.jhj.teamproject.annual.entities.LeaveRequestEntity;
-import com.jhj.teamproject.annual.results.Result;
 import com.jhj.teamproject.annual.services.AnnualService;
-import com.jhj.teamproject.user.entities.UserEntity;
 import jakarta.servlet.http.HttpSession;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
