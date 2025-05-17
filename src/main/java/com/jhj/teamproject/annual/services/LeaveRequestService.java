@@ -90,7 +90,7 @@ public class LeaveRequestService {
         return this.leaveRequestMapper.select(email);
     }
 
-    private boolean isDateOnWeekend(LocalDate startDate, LocalDate endDate) {
+    public boolean isDateOnWeekend(LocalDate startDate, LocalDate endDate) {
         DayOfWeek dayS = startDate.getDayOfWeek();
         DayOfWeek dayE = endDate.getDayOfWeek();
 

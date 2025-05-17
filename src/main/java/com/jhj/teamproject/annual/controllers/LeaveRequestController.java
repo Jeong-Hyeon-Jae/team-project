@@ -45,9 +45,8 @@ public class LeaveRequestController {
         JSONArray event = new JSONArray();
 
         if (email == null) {
-            JSONObject failure = new JSONObject();
-            failure.put("result", Result.FAILURE.toString().toLowerCase());
-            return failure.toString();
+            event.put(Result.FAILURE.toString().toLowerCase());
+            return event.toString();
         }
 
         List<LeaveRequestEntity> leaveList = this.leaveRequestService.selectByEmail(email);
@@ -63,12 +62,13 @@ public class LeaveRequestController {
             while (!current.isAfter(end)) {
                 DayOfWeek day = current.getDayOfWeek();
                 if (day != DayOfWeek.SATURDAY && day != DayOfWeek.SUNDAY) {
+                    // 외부에서 인스턴스 생성시 다른 사용자의 요청이 들어오면 중첩되어 날라감
                     JSONObject events = new JSONObject();
                     events.put("id", i.getUserId());
                     events.put("title", i.getName());
-                    // start.toString 이나 end.plusDays를 하면 반복문에 고정된 값이 출력됨
+                    // start.toString 이나 end.plusDays를 하면 반복문에 고정된 값이 출력
                     events.put("start", current.toString());
-                    // FullCalendar에서는 +1을 해야 하루 표시됨
+                    // FullCalendar에서는 +1을 해야 하루 표시
                     // ex) 19일~20일로 제출하면 current.toString()으로 응답결과를 보내면 19일만 찍힘
                     events.put("end", current.plusDays(1).toString());
                     events.put("allDay", true);
