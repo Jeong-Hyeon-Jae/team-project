@@ -1,26 +1,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jhj.teamproject.annual.mappers.LeaveRequestMapper">
-    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id" >
-        INSERT INTO `leave`.`leave_requests` (user_id, start_date, end_date, days, content, status, category, created_at)
-        VALUES (#{leaveRequest.userId}, #{leaveRequest.startDate}, #{leaveRequest.endDate}, #{leaveRequest.days}, #{leaveRequest.content}, #{leaveRequest.status}, #{leaveRequest.category}, #{leaveRequest.createdAt})
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        INSERT INTO leave.leave_requests (user_id, start_date, end_date, days, content, status, category,
+                                              created_at)
+        VALUES (#{leaveRequest.userId}, #{leaveRequest.startDate}, #{leaveRequest.endDate}, #{leaveRequest.days},
+                #{leaveRequest.content}, #{leaveRequest.status}, #{leaveRequest.category}, #{leaveRequest.createdAt})
     </insert>
 
     <select id="select" parameterType="String">
         SELECT
-            `lr`.`start_date` AS startDate,
-            `lr`.`end_date` AS `endDate`,
-            `lr`.`days` AS `days`,
-            `lr`.`content` AS `content`,
-            `lr`.`status` AS `status`,
-            `lr`.`category` AS `category`,
-            `lr`.`reviewed_by` AS `reviewedBy`,
-            `lr`.`reviewed_at` AS `reviewedAt`,
-            `lr`.`created_at` AS `createdAt`,
-            `u`.`name` AS `name`
+        lr.user_id AS userId,
+        lr.start_date AS startDate,
+        lr.end_date AS endDate,
+        lr.days AS days,
+        lr.content AS content,
+        lr.status AS status,
+        lr.category AS category,
+        lr.reviewed_by AS reviewedBy,
+        lr.reviewed_at AS reviewedAt,
+        lr.created_at AS createdAt,
+        u.name AS name
         FROM
-            leave.leave_requests lr
-                JOIN
-            leave.users u ON lr.user_id = u.id
+        leave.leave_requests lr
+        JOIN
+        leave.users u ON lr.user_id = u.id
         <where>
             <if test="email != null and email != ''">
                 u.email = #{email}
@@ -29,11 +32,20 @@
     </select>
     <select id="selectCountByEmailAndDate" resultType="boolean">
         SELECT COUNT(*) > 0
-        FROM leave_requests
-        WHERE user_email = #{userEmail}
-        AND (
-        start_date &lt;= #{endDate}
-        AND end_date &gt;= #{startDate}
-        )
+        FROM leave.leave_requests
+        WHERE user_id = #{leaveRequest.userId}
+          AND (
+            start_date &lt;= #{leaveRequest.endDate}
+                AND end_date &gt;= #{leaveRequest.startDate}
+            )
+    </select>
+
+    <select id="existsByMonth" resultType="boolean">
+        SELECT COUNT(*) > 0
+        FROM leave.leave_requests
+        WHERE user_id = #{userId}
+            AND YEAR (
+            start_date) = #{year}
+          AND MONTH (start_date) = #{month}
     </select>
 </mapper>

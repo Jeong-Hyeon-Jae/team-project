@@ -42,7 +42,6 @@ public class LeaveRequestController {
     public String getRequestList(@SessionAttribute(value = "email")String email) {
         JSONArray events = new JSONArray();
         JSONObject res = new JSONObject();
-
         if (email == null) {
             res.put("result", Result.FAILURE.toString().toLowerCase());
             return res.toString();
@@ -52,6 +51,7 @@ public class LeaveRequestController {
 
         for (LeaveRequestEntity i : leaveList) {
             res.put("result", Result.SUCCESS.toString().toLowerCase());
+            res.put("id", i.getUserId());
             res.put("title", i.getName()); // js의 기본 달력 출력값이 title로 되어있음 -> 이름으로 변경
             res.put("start", i.getStartDate().toString());
             res.put("end", i.getEndDate().toString());
@@ -65,16 +65,20 @@ public class LeaveRequestController {
 
     @RequestMapping(value = "/request/list", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String getRequestListAll() {
+    public String getRequestListAll(@SessionAttribute(value = "email")String email) {
         JSONArray events = new JSONArray();
-        JSONObject res = new JSONObject();
         System.out.println("요청 들어옴 post");
+        if (email == null) {
+            events.put(Result.FAILURE.toString());
+            return events.toString();
+        }
 
         List<LeaveRequestEntity> leaveList = this.leaveRequestService.selectByEmail(null);
 
         for (LeaveRequestEntity i : leaveList) {
+            JSONObject res = new JSONObject(); // 전역변수로 설정하면 인스턴스가 value를 덮어씀
             res.put("result", Result.SUCCESS.toString().toLowerCase());
-            res.put("title", i.getName()); // js의 기본 달력 출력값이 title로 되어있음 -> 이름으로 변경
+            res.put("title", i.getName()); // calendar.js 기본 달력 키가 title로 되어있음
             res.put("start", i.getStartDate().toString());
             res.put("end", i.getEndDate().toString());
             res.put("allDay", true);

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -14,11 +14,14 @@
 </head>
 <body>
 <div id="defaultContainer">
-    <form id="annualForm">
+    <form id="annualForm" action="/" method="GET">
         <div class="menu-bar">
             <br>
-            <h1 class="title"><span>반가워요! 땡땡님</span></h1>
-            <br><br><br>
+            <h1 class="title">반가워요! <span th:text="${result.name}"></span>님</h1>
+            <br><br>
+            <span th:text="|총 연차: ${result.totalDays}|"></span>
+            <span th:text="|사용 연차: ${result.usedDays}|"></span>
+            <br>
             <div class="today">
                 <h2 class="title">Today</h2>
                 <span class="today"></span>
@@ -27,13 +30,13 @@
             <div class="calendar">
                 <h2 class="title">Calendar</h2>
                 <label class="--object-check">
-                    <input checked class="---input" type="radio" name="option" value="all">
+                    <input class="---input" type="radio" name="option" value="all">
                     <span class="---box"></span>
                     <span class="---caption">전체 일정</span>
                 </label>
                 <br>
                 <label class="--object-check">
-                    <input class="---input" type="radio" name="option" value="my">
+                    <input checked class="---input" type="radio" name="option" value="my">
                     <span class="---box"></span>
                     <span class="---caption">내 일정</span>
                 </label>
@@ -83,7 +86,7 @@
                 <span class="title">분류</span>
                 <div class="category-select">
                     <label><input checked type="radio" name="annual" value="leave"/> 연차</label>
-                    <label><input type="radio" name="annual" value="half"/> 반차</label>
+                    <label><input type="radio" name="annual" value="half" onclick="return false;"/> 반차</label>
                     <!--<label><input type="radio" name="annual" /> 기타</label>-->
                 </div>
                 <label>

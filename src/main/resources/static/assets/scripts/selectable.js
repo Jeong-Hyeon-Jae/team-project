@@ -1,11 +1,8 @@
-const yourDate = new Date()
+
 const $fcHeaderToolbar = document.querySelector('#calendar .fc-header-toolbar');
 let calendar;
 
 const showCalendar = (val) =>{
-    if (calendar) {
-        calendar.destroy();
-    }
     const calendarEl = document.getElementById('calendar');
     calendar = new FullCalendar.Calendar(calendarEl, {
         headerToolbar: {
@@ -13,7 +10,7 @@ const showCalendar = (val) =>{
             center: 'title',
             right: 'dayGridMonth,timeGridWeek'
         },
-        initialDate: `${yourDate.toISOString().split('T')[0]}`,
+        initialDate: new Date().toISOString().split('T')[0],
         navLinks: true, // can click day/week names to navigate views
         navLinkDayClick: function(date, jsEvent) {
             let calendarApi = calendar.view.calendar;
@@ -34,11 +31,11 @@ const showCalendar = (val) =>{
                     }
                     calendar.unselect()
                 }*/
-        eventClick: function(arg) {
+        /*eventClick: function(arg) {
             if (confirm('Are you sure you want to delete this event?')) {
                 arg.event.remove()
             }
-        },
+        },*/
         editable: true,
         dayMaxEvents: true, // allow "more" link when too many events
         events: function(fetchInfo, successCallback, failureCallback) {
@@ -52,18 +49,16 @@ const showCalendar = (val) =>{
                     alert(xhr.status);
                     return;
                 }
-
                 const res = JSON.parse(xhr.responseText);
-
-
+                res.forEach(event => {
+                    console.log(event)
+                });
                 if (Array.isArray(res)) {
                     successCallback(res);
                 } else {
                     failureCallback('response data type error');
                 }
-
             };
-
 
             if (val === 'my') {
                 xhr.open('GET', '/request/list');
@@ -78,7 +73,7 @@ const showCalendar = (val) =>{
 
 }
 
-
 document.addEventListener('DOMContentLoaded', () => {
-    showCalendar();
+    showCalendar('my');
 });
+

@@ -1,6 +1,7 @@
 package com.jhj.teamproject.annual.services;
 
 import com.jhj.teamproject.annual.entities.AnnualEntity;
+import com.jhj.teamproject.annual.entities.AnnualSummaryEntity;
 import com.jhj.teamproject.annual.mappers.AnnualMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ public class AnnualService {
         this.annualMapper = annualMapper;
     }
 
-    public List<AnnualEntity> selectAny(String email) {
+    public AnnualSummaryEntity selectAny(String email) {
         return this.annualMapper.selectNameAndDateByEmail(email);
     }
 }

@@ -33,8 +33,22 @@ public class LeaveRequestService {
             return Result.FAILURE;
         }
         boolean exists = leaveRequestMapper.selectCountByEmailAndDate(email, leaveRequest);
-        if (exists) {
+
+        if (email != null && exists) {
+            // 오늘 날 보다 신청 날짜가 이전일 경우
             return Result.FAILURE_DUPLICATE_DATE;
+        }
+
+        int year = leaveRequest.getStartDate().getYear();
+        int month = leaveRequest.getStartDate().getMonthValue();
+
+        boolean existsInSameMonth = leaveRequestMapper.existsByMonth(
+                                    this.userMapper.selectIdByEmail(email),
+                                    year,
+                                    month);
+        if (existsInSameMonth) {
+            // 한달에 두 번 이상 연차 신청을 했을 경우
+            return Result.FAILURE_DUPLICATE_MONTH;
         }
 
         LeaveRequestEntity leave = new LeaveRequestEntity();
@@ -61,8 +75,11 @@ public class LeaveRequestService {
         leave.setStatus(leaveRequest.getStatus());*/
 
 
+
         return this.leaveRequestMapper.insert(leave) > 0 ? Result.SUCCESS : Result.FAILURE;
     }
+
+
 
     public List<LeaveRequestEntity> selectByEmail(String email) {
         return this.leaveRequestMapper.select(email);

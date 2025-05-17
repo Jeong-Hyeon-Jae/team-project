@@ -1,25 +1,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jhj.teamproject.annual.entities.AnnualEntity">
-<!--    <select id="selectByIndex" resultType="com.jhj.teamproject.annual.mappers.AnnualMapper">
-        SELECT u.id AS user_id,
-               u.name,
-               u.email,
-               a.total_days,
-               a.used_days,
-        FROM annual_leaves a
-                 JOIN
-            users u ON a.user_id = u.id
-        WHERE u.email = 'example@example.com';
-    </select>-->
-    <select id="selectByIndex" resultType="com.jhj.teamproject.annual.mappers.AnnualMapper">
-        SELECT u.id AS user_id,
-               u.name,
-               u.email,
-               a.total_days,
-               a.used_days,
-        FROM annual_leaves a
-                 JOIN
-            users u ON a.user_id = u.id
-        WHERE u.email = 'example@example.com';
+<mapper namespace="com.jhj.teamproject.annual.mappers.AnnualMapper">
+    <!--    <select id="selectByIndex" resultType="com.jhj.teamproject.annual.mappers.AnnualMapper">
+            SELECT u.id AS user_id,
+                   u.name,
+                   u.email,
+                   a.total_days,
+                   a.used_days,
+            FROM annual_leaves a
+                     JOIN
+                users u ON a.user_id = u.id
+            WHERE u.email = 'example@example.com';
+        </select>-->
+    <select id="selectNameAndDateByEmail" resultType="com.jhj.teamproject.annual.entities.AnnualSummaryEntity">
+        SELECT a.user_id    AS userId,
+               u.id         AS id,
+               u.name       AS name,
+               u.email      AS email,
+               a.total_days AS totalDays,
+               a.used_days  AS usedDays
+        FROM `leave`.`annual_leaves` a
+                 JOIN `leave`.`users` u ON a.user_id = u.id
+        WHERE u.email = #{email}
     </select>
 </mapper>

@@ -10,6 +10,7 @@ const date = new Date();
 
 $annualForm.onsubmit = (e) => {
     e.preventDefault();
+    const xhr = new XMLHttpRequest();
 
     xhr.onreadystatechange = () => {
         if (xhr.readyState !== XMLHttpRequest.DONE) {
@@ -23,7 +24,7 @@ $annualForm.onsubmit = (e) => {
         console.log(response);
         $title.innerHTML = ''
         $title.innerHTML = `
-            반가워요! 땡땡님ㅇㅇ
+            반가워요! ${response.name}
         `
     };
     xhr.open('GET', '/request/info');
@@ -71,10 +72,20 @@ document.getElementById('saveEvent').addEventListener('click', (e) => {
         $annualForm.querySelector("[name='start-date']").focus();
         return;
     }
+    if ($annualForm[name='start-date'].value === '') {
+        alert('시작 날짜를 입력해 주세요.');
+        $annualForm[name='start-date'].select();
+        $annualForm[name='start-date'].focus();
+    }
+    if ($annualForm[name='start-date'] > $annualForm[name="end-date"]) {
+        alert('날짜를 다시 입력해주세요');
+        $annualForm.querySelector("[name='start-date']").focus();
+        return;
+    }
     if ($annualForm[name='end-date'].value === '') {
         alert('종료 날짜를 입력해 주세요.');
         $annualForm[name='end-date'].select();
-        $annualForm[name='start-date'].focus();
+        $annualForm[name='end-date'].focus();
         return;
     }
     if ($annualForm[name='content'].value === '') {
@@ -111,6 +122,9 @@ document.getElementById('saveEvent').addEventListener('click', (e) => {
                 return;
             case 'failure_duplicate_date':
                 alert(`이미 접수되었습니다.`)
+                return;
+            case 'failure_duplicate_month':
+                alert('한달에 한 번만 신청할 수 있습니다.')
                 return;
             case 'success':
                 alert(`연차접수가 완료되었습니다.`);
