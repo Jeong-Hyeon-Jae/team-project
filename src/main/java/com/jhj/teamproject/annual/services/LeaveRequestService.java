@@ -9,6 +9,8 @@ import com.jhj.teamproject.user.mappers.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -42,13 +44,16 @@ public class LeaveRequestService {
         int year = leaveRequest.getStartDate().getYear();
         int month = leaveRequest.getStartDate().getMonthValue();
 
-        boolean existsInSameMonth = leaveRequestMapper.existsByMonth(
-                                    this.userMapper.selectIdByEmail(email),
-                                    year,
-                                    month);
+        boolean existsInSameMonth = leaveRequestMapper.existsByMonth(this.userMapper.selectIdByEmail(email), year, month);
         if (existsInSameMonth) {
             // 한달에 두 번 이상 연차 신청을 했을 경우
             return Result.FAILURE_DUPLICATE_MONTH;
+        }
+
+
+        if (isDateOnWeekend(leaveRequest.getStartDate(), leaveRequest.getEndDate())) {
+            // 신청일과 종료일이 주말인 경우
+            return Result.FAILURE_WEEKEND_NOT_ALLOWED;
         }
 
         LeaveRequestEntity leave = new LeaveRequestEntity();
@@ -68,7 +73,9 @@ public class LeaveRequestService {
         leave.setUserId(this.userMapper.selectIdByEmail(email));
         leave.setStartDate(leaveRequest.getStartDate());
         leave.setEndDate(leaveRequest.getEndDate());
-        leave.setDays(leaveRequest.getDays());
+        // 연차 사용일수 주말제외 로직
+        int realDays = calculateBusinessDays(leaveRequest.getStartDate(), leaveRequest.getEndDate());
+        leave.setDays(realDays);
         leave.setContent(leaveRequest.getContent());
         leave.setCreatedAt(LocalDateTime.now());
         /*leave.setCategory(LeaveCategory.valueOf(leaveRequest.getCategory()));
@@ -79,9 +86,32 @@ public class LeaveRequestService {
         return this.leaveRequestMapper.insert(leave) > 0 ? Result.SUCCESS : Result.FAILURE;
     }
 
-
-
     public List<LeaveRequestEntity> selectByEmail(String email) {
         return this.leaveRequestMapper.select(email);
+    }
+
+    private boolean isDateOnWeekend(LocalDate startDate, LocalDate endDate) {
+        DayOfWeek dayS = startDate.getDayOfWeek();
+        DayOfWeek dayE = endDate.getDayOfWeek();
+
+        return dayS == DayOfWeek.SATURDAY ||
+                dayS == DayOfWeek.SUNDAY ||
+                dayE == DayOfWeek.SATURDAY ||
+                dayE == DayOfWeek.SUNDAY;
+    }
+
+    public int calculateBusinessDays(LocalDate start, LocalDate end) {
+        int businessDays = 0;
+        LocalDate current = start;
+
+        while (!current.isAfter(end)) {
+            DayOfWeek day = current.getDayOfWeek();
+            if (day != DayOfWeek.SATURDAY && day != DayOfWeek.SUNDAY) {
+                businessDays++;
+            }
+            current = current.plusDays(1);
+        }
+
+        return businessDays;
     }
 }

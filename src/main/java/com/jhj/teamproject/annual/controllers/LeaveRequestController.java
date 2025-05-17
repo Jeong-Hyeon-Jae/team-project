@@ -10,6 +10,8 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -40,52 +42,81 @@ public class LeaveRequestController {
     @RequestMapping(value = "/request/list", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String getRequestList(@SessionAttribute(value = "email")String email) {
-        JSONArray events = new JSONArray();
-        JSONObject res = new JSONObject();
+        JSONArray event = new JSONArray();
+
         if (email == null) {
-            res.put("result", Result.FAILURE.toString().toLowerCase());
-            return res.toString();
+            JSONObject failure = new JSONObject();
+            failure.put("result", Result.FAILURE.toString().toLowerCase());
+            return failure.toString();
         }
 
         List<LeaveRequestEntity> leaveList = this.leaveRequestService.selectByEmail(email);
 
         for (LeaveRequestEntity i : leaveList) {
-            res.put("result", Result.SUCCESS.toString().toLowerCase());
-            res.put("id", i.getUserId());
-            res.put("title", i.getName()); // js의 기본 달력 출력값이 title로 되어있음 -> 이름으로 변경
-            res.put("start", i.getStartDate().toString());
-            res.put("end", i.getEndDate().toString());
-            res.put("allDay", true);
-            res.put("content", i.getContent());
-            events.put(res);
+            LocalDate start = i.getStartDate();
+            LocalDate end = i.getEndDate();
+            LocalDate current = start;
+            System.out.println(start);
+            System.out.println(end);
+            System.out.println(current);
+
+            while (!current.isAfter(end)) {
+                DayOfWeek day = current.getDayOfWeek();
+                if (day != DayOfWeek.SATURDAY && day != DayOfWeek.SUNDAY) {
+                    JSONObject events = new JSONObject();
+                    events.put("id", i.getUserId());
+                    events.put("title", i.getName());
+                    // start.toString 이나 end.plusDays를 하면 반복문에 고정된 값이 출력됨
+                    events.put("start", current.toString());
+                    // FullCalendar에서는 +1을 해야 하루 표시됨
+                    // ex) 19일~20일로 제출하면 current.toString()으로 응답결과를 보내면 19일만 찍힘
+                    events.put("end", current.plusDays(1).toString());
+                    events.put("allDay", true);
+                    events.put("content", i.getContent());
+                    events.put("result", Result.SUCCESS.toString().toLowerCase());
+                    event.put(events);
+                }
+                current = current.plusDays(1);
+            }
         }
 
-        return events.toString();
+        return event.toString();
     }
 
     @RequestMapping(value = "/request/list", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String getRequestListAll(@SessionAttribute(value = "email")String email) {
-        JSONArray events = new JSONArray();
+        JSONArray event = new JSONArray();
         System.out.println("요청 들어옴 post");
         if (email == null) {
-            events.put(Result.FAILURE.toString());
-            return events.toString();
+            event.put(Result.FAILURE.toString());
+            return event.toString();
         }
 
         List<LeaveRequestEntity> leaveList = this.leaveRequestService.selectByEmail(null);
 
         for (LeaveRequestEntity i : leaveList) {
-            JSONObject res = new JSONObject(); // 전역변수로 설정하면 인스턴스가 value를 덮어씀
-            res.put("result", Result.SUCCESS.toString().toLowerCase());
-            res.put("title", i.getName()); // calendar.js 기본 달력 키가 title로 되어있음
-            res.put("start", i.getStartDate().toString());
-            res.put("end", i.getEndDate().toString());
-            res.put("allDay", true);
-            res.put("content", i.getContent());
-            events.put(res);
+            LocalDate start = i.getStartDate();
+            LocalDate end = i.getEndDate();
+            LocalDate current = start;
+
+            while (!current.isAfter(end)) {
+                DayOfWeek day = current.getDayOfWeek();
+                if (day != DayOfWeek.SATURDAY && day != DayOfWeek.SUNDAY) {
+                    JSONObject events = new JSONObject();
+                    events.put("id", i.getUserId());
+                    events.put("title", i.getName());
+                    events.put("start", current.toString());
+                    events.put("end", current.plusDays(1).toString());
+                    events.put("allDay", true);
+                    events.put("content", i.getContent());
+                    events.put("result", Result.SUCCESS.toString().toLowerCase());
+                    event.put(events);
+                }
+                current = current.plusDays(1);
+            }
         }
 
-        return events.toString();
+        return event.toString();
     }
 }

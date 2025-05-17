@@ -46,7 +46,6 @@ const showCalendar = (val) =>{
                     return;
                 }
                 if (xhr.status < 200 || xhr.status >= 300) {
-                    alert(xhr.status);
                     return;
                 }
                 const res = JSON.parse(xhr.responseText);
