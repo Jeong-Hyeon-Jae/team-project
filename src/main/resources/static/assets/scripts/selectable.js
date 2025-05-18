@@ -36,7 +36,7 @@ const showCalendar = (val) =>{
                 arg.event.remove()
             }
         },*/
-        editable: true,
+        editable: false,
         dayMaxEvents: true, // allow "more" link when too many events
         events: function(fetchInfo, successCallback, failureCallback) {
 
@@ -50,7 +50,14 @@ const showCalendar = (val) =>{
                 }
                 const res = JSON.parse(xhr.responseText);
                 res.forEach(event => {
-                    console.log(event)
+                    console.log(event);
+                    if (event.status === "APPROVED") {
+                        event.backgroundColor = "#1abc9c";
+                        event.borderColor = "#1abc9c";
+                    } else {
+                        event.backgroundColor = "#3498db";
+                        event.borderColor = "#3498db";
+                    }
                 });
                 if (Array.isArray(res)) {
                     successCallback(res);
@@ -73,6 +80,6 @@ const showCalendar = (val) =>{
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    showCalendar('my');
+    showCalendar('all');
 });
 

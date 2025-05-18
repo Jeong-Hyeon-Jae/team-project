@@ -8,7 +8,5 @@ import java.util.List;
 
 @Mapper
 public interface AnnualMapper {
-    AnnualEntity selectByIndex();
     AnnualSummaryEntity selectNameAndDateByEmail(String email);
-
 }

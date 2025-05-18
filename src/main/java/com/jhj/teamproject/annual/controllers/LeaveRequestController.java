@@ -73,6 +73,9 @@ public class LeaveRequestController {
                     events.put("end", current.plusDays(1).toString());
                     events.put("allDay", true);
                     events.put("content", i.getContent());
+                    events.put("status", i.getStatus());
+                    // category를 추가하고 allDay Key로 false를 넣으면 반차
+                    /*events.put("category", i.getCategory());*/
                     events.put("result", Result.SUCCESS.toString().toLowerCase());
                     event.put(events);
                 }
@@ -83,6 +86,7 @@ public class LeaveRequestController {
         return event.toString();
     }
 
+    // SRP(단일 책임 원칙)에 어긋남
     @RequestMapping(value = "/request/list", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String getRequestListAll(@SessionAttribute(value = "email")String email) {
@@ -110,6 +114,7 @@ public class LeaveRequestController {
                     events.put("end", current.plusDays(1).toString());
                     events.put("allDay", true);
                     events.put("content", i.getContent());
+                    events.put("status", i.getStatus());
                     events.put("result", Result.SUCCESS.toString().toLowerCase());
                     event.put(events);
                 }

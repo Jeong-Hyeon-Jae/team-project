@@ -1,34 +1,9 @@
 const $annualForm = document.getElementById('annualForm');
 const $today = $annualForm.querySelector(':scope > .menu-bar > .today > .today');
-
 const addBtn = $annualForm.querySelector(':scope > .menu-bar > .button-container > button');
 const $modal = document.getElementById('modal');
 const $closeBtn = document.getElementById('closeModal');
-const $eventTitle = document.getElementById('eventTitle');
-const $title = $annualForm.querySelector(':scope > .menu-bar > .title')
 const date = new Date();
-
-$annualForm.onsubmit = (e) => {
-    e.preventDefault();
-    const xhr = new XMLHttpRequest();
-
-    xhr.onreadystatechange = () => {
-        if (xhr.readyState !== XMLHttpRequest.DONE) {
-            return;
-        }
-        if (xhr.status < 200 || xhr.status >= 300) {
-            return;
-        }
-        const response = JSON.parse(xhr.responseText);
-        console.log(response);
-        $title.innerHTML = ''
-        $title.innerHTML = `
-            반가워요! ${response.name}
-        `
-    };
-    xhr.open('GET', '/request/info');
-    xhr.send();
-}
 
 $today.textContent = "";
 $today.textContent = new Date().toLocaleDateString('ko-KR');
@@ -132,7 +107,6 @@ document.getElementById('saveEvent').addEventListener('click', (e) => {
             case 'success':
                 alert(`연차접수가 완료되었습니다.`);
                 location.href = "/";
-
         }
     };
     xhr.open('POST', '/request');
