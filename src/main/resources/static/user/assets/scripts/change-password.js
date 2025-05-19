@@ -5,6 +5,12 @@ const $changeButton = $changePasswordForm.querySelector(':scope>button[name="cha
 $changeInput.querySelector(':scope>.---row> input').setValid(false);
 $changeButton.hide();
 
+const emailRegex = new RegExp('^(?=.{8,50}$)([\\da-z\\-_.]{4,})@([\\da-z][\\da-z\\-]*[\\da-z]\\.)?([\\da-z][\\da-z\\-]*[\\da-z])\\.([a-z]{2,15})(\\.[a-z]{2,3})?$');
+
+const passwordRegex = new RegExp('^([\\da-zA-Z`~!@#$%^&*()\\-_=+\\[{\\]}\\\\|;:\'",<.>/?]{8,50})$');
+const nameRegex = new RegExp('^[a-zA-Z가-힣]{2,6}$');
+const contactRegex = new RegExp('^\\d{4}$');
+let isVerify=false;
 $confirmButton.addEventListener('click', () => {
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
@@ -23,12 +29,22 @@ $confirmButton.addEventListener('click', () => {
         $changePasswordForm['name'].focus();
         return;
     }
+    if(!nameRegex.test($changePasswordForm['name'].value)){
+        $changeNameLabel.setVisible(true, '올바른 형식으로 입력해주세요');
+        $changePasswordForm['name'].focus();
+        return;
+    }
     if ($changePasswordForm['email'].value === '') {
         $changeEmailLabel.setVisible(true, '이메일을 입력해주세요');
         $changePasswordForm['email'].focus();
         return;
     }
-    if ($changePasswordForm['contactMvno'].value === '') {
+    if (!emailRegex.test($changePasswordForm['email'].value)) {
+        $changeEmailLabel.setVisible(true, '올바른 형식으로 입력해주세요');
+        $changePasswordForm['email'].focus();
+        return;
+    }
+    if ($changePasswordForm['contactMvno'].value === '-1') {
         $changeContactMvnoLabel.setVisible(true, '통신사를 선택해주세요');
         $changePasswordForm['contactMvno'].focus();
         return;
@@ -38,8 +54,18 @@ $confirmButton.addEventListener('click', () => {
         $changePasswordForm['contactSecond'].focus();
         return;
     }
+    if (!contactRegex.test($changePasswordForm['contactSecond'].value)) {
+        $changeContactSecondLabel.setVisible(true, '올바른 형식으로 입력해주세요');
+        $changePasswordForm['contactSecond'].focus();
+        return;
+    }
     if ($changePasswordForm['contactThird'].value === '') {
         $changeContactThirdLabel.setVisible(true, '전화번호를 입력해주세요');
+        $changePasswordForm['contactThird'].focus();
+        return;
+    }
+    if (!contactRegex.test($changePasswordForm['contactThird'].value)) {
+        $changeContactSecondLabel.setVisible(true, '올바른 형식으로 입력해주세요');
         $changePasswordForm['contactThird'].focus();
         return;
     }
@@ -61,8 +87,12 @@ $confirmButton.addEventListener('click', () => {
         switch (response.result) {
             case 'success':
                 dialog.showSimpleOk('인증', '인증에 성공하셨습니다.');
-                $changeInput.querySelector(':scope>.---row> input').setValid(true);
+
+                const $input = $changeInput.querySelector(':scope>.---row> input');
+                $input.setValid(true); 
+                $input.focus();
                 $changeButton.show();
+                isVerify=true;
                 break;
             case'failure':
                 dialog.showSimpleOk('인증', '입력하신 정보가 없습니다. 다시 한번 확인해 주세요.');
@@ -72,14 +102,16 @@ $confirmButton.addEventListener('click', () => {
                 break;
         }
     };
-    xhr.open('POST', '/user/findInfo/changePassword');
+    xhr.open('POST', '/user/find/change-password');
     xhr.send(formData);
 })
 $changePasswordForm.onsubmit = (e) => {
     e.preventDefault();
-    const $changePasswordInputLabel = $changePasswordForm.querySelector('.--object-label:has(input[name="changeInput"])');
+    if (!isVerified) {
+        return;
+    }
     if ($changePasswordForm['changeInput'].value === '') {
-        $changePasswordInputLabel.setVisible(true, '바꾸실 비밀번호를 입력해주세요.');
+        $changeInput.setVisible(true, '바꾸실 비밀번호를 입력해주세요.');
         return;
     }
     const xhr = new XMLHttpRequest();
@@ -119,7 +151,7 @@ $changePasswordForm.onsubmit = (e) => {
                 break;
         }
     };
-    xhr.open('PATCH', '/user/findInfo/changePassword');
+    xhr.open('PATCH', '/user/find/change-password');
     xhr.send(formData);
 
 }

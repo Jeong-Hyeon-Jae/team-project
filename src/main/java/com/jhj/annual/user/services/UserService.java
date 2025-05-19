@@ -130,7 +130,14 @@ public class UserService {
                     .build();
         }
         UserEntity dbUser = this.userMapper.selectInfoByName(name);
-        System.out.println(dbUser.getEmail());
+        if (dbUser == null ||
+                !dbUser.getName().equals(name) ||
+                !dbUser.getContactSecond().equals(contactSecond) ||
+                !dbUser.getContactThird().equals(contactThird)) {
+            return ResultTuple.<UserEntity>builder()
+                    .result(CommonResult.FAILURE)
+                    .build();
+        }
         return ResultTuple.<UserEntity>builder()
                 .result(CommonResult.SUCCESS)
                 .payload(dbUser)
@@ -145,7 +152,6 @@ public class UserService {
                 !UserService.isNameValid(user.getName()) ||
                 !UserService.isContactSecondValid(user.getContactSecond()) ||
                 !UserService.isContactThirdValid(user.getContactThird())) {
-            System.out.println(1);
             return ResultTuple.<UserEntity>builder()
                     .result(CommonResult.FAILURE)
                     .build();
@@ -155,7 +161,6 @@ public class UserService {
         System.out.println(user.getEmail());
         UserEntity dbUser = this.userMapper.selectByEmail(user.getEmail());
         if (dbUser == null || dbUser.getIsDeleted().equals("Y")) {
-            System.out.println(2);
             return ResultTuple.<UserEntity>builder()
                     .result(CommonResult.FAILURE)
                     .build();
@@ -168,7 +173,6 @@ public class UserService {
                         dbUser.getContactThird().equals(user.getContactThird());
 
         if (!isSameIdentity) {
-            System.out.println(3);
             return ResultTuple.<UserEntity>builder()
                     .result(CommonResult.FAILURE)
                     .build();
@@ -206,7 +210,6 @@ public class UserService {
                 .result(CommonResult.SUCCESS)
                 .build();
     }
-
 
 
 }

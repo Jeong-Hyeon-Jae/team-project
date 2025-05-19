@@ -25,3 +25,18 @@
     justify-content: center;
     align-items: center;
 }
+
+.--warning {
+    font-size: 0.8rem;
+    color: red;
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: 0.2s;
+    transition-timing-function: ease;
+    height: 0.8rem;
+}
+
+/* 경고 메시지 보임 상태 */
+.--warning.-visible {
+    opacity: 1;
+}

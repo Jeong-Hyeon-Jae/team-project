@@ -1,4 +1,6 @@
 const $loginForm = document.getElementById('loginForm');
+const emailRegex = new RegExp('^(?=.{8,50}$)([\\da-z\\-_.]{4,})@([\\da-z][\\da-z\\-]*[\\da-z]\\.)?([\\da-z][\\da-z\\-]*[\\da-z])\\.([a-z]{2,15})(\\.[a-z]{2,3})?$');
+const passwordRegex = new RegExp('^([\\da-zA-Z`~!@#$%^&*()\\-_=+\\[{\\]}\\\\|;:\'",<.>/?]{8,50})$');
 
 $loginForm.onsubmit = (e) => {
     e.preventDefault();
@@ -10,8 +12,18 @@ $loginForm.onsubmit = (e) => {
         $loginForm['email'].focus();
         return;
     }
+    if (!emailRegex.test($loginForm['email'].value)) {
+        $loginLabel.setVisible(true, '올바른 형식으로 입력해주세요.');
+        $loginForm['email'].focus();
+        return;
+    }
     if ($loginForm['password'].value === '') {
         $passwordLabel.setVisible(true, '비밀번호를 입력해주세요.');
+        $loginForm['password'].focus();
+        return;
+    }
+    if (!passwordRegex.test($loginForm['password'].value)) {
+        $passwordLabel.setVisible(true, '올바른 형식으로 입력해주세요.');
         $loginForm['password'].focus();
         return;
     }

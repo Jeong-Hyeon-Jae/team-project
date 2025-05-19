@@ -1,8 +1,9 @@
 const $registerForm = document.getElementById('registerForm');
 const $addressFindDialog = document.getElementById('addressFindDialog');
+const nameRegex = new RegExp('^[a-zA-Z가-힣]{2,6}$');
 const emailRegex = new RegExp('^(?=.{8,50}$)([\\da-z\\-_.]{4,})@([\\da-z][\\da-z\\-]*[\\da-z]\\.)?([\\da-z][\\da-z\\-]*[\\da-z])\\.([a-z]{2,15})(\\.[a-z]{2,3})?$');
-const passwordRegex = new RegExp('^([\\da-zA-Z`~!@#$%^&*()\\-_=+\\[{\\]}\\\\|;:\'",<.>/?]{8,50})$');
-
+const passwordRegex = new RegExp('^(?=.*[!@#$%^&*()\\-_=+\\[\\]{}\\\\|;:\'",.<>/?]).{8,50}$');
+const contactRegex = new RegExp('^[\\d]{4}$');
 //주소찾기.
 $registerForm['addressFindButton'].addEventListener('click', () => {
     $addressFindDialog.show();
@@ -27,7 +28,6 @@ $registerForm['addressFindButton'].addEventListener('click', () => {
 //회원가입
 $registerForm.onsubmit = (e) => {
     e.preventDefault();
-
     const $nameLabel = $registerForm.querySelector('.--object-label:has(input[name="name"])');
     const $emailLabel = $registerForm.querySelector('.--object-label:has( input[name="email"])');
     const $passwordLabel = $registerForm.querySelector('.--object-label:has( input[name="passwordCheck"])');
@@ -46,6 +46,11 @@ $registerForm.onsubmit = (e) => {
         $registerForm['name'].focus();
         return;
     }
+    if (!nameRegex.test($registerForm['name'].value)) {
+        $nameLabel.setVisible(true, '올바른 형식으로 입력해주세요.');
+        $registerForm['name'].focus();
+        return;
+    }
 
     if ($registerForm['email'].value === '') {
         $emailLabel.setVisible(true, '이메일을 입력해주세요.');
@@ -53,7 +58,7 @@ $registerForm.onsubmit = (e) => {
         return;
     }
     if (!emailRegex.test($registerForm['email'].value)) {
-        $emailLabel.setVisible(true, '올바른 이메일 형식으로 입력해주세요.');
+        $emailLabel.setVisible(true, '올바른 형식으로 입력해주세요.');
         $registerForm['email'].focus();
         return;
     }
@@ -64,7 +69,7 @@ $registerForm.onsubmit = (e) => {
         return;
     }
     if (!passwordRegex.test($registerForm['password'].value)) {
-        $passwordLabel.setVisible(true, '올바른 비밀번호 형식으로 입력해줏세요.');
+        $passwordLabel.setVisible(true, '올바른 형식으로 입력해줏세요.');
         $registerForm['password'].focus();
         return;
     }
@@ -79,18 +84,42 @@ $registerForm.onsubmit = (e) => {
         $registerForm['createdAt'].focus();
         return;
     }
+    // ⏱️ 미래 날짜 불가 검사 추가
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const inputDate = new Date($registerForm['createdAt'].value);
+    if (inputDate > today) {
+        $createdAtLabel.setVisible(true, '입사일을 다시 확인해 주세요.');
+        $registerForm['createdAt'].focus();
+        return;
+    }
+    if ($registerForm['createdAt'].value>Date.now()) {
+        $createdAtLabel.setVisible(true, '입사일을 다시 입력해주세요.');
+        $registerForm['createdAt'].focus();
+        return;
+    }
     if ($registerForm['contactMvno'].value === '-1') {
         $contactLabel.setVisible(true, '통신사를 선택해주세요.');
         $registerForm['contactMvno'].focus();
         return;
     }
     if ($registerForm['contactSecond'].value === '') {
-        $contactSecondLabel.setVisible(true, '전화번호를 선택해주세요.');
+        $contactSecondLabel.setVisible(true, '전화번호를 입력해주세요.');
         $registerForm['contactSecond'].focus();
         return;
     }
+    if (!contactRegex.test($registerForm['contactSecond'].value)) {
+        $contactSecondLabel.setVisible(true, '올바른 형식으로 입력해주세요.');
+        $registerForm['contactSecond'].focus();
+        return;
+    }
+    if (!contactRegex.test($registerForm['contactThird'].value)) {
+        $contactSecondLabel.setVisible(true, '올바른 형식으로 입력해주세요.');
+        $registerForm['contactThird'].focus();
+        return;
+    }
     if ($registerForm['addressPostal'].value === '') {
-        $addressPostalLabel.setVisible(true,'주소를 입력해주세요.')
+        $addressPostalLabel.setVisible(true,'주소를 입력해주세요.');
         $registerForm['addressPostal'].focus();
         return;
     }

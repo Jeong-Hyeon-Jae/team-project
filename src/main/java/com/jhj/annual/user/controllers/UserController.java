@@ -65,45 +65,48 @@ public class UserController {
 
     //계정찾기
     @RequestMapping(value = "/find/find-info", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public String getFindInfo(){
+    public String getFindInfo() {
         return "user/find/find-info";
     }
 
     //아이디 찾기
-    @RequestMapping(value = "/find/find-id",method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    @RequestMapping(value = "/find/find-id", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public String getFindId() {
         return "user/find/find-id";
     }
+
     @RequestMapping(value = "/find/find-id", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String postFindId(@RequestParam(value = "name") String name,
                              @RequestParam(value = "contactMvno") String contactMvno,
                              @RequestParam(value = "contactFirst") String contactFirst,
                              @RequestParam(value = "contactSecond") String contactSecond,
-                             @RequestParam(value = "contactThird") String contactThird){
+                             @RequestParam(value = "contactThird") String contactThird) {
         ResultTuple<UserEntity> resultTuple = this.userService.findId(name, contactMvno, contactFirst, contactSecond, contactThird);
         JSONObject response = new JSONObject();
         response.put("result", resultTuple.getResult().toStringLower());
-        response.put("findEmail", resultTuple.getPayload().getEmail());
+        if (resultTuple.getResult() == CommonResult.SUCCESS && resultTuple.getPayload() != null) {
+            response.put("findEmail", resultTuple.getPayload().getEmail());
+        }
         return response.toString();
     }
 
     //비밀번호 변경
     @RequestMapping(value = "/find/change-password", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public String getFindPassword(){
+    public String getFindPassword() {
         return "user/find/change-password";
     }
 
     @RequestMapping(value = "/find/change-password", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String patchChangePassword(UserEntity user ) {
+    public String patchChangePassword(UserEntity user) {
         ResultTuple<UserEntity> resultTuple = this.userService.changePassword(user);
         JSONObject response = new JSONObject();
         response.put("result", resultTuple.getResult().toStringLower());
         return response.toString();
     }
 
-    @RequestMapping(value = "/find/change-password", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/find/change-password", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String postChangePassword(UserEntity user) {
         ResultTuple<UserEntity> resultTuple = this.userService.confirmInfo(user);
@@ -112,7 +115,6 @@ public class UserController {
         System.out.println(resultTuple.getResult().toStringLower());
         return response.toString();
     }
-
 
 
 }
