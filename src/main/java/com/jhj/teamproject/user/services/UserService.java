@@ -55,7 +55,7 @@ public class UserService {
                     .build();
         }
         UserEntity dbUserEntity = this.userMapper.selectByEmail(email);
-        if (dbUserEntity == null || dbUserEntity.getIsDeleted() == "y") {
+        if (dbUserEntity == null || dbUserEntity.getIsDeleted().equals("Y")) {
             return ResultTuple.<UserEntity>builder()
                     .result(CommonResult.FAILURE)
                     .build();

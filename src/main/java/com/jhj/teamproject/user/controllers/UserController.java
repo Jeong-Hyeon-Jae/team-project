@@ -44,7 +44,7 @@ public class UserController {
         }
         JSONObject response = new JSONObject();
         response.put("result", result.getResult().toStringLower());
-        response.put("admin", result.getPayload().isAdmin());
+        response.put("admin", result.getPayload() != null && result.getPayload().isAdmin());
         return response.toString();
     }
 
