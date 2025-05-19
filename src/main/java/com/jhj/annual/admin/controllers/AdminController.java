@@ -28,6 +28,13 @@ public class AdminController {
                             @RequestParam(value = "action") String status,
                             @SessionAttribute(value = "email", required = false) String signedUser) {
         UpdateResult result = this.adminService.updateRequests(signedUser, status, id);
+        System.out.println(result);
+        if (result == UpdateResult.FAILURE) {
+            JSONObject response = new JSONObject();
+            response.put("result", result.toString().toUpperCase());
+            System.out.println(result);
+            return response.toString();
+        }
         JSONObject response = new JSONObject();
         response.put("result", result.name().toUpperCase());
         return response.toString();
@@ -55,22 +62,15 @@ public class AdminController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public String getList(@SessionAttribute(value = "email", required = false) String email,
-                          Model model, HttpSession session) {
-
+                          Model model) {
         if (email != null) {
             UserEntity user = this.adminService.getRequestByEmail(email);
             if (user != null) {
-                if (user.isAdmin()) {
-                    model.addAttribute("user", user);
-                    return "/admin/list";
-                }
                 model.addAttribute("user", user);
             }
-        }
-        return "redirect:/user/login";
+         }
+        return "/admin/list";
     }
-
-
 
     @RequestMapping(value = "/lists", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody

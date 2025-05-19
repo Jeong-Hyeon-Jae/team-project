@@ -32,6 +32,9 @@ public class AdminService {
         if (user == null) {
             return UpdateResult.FAILURE;
         }
+        if (!user.isAdmin()) {
+            return UpdateResult.FAILURE;
+        }
         if (status.equals("APPROVED")) {
             RequestsEntity request = this.adminMapper.selectRequestById(id);
             if (request != null) {
