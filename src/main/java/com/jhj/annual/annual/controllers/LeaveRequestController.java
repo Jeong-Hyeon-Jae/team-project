@@ -88,7 +88,6 @@ public class LeaveRequestController {
     @ResponseBody
     public String getRequestListAll(@SessionAttribute(value = "email")String email) {
         JSONArray event = new JSONArray();
-        System.out.println("요청 들어옴 post");
         if (email == null) {
             event.put(Result.FAILURE.toString());
             return event.toString();

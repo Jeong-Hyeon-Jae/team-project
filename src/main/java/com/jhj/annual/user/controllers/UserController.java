@@ -27,10 +27,8 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public String getLogin(@SessionAttribute(value = "email", required = false) String email) {
         if (email == null) {
-            System.out.println("로그인 실패");
             return "/user/login";
         }
-        System.out.println("로그인 성공");
         return "redirect:/";
     }
 
@@ -112,7 +110,6 @@ public class UserController {
         ResultTuple<UserEntity> resultTuple = this.userService.confirmInfo(user);
         JSONObject response = new JSONObject();
         response.put("result", resultTuple.getResult().toStringLower());
-        System.out.println(resultTuple.getResult().toStringLower());
         return response.toString();
     }
 

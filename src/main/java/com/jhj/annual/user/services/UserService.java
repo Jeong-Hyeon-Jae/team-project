@@ -158,7 +158,6 @@ public class UserService {
         }
 
         // 2. 사용자 조회
-        System.out.println(user.getEmail());
         UserEntity dbUser = this.userMapper.selectByEmail(user.getEmail());
         if (dbUser == null || dbUser.getIsDeleted().equals("Y")) {
             return ResultTuple.<UserEntity>builder()
@@ -190,7 +189,6 @@ public class UserService {
         UserEntity dbUser = this.userMapper.selectByEmail(user.getEmail());
         // 4. 기존 비밀번호 재사용 방지
         if (Bcrypt.isMatch(user.getPassword(), dbUser.getPassword())) {
-            System.out.println("기존과 동일");
             return ResultTuple.<UserEntity>builder()
                     .result(RegisterResult.FAILURE_DUPLICATE)
                     .build();
@@ -201,7 +199,6 @@ public class UserService {
 
         int updatedRows = this.userMapper.updatePassword(dbUser);
         if (updatedRows < 1) {
-            System.out.println(5);
             return ResultTuple.<UserEntity>builder()
                     .result(CommonResult.FAILURE)
                     .build();

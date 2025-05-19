@@ -5,25 +5,25 @@
 ## 🗄️ Users 테이블 생성 SQL
 
 ```sql
-create table `leave`.`users`
+CREATE TABLE `leave`.`users`
 (
-    `id`          int unsigned not null auto_increment,
-    `email`       varchar(50)  not null,
-    `password`    varchar(100) not null,
-    `name`        varchar(50)  not null,
-    `created_at`  date default now() comment '입사일',
-    `modified_at` date         null comment '수정일',
-    `is_deleted`    varchar(1)   not null comment '탈퇴여부 (Y,N)',
-    `is_admin`     boolean      not null comment '관리자여부 (true,false)',
-    `contact_mvno_code` varchar(3)     not null comment '연락처 통신사 코드 FK',
-    `contact_first`     varchar(4)     not null comment '연락처 앞',
-    `contact_second`    varchar(4)     not null comment '연락처 중간',
-    `contact_third`     varchar(4)     not null comment '연락처 끝',
-    `address_postal`    varchar(10)     not null comment '주소 우편번호',
-    `address_primary`   varchar(100)   not null comment '주소 기본',
-    `address_secondary` varchar(100)   not null comment '주소 상세',
-    constraint primary key (`id`),
-    constraint unique (`email`)
+    `id`                INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `email`             VARCHAR(50)  NOT NULL,
+    `password`          VARCHAR(100) NOT NULL,
+    `name`              VARCHAR(50)  NOT NULL,
+    `created_at`        DATE DEFAULT NOW() COMMENT '입사일',
+    `modified_at`       DATE         NULL COMMENT '수정일',
+    `is_deleted`        VARCHAR(1) NOT NULL COMMENT '탈퇴여부 (Y,N)',
+    `is_admin`          BOOLEAN NOT NULL COMMENT '관리자여부 (true,false)',
+    `contact_mvno_code` VARCHAR(3)   NOT NULL COMMENT '연락처 통신사 코드 FK',
+    `contact_first`     VARCHAR(4)   NOT NULL COMMENT '연락처 앞',
+    `contact_second`    VARCHAR(4)   NOT NULL COMMENT '연락처 중간',
+    `contact_third`     VARCHAR(4)   NOT NULL COMMENT '연락처 끝',
+    `address_postal`    VARCHAR(10)  NOT NULL COMMENT '주소 우편번호',
+    `address_primary`   VARCHAR(100) NOT NULL COMMENT '주소 기본',
+    `address_secondary` VARCHAR(100) NOT NULL COMMENT '주소 상세',
+    CONSTRAINT PRIMARY KEY (`id`),
+    CONSTRAINT UNIQUE (`email`)
 );
 ```
 ## 🗄️ Annual Leaves 테이블 생성 SQL
@@ -53,7 +53,7 @@ CREATE TABLE `leave`.`leave_requests`
     `reviewed_by` INT UNSIGNED NULL,              -- 검토자 ID (users FK)
     `reviewed_at` DATETIME NULL DEFAULT NULL,     -- 검토 일시
     `created_at` DATETIME NOT NULL,               -- 신청 일시
-    `category` ENUM('LEAVE','HALF') NOT NULL comment '연차 구분',
+    `category` ENUM('LEAVE','HALF') NOT NULL COMMENT '연차 구분',
     CONSTRAINT PRIMARY KEY (`id`),
     CONSTRAINT FOREIGN KEY (`user_id`) REFERENCES `leave`.`users`(`id`),
     CONSTRAINT FOREIGN KEY (`reviewed_by`) REFERENCES `leave`.`users`(`id`)

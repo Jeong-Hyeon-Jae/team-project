@@ -38,7 +38,7 @@ public class AnnualController {
 
     @RequestMapping(value = "/logout", method = {RequestMethod.GET}, produces = MediaType.TEXT_HTML_VALUE)
     public String getLogout(HttpSession session) {
-        session.setAttribute("email",null);
+        session.invalidate();
 
         return "redirect:/user/login";
     }

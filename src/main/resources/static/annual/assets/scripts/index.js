@@ -83,7 +83,6 @@ document.getElementById('saveEvent').addEventListener('click', (e) => {
             return;
         }
         const response = JSON.parse(xhr.responseText);
-        console.log(response);
         switch (response.result) {
             case 'failure':
                 alert(`알수 없는 오류로 에러가 발생했습니다. ${xhr.status}`);

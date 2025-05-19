@@ -36,7 +36,7 @@ $loginForm.onsubmit = (e) => {
             return;
         }
         if (xhr.status < 200 || xhr.status >= 300) {
-            alert(`${xhr.status}`)
+            dialog.showSimpleOk('로그인', `${xhr.status}`);
             return;
         }
         const response = JSON.parse(xhr.responseText);

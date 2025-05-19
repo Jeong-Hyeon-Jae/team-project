@@ -28,11 +28,9 @@ public class AdminController {
                             @RequestParam(value = "action") String status,
                             @SessionAttribute(value = "email", required = false) String signedUser) {
         UpdateResult result = this.adminService.updateRequests(signedUser, status, id);
-        System.out.println(result);
         if (result == UpdateResult.FAILURE) {
             JSONObject response = new JSONObject();
             response.put("result", result.toString().toUpperCase());
-            System.out.println(result);
             return response.toString();
         }
         JSONObject response = new JSONObject();
@@ -42,8 +40,7 @@ public class AdminController {
 
     @RequestMapping(value = "/logout", method = {RequestMethod.GET, RequestMethod.POST}, produces = MediaType.TEXT_HTML_VALUE)
     public String getLogout(HttpSession session) {
-        session.setAttribute("email", null);
-        System.out.println("로그아웃");
+        session.invalidate();
         return "redirect:/user/login";
 
     }
