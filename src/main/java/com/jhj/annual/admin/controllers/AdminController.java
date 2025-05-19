@@ -55,15 +55,22 @@ public class AdminController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public String getList(@SessionAttribute(value = "email", required = false) String email,
-                          Model model) {
+                          Model model, HttpSession session) {
+
         if (email != null) {
             UserEntity user = this.adminService.getRequestByEmail(email);
             if (user != null) {
+                if (user.isAdmin()) {
+                    model.addAttribute("user", user);
+                    return "/admin/list";
+                }
                 model.addAttribute("user", user);
             }
         }
-        return "/admin/list";
+        return "redirect:/user/login";
     }
+
+
 
     @RequestMapping(value = "/lists", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody

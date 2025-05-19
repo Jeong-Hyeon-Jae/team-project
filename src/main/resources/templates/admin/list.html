@@ -9,12 +9,16 @@
     <link rel="stylesheet" href="/assets/styles/common.css">
     <link rel="stylesheet" href="/admin/assets/styles/admin.css">
     <link rel="stylesheet" href="/admin/assets/styles/list.css">
+
     <script defer src="/admin/assets/scripts/admin.js"></script>
     <script defer src="/assets/scripts/dist/fullcalendar.js"></script>
     <script src="/assets/scripts/selectable.js"></script>
 </head>
 <body>
-
+<script th:if="${!user.admin}">
+    alert('관리자가 아닙니다.');
+    location.href = '/';
+</script>
 <div id="defaultContainer">
     <form id="annualForm">
         <div class="menu-bar">

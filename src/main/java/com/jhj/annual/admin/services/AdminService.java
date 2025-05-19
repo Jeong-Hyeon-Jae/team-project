@@ -4,6 +4,7 @@ import com.jhj.annual.admin.entities.RequestsEntity;
 import com.jhj.annual.admin.mappers.AdminMapper;
 import com.jhj.annual.admin.results.UpdateResult;
 import com.jhj.annual.user.entities.UserEntity;
+import jakarta.jws.soap.SOAPBinding;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,4 +45,5 @@ public class AdminService {
     public UserEntity getRequestByEmail(String email) {
         return this.adminMapper.selectByEmail(email);
     }
+
 }

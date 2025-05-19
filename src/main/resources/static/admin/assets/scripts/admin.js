@@ -1,15 +1,12 @@
 const $listTable = document.getElementById('listTable');
 const $select = document.getElementById('sortSelect');
 
-$select.addEventListener('change' ,() => {
-
-})
-
 document.getElementById('sortSelect').addEventListener('change', () => {
     loadLists();
 });
 
 function loadLists() {
+
     const sort = document.getElementById('sortSelect').value; // 내부에서 정렬 값 읽기
 
     const xhr = new XMLHttpRequest();
