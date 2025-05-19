@@ -69,7 +69,7 @@ $registerForm.onsubmit = (e) => {
         return;
     }
     if (!passwordRegex.test($registerForm['password'].value)) {
-        $passwordLabel.setVisible(true, '올바른 형식으로 입력해줏세요.');
+        $passwordLabel.setVisible(true, '올바른 형식으로 입력해주세요.');
         $registerForm['password'].focus();
         return;
     }

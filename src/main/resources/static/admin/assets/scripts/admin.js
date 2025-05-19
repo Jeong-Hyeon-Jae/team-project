@@ -27,7 +27,7 @@ function loadLists() {
             const actionHtml = list.status === 'APPROVED' ? '승인 완료'
                 : list.status === 'REJECTED' ? '승인 거부'
                     : `
-                <button name="approval" class="-button-purple button" type="button">승인</button>
+                <button name="approval" class="--button-purple button" type="button">승인</button>
                 <button name="cancel" class="-button-red button" type="button">취소</button>
             `;
             $tbody.innerHTML += `

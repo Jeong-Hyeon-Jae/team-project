@@ -89,7 +89,7 @@ $confirmButton.addEventListener('click', () => {
                 dialog.showSimpleOk('인증', '인증에 성공하셨습니다.');
 
                 const $input = $changeInput.querySelector(':scope>.---row> input');
-                $input.setValid(true); 
+                $input.setValid(true);
                 $input.focus();
                 $changeButton.show();
                 isVerify=true;
