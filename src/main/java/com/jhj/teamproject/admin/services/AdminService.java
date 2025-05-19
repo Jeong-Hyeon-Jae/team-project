@@ -31,6 +31,12 @@ public class AdminService {
         if (user == null) {
             return UpdateResult.FAILURE;
         }
+        if (status.equals("APPROVED")) {
+            RequestsEntity request = this.adminMapper.selectRequestById(id);
+            if (request != null) {
+                this.adminMapper.incrementUsedDays(request.getUserId(), request.getDays());
+            }
+        }
 
         return this.adminMapper.updateRequests(user, status, id) > 0 ? UpdateResult.SUCCESS : UpdateResult.FAILURE;
     }

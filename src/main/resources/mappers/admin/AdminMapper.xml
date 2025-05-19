@@ -51,4 +51,28 @@
         where `email` = #{email}
         limit 1;
     </select>
+
+    <select id="selectRequestById" resultType="com.jhj.teamproject.admin.entities.RequestsEntity">
+        SELECT `id` as `id`,
+               `user_id` as `userId`,
+               `start_date` as `startDate`,
+               `end_date` as `endDate`,
+               `days` as Days,
+               `content` as `content`,
+               `status` as `status`,
+               `reviewed_by` as `reviewedBy`,
+               `reviewed_at` as `reviewedAt`,
+               `created_at` as `createdAt`,
+               `category` as `category`
+        FROM leave.leave_requests
+        WHERE id = #{id}
+    </select>
+
+    <update id="incrementUsedDays">
+        UPDATE leave.annual_leaves
+        SET total_days = total_days - #{days},
+            used_days =  #{days}
+        WHERE user_id = #{userId}
+        limit 1
+    </update>
 </mapper>

@@ -14,4 +14,9 @@ public interface AdminMapper {
                     @Param(value = "id")int id);
 
  UserEntity selectByEmail(@Param("email") String email);
+
+ RequestsEntity selectRequestById(@Param("id") int id);
+
+ int incrementUsedDays(@Param("userId") int userId,
+                       @Param("days") int days);
 }

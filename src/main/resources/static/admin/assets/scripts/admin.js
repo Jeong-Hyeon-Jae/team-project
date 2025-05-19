@@ -78,6 +78,10 @@ const tableAction = ($btn, actionType) => {
 
         $actionTd.textContent = actionType === '승인' ? '승인 완료' : '승인 거부';
         $statusTd.textContent = actionStatus;
+        if (typeof calendar !== 'undefined') {
+            calendar.refetchEvents();
+        }
+
         loadLists();
     };
 
