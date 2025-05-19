@@ -1,6 +1,7 @@
 const $registerForm = document.getElementById('registerForm');
 const $addressFindDialog = document.getElementById('addressFindDialog');
-
+const emailRegex = new RegExp('^(?=.{8,50}$)([\\da-z\\-_.]{4,})@([\\da-z][\\da-z\\-]*[\\da-z]\\.)?([\\da-z][\\da-z\\-]*[\\da-z])\\.([a-z]{2,15})(\\.[a-z]{2,3})?$');
+const passwordRegex = new RegExp('^([\\da-zA-Z`~!@#$%^&*()\\-_=+\\[{\\]}\\\\|;:\'",<.>/?]{8,50})$');
 
 //주소찾기.
 $registerForm['addressFindButton'].addEventListener('click', () => {
@@ -51,13 +52,22 @@ $registerForm.onsubmit = (e) => {
         $registerForm['email'].focus();
         return;
     }
+    if (!emailRegex.test($registerForm['email'].value)) {
+        $emailLabel.setVisible(true, '올바른 이메일 형식으로 입력해주세요.');
+        $registerForm['email'].focus();
+        return;
+    }
 
     if ($registerForm['password'].value === '') {
         $passwordLabel.setVisible(true, '비밀번호를 입력해주세요.');
         $registerForm['password'].focus();
         return;
     }
-
+    if (!passwordRegex.test($registerForm['password'].value)) {
+        $passwordLabel.setVisible(true, '올바른 비밀번호 형식으로 입력해줏세요.');
+        $registerForm['password'].focus();
+        return;
+    }
     if ($registerForm['password'].value !== $registerForm['passwordCheck'].value) {
         $passwordLabel.setVisible(true, '비밀번호를 다시 확인해주세요.');
         $registerForm['passwordCheck'].focus();
