@@ -1,7 +1,5 @@
 ## 📊 DB 다이어그램
-
-![DB 다이어그램](https://github.com/user-attachments/assets/eba48ee9-f06f-4d66-bff0-f42961406497)
-
+![img.png](img.png)
 ---
 
 ## 🗄️ Users 테이블 생성 SQL
