@@ -21,12 +21,15 @@ function loadLists() {
         $tbody.innerHTML = '';
         for (const list of lists) {
             const createdAtArray = list.createdAt.split('T');
-            const actionHtml = list.status === 'APPROVED' ? '승인 완료'
-                : list.status === 'REJECTED' ? '승인 거부'
-                    : `
-                <button name="approval" class="--button-purple button" type="button">승인</button>
-                <button name="cancel" class="-button-red button" type="button">취소</button>
-            `;
+            const actionHtml =
+                list.status === 'APPROVED'
+                    ? `<span style="color: #1abc9c;">승인 완료</span>`
+                    : list.status === 'REJECTED'
+                        ? `<span style="color: red;">승인 거부</span>`
+                        : `
+        <button name="approval" class="--button-purple button" type="button">승인</button>
+        <button name="cancel" class="-button-red button" type="button">취소</button>
+    `;
             $tbody.innerHTML += `
                 <tr data-id="${list.id}">
                     <td>${list.id}</td>
