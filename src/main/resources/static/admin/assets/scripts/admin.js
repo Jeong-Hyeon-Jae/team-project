@@ -72,6 +72,13 @@ const tableAction = ($btn, actionType) => {
             alert(`[${xhr.status}] 변경 실패`);
             return;
         }
+        const result = JSON.parse(xhr.responseText);
+
+        if (result.result === "FAILURE") {
+            alert('관리자가 아닙니다.');
+            location.href = '/user/logout';
+            return;
+        }
 
         $actionTd.textContent = actionType === '승인' ? '승인 완료' : '승인 거부';
         $statusTd.textContent = actionStatus;

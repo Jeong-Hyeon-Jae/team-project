@@ -33,8 +33,6 @@ document.getElementById('saveEvent').addEventListener('click', (e) => {
 
     if (startDate === '') {
         alert('시작 날짜를 입력해 주세요.');
-        startDate.select();
-        startDate.focus();
         return;
     }
     const today = new Date();
@@ -45,23 +43,18 @@ document.getElementById('saveEvent').addEventListener('click', (e) => {
 
     if (selectedDate < today) {
         alert('시작 날짜는 오늘보다 이전일 수 없습니다.');
-        $annualForm.querySelector("[name='start-date']").focus();
         return;
     }
     if (startDate === '') {
         alert('시작 날짜를 입력해 주세요.');
-        startDate.select();
-        startDate.focus();
+        return;
     }
     if (startDate > endDate) {
         alert('날짜를 다시 입력해주세요');
-        $annualForm.querySelector("[name='start-date']").focus();
         return;
     }
     if (endDate === '') {
         alert('종료 날짜를 입력해 주세요.');
-        endDate.select();
-        endDate.focus();
         return;
     }
     if ($annualForm[name='content'].value === '') {
@@ -130,8 +123,3 @@ radios.forEach(radio => {
 
 
 //개인정보 수정
-
-
-
-
-
