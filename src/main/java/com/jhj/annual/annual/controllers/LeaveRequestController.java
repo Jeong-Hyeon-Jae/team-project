@@ -55,9 +55,6 @@ public class LeaveRequestController {
             LocalDate start = i.getStartDate();
             LocalDate end = i.getEndDate();
             LocalDate current = start;
-            System.out.println(start);
-            System.out.println(end);
-            System.out.println(current);
 
             while (!current.isAfter(end)) {
                 DayOfWeek day = current.getDayOfWeek();
