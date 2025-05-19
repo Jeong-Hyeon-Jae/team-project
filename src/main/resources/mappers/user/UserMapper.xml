@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jhj.teamproject.user.mappers.UserMapper">
+<mapper namespace="com.jhj.annual.user.mappers.UserMapper">
 
     <insert id="insertUser" useGeneratedKeys="true" keyColumn="id" keyProperty="id" >
         insert into `leave`.`users` (`email`,`password`,`name`,`created_at`,`modified_at`,`is_deleted`,`is_admin`,`contact_mvno_code`,`contact_first`,`contact_second`,`contact_third`,`address_postal`,`address_primary`,`address_secondary`)
@@ -44,7 +44,7 @@
         limit 1;
     </update>
 
-    <select id="selectByEmail" resultType="com.jhj.teamproject.user.entities.UserEntity">
+    <select id="selectByEmail" resultType="com.jhj.annual.user.entities.UserEntity">
         select `id`                as `id`,
                `email`             as `email`,
                `password`          as `password`,
@@ -76,7 +76,7 @@
         where `email` = #{email}
         limit 1;
     </select>
-    <select id="selectInfoByName" resultType="com.jhj.teamproject.user.entities.UserEntity">
+    <select id="selectInfoByName" resultType="com.jhj.annual.user.entities.UserEntity">
         select `id`                as `id`,
                `email`             as `email`,
                `password`          as `password`,

@@ -1,4 +1,4 @@
-package com.jhj.teamproject.user.results;
+package com.jhj.annual.user.results;
 
 import lombok.*;
 import org.springframework.web.bind.annotation.SessionAttribute;

@@ -1,6 +1,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jhj.teamproject.annual.mappers.AnnualMapper">
-    <!--    <select id="selectByIndex" resultType="com.jhj.teamproject.annual.mappers.AnnualMapper">
+<mapper namespace="com.jhj.annual.annual.mappers.AnnualMapper">
+    <!--    <select id="selectByIndex" resultType="com.jhj.annual.annual.mappers.AnnualMapper">
             SELECT u.id AS user_id,
                    u.name,
                    u.email,
@@ -11,7 +11,7 @@
                 users u ON a.user_id = u.id
             WHERE u.email = 'example@example.com';
         </select>-->
-    <select id="selectNameAndDateByEmail" resultType="com.jhj.teamproject.annual.entities.AnnualSummaryEntity">
+    <select id="selectNameAndDateByEmail" resultType="com.jhj.annual.annual.entities.AnnualSummaryEntity">
         SELECT a.user_id    AS userId,
                u.id         AS id,
                u.name       AS name,

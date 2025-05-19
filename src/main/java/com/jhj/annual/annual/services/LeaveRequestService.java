@@ -1,11 +1,11 @@
-package com.jhj.teamproject.annual.services;
+package com.jhj.annual.annual.services;
 
-import com.jhj.teamproject.annual.entities.LeaveRequestEntity;
-import com.jhj.teamproject.annual.mappers.LeaveRequestMapper;
-import com.jhj.teamproject.annual.results.LeaveCategory;
-import com.jhj.teamproject.annual.results.LeaveStatus;
-import com.jhj.teamproject.annual.results.Result;
-import com.jhj.teamproject.user.mappers.UserMapper;
+import com.jhj.annual.annual.entities.LeaveRequestEntity;
+import com.jhj.annual.annual.mappers.LeaveRequestMapper;
+import com.jhj.annual.annual.results.LeaveCategory;
+import com.jhj.annual.annual.results.LeaveStatus;
+import com.jhj.annual.annual.results.Result;
+import com.jhj.annual.user.mappers.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

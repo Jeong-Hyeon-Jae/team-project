@@ -1,13 +1,13 @@
-package com.jhj.teamproject;
+package com.jhj.annual;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TeamProjectApplication {
+public class annualApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(TeamProjectApplication.class, args);
+        SpringApplication.run(annualApplication.class, args);
     }
 
 }

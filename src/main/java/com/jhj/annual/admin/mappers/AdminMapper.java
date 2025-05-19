@@ -1,7 +1,7 @@
-package com.jhj.teamproject.admin.mappers;
+package com.jhj.annual.admin.mappers;
 
-import com.jhj.teamproject.admin.entities.RequestsEntity;
-import com.jhj.teamproject.user.entities.UserEntity;
+import com.jhj.annual.admin.entities.RequestsEntity;
+import com.jhj.annual.user.entities.UserEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

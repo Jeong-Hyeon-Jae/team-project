@@ -1,6 +1,6 @@
-package com.jhj.teamproject.annual.mappers;
+package com.jhj.annual.annual.mappers;
 
-import com.jhj.teamproject.annual.entities.LeaveRequestEntity;
+import com.jhj.annual.annual.entities.LeaveRequestEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

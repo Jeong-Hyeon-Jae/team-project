@@ -1,10 +1,10 @@
-package com.jhj.teamproject.annual.controllers;
+package com.jhj.annual.annual.controllers;
 
-import com.jhj.teamproject.annual.entities.AnnualEntity;
-import com.jhj.teamproject.annual.entities.AnnualSummaryEntity;
-import com.jhj.teamproject.annual.entities.LeaveRequestEntity;
-import com.jhj.teamproject.annual.results.Result;
-import com.jhj.teamproject.annual.services.AnnualService;
+import com.jhj.annual.annual.entities.AnnualEntity;
+import com.jhj.annual.annual.entities.AnnualSummaryEntity;
+import com.jhj.annual.annual.entities.LeaveRequestEntity;
+import com.jhj.annual.annual.results.Result;
+import com.jhj.annual.annual.services.AnnualService;
 import jakarta.servlet.http.HttpSession;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -41,7 +41,6 @@ public class AnnualController {
         session.setAttribute("email",null);
 
         return "redirect:/user/login";
-
     }
 
 /*

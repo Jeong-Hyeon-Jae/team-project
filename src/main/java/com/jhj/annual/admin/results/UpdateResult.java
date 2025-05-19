@@ -1,4 +1,4 @@
-package com.jhj.teamproject.admin.results;
+package com.jhj.annual.admin.results;
 
 public enum UpdateResult {
     FAILURE,

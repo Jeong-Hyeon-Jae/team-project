@@ -1,10 +1,10 @@
-package com.jhj.teamproject.user.controllers;
+package com.jhj.annual.user.controllers;
 
-import com.jhj.teamproject.user.entities.UserEntity;
-import com.jhj.teamproject.user.results.CommonResult;
-import com.jhj.teamproject.user.results.RegisterResult;
-import com.jhj.teamproject.user.results.ResultTuple;
-import com.jhj.teamproject.user.services.UserService;
+import com.jhj.annual.user.entities.UserEntity;
+import com.jhj.annual.user.results.CommonResult;
+import com.jhj.annual.user.results.RegisterResult;
+import com.jhj.annual.user.results.ResultTuple;
+import com.jhj.annual.user.services.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;

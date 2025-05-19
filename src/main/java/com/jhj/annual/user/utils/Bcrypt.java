@@ -1,4 +1,4 @@
-package com.jhj.teamproject.user.utils;
+package com.jhj.annual.user.utils;
 
 import lombok.experimental.UtilityClass;
 import org.mindrot.jbcrypt.BCrypt;

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jhj.teamproject.admin.mappers.AdminMapper">
+<mapper namespace="com.jhj.annual.admin.mappers.AdminMapper">
     <update id="updateRequests">
         update `leave`.`leave_requests`
         set status = #{status},
@@ -11,7 +11,7 @@
         where `id` = #{id}
     </update>
 
-    <select id="AllRequests" resultType="com.jhj.teamproject.admin.entities.RequestsEntity">
+    <select id="AllRequests" resultType="com.jhj.annual.admin.entities.RequestsEntity">
         select lr.id          as `id`,
                lr.user_id     as `userId`,
                lr.start_date  as `startDate`,
@@ -31,7 +31,7 @@
         order by lr.created_at ${sort}
     </select>
 
-    <select id="selectByEmail" resultType="com.jhj.teamproject.user.entities.UserEntity">
+    <select id="selectByEmail" resultType="com.jhj.annual.user.entities.UserEntity">
         select `id`                as `id`,
                `email`             as `email`,
                `password`          as `password`,
@@ -52,7 +52,7 @@
         limit 1;
     </select>
 
-    <select id="selectRequestById" resultType="com.jhj.teamproject.admin.entities.RequestsEntity">
+    <select id="selectRequestById" resultType="com.jhj.annual.admin.entities.RequestsEntity">
         SELECT `id` as `id`,
                `user_id` as `userId`,
                `start_date` as `startDate`,

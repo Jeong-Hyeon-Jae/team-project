@@ -1,7 +1,7 @@
-package com.jhj.teamproject.annual.entities;
+package com.jhj.annual.annual.entities;
 
-import com.jhj.teamproject.annual.results.LeaveCategory;
-import com.jhj.teamproject.annual.results.LeaveStatus;
+import com.jhj.annual.annual.results.LeaveCategory;
+import com.jhj.annual.annual.results.LeaveStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

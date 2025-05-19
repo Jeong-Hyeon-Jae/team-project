@@ -1,4 +1,4 @@
-package com.jhj.teamproject.user.entities;
+package com.jhj.annual.user.entities;
 
 import lombok.*;
 

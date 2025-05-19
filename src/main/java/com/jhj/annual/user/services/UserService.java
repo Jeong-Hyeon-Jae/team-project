@@ -1,12 +1,12 @@
-package com.jhj.teamproject.user.services;
+package com.jhj.annual.user.services;
 
-import com.jhj.teamproject.annual.entities.AnnualEntity;
-import com.jhj.teamproject.user.entities.UserEntity;
-import com.jhj.teamproject.user.mappers.UserMapper;
-import com.jhj.teamproject.user.results.CommonResult;
-import com.jhj.teamproject.user.results.RegisterResult;
-import com.jhj.teamproject.user.results.ResultTuple;
-import com.jhj.teamproject.user.utils.Bcrypt;
+import com.jhj.annual.annual.entities.AnnualEntity;
+import com.jhj.annual.user.entities.UserEntity;
+import com.jhj.annual.user.mappers.UserMapper;
+import com.jhj.annual.user.results.CommonResult;
+import com.jhj.annual.user.results.RegisterResult;
+import com.jhj.annual.user.results.ResultTuple;
+import com.jhj.annual.user.utils.Bcrypt;
 import jakarta.jws.soap.SOAPBinding;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

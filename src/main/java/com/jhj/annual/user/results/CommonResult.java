@@ -1,4 +1,4 @@
-package com.jhj.teamproject.user.results;
+package com.jhj.annual.user.results;
 
 public enum CommonResult implements Result{
     FAILURE,

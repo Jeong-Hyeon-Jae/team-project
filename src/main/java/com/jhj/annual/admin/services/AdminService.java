@@ -1,9 +1,9 @@
-package com.jhj.teamproject.admin.services;
+package com.jhj.annual.admin.services;
 
-import com.jhj.teamproject.admin.entities.RequestsEntity;
-import com.jhj.teamproject.admin.mappers.AdminMapper;
-import com.jhj.teamproject.admin.results.UpdateResult;
-import com.jhj.teamproject.user.entities.UserEntity;
+import com.jhj.annual.admin.entities.RequestsEntity;
+import com.jhj.annual.admin.mappers.AdminMapper;
+import com.jhj.annual.admin.results.UpdateResult;
+import com.jhj.annual.user.entities.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

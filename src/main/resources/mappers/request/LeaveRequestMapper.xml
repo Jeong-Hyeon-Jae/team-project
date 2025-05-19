@@ -1,5 +1,5 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jhj.teamproject.annual.mappers.LeaveRequestMapper">
+<mapper namespace="com.jhj.annual.annual.mappers.LeaveRequestMapper">
     <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         INSERT INTO leave.leave_requests (user_id, start_date, end_date, days, content, status, category,
                                               created_at)

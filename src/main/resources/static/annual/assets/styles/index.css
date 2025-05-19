@@ -64,7 +64,7 @@
     text-align: right;
 }
 
-#defaultContainer > #annualForm > .menu-bar > .logout-container > .logout {
+#defaultContainer > #annualForm > .menu-bar > .logout-container > .logout{
     color: #3498db;
     margin-right: 1rem;
     font-size: 0.875rem;

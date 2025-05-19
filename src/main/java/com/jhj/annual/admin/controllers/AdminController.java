@@ -1,9 +1,9 @@
-package com.jhj.teamproject.admin.controllers;
+package com.jhj.annual.admin.controllers;
 
-import com.jhj.teamproject.admin.entities.RequestsEntity;
-import com.jhj.teamproject.admin.results.UpdateResult;
-import com.jhj.teamproject.admin.services.AdminService;
-import com.jhj.teamproject.user.entities.UserEntity;
+import com.jhj.annual.admin.entities.RequestsEntity;
+import com.jhj.annual.admin.results.UpdateResult;
+import com.jhj.annual.admin.services.AdminService;
+import com.jhj.annual.user.entities.UserEntity;
 import jakarta.servlet.http.HttpSession;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.jhj.teamproject.annual.results;
+package com.jhj.annual.annual.results;
 
 public enum Result {
     SUCCESS,

@@ -1,7 +1,7 @@
-package com.jhj.teamproject.annual.mappers;
+package com.jhj.annual.annual.mappers;
 
-import com.jhj.teamproject.annual.entities.AnnualEntity;
-import com.jhj.teamproject.annual.entities.AnnualSummaryEntity;
+import com.jhj.annual.annual.entities.AnnualEntity;
+import com.jhj.annual.annual.entities.AnnualSummaryEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

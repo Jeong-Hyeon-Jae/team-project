@@ -1,4 +1,4 @@
-package com.jhj.teamproject.annual.entities;
+package com.jhj.annual.annual.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

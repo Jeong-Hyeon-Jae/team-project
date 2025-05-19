@@ -1,8 +1,8 @@
-package com.jhj.teamproject.annual.controllers;
+package com.jhj.annual.annual.controllers;
 
-import com.jhj.teamproject.annual.entities.LeaveRequestEntity;
-import com.jhj.teamproject.annual.results.Result;
-import com.jhj.teamproject.annual.services.LeaveRequestService;
+import com.jhj.annual.annual.entities.LeaveRequestEntity;
+import com.jhj.annual.annual.results.Result;
+import com.jhj.annual.annual.services.LeaveRequestService;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
